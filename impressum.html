@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="de-AT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Impressum – Mag. Gerlinde Pramer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream:      #FAF8F3;
+      --cream-deep: #F2EDE3;
+      --surface:    #FFFFFF;
+      --navy:       #1A3A6B;
+      --navy-mid:   #2B5A8C;
+      --gold:       #B89968;
+      --gold-soft:  #E7DCC6;
+      --ink:        #1A3A6B;
+      --ink-soft:   #3A4F6E;
+      --ink-muted:  #6A7A94;
+      --line:       #E5DED1;
+      --radius:     4px;
+      --radius-lg:  10px;
+      --max:        1160px;
+      --pad:        clamp(1.25rem, 5vw, 3rem);
+      --nav-h:      80px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--ink-soft);
+      font-size: 1.0625rem;
+      line-height: 1.78;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    h1, h2, h3 {
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--navy);
+    }
+    h1 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 2rem; }
+    h2 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); margin: 2rem 0 0.75rem; }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+
+    /* NAV */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h);
+      display: flex; align-items: center;
+      background: var(--navy);
+      box-shadow: 0 4px 20px rgba(26,58,107,0.35);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--pad);
+    }
+    .nav-logo img { height: 40px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; transition: filter 0.2s, opacity 0.2s; }
+    .nav-logo:hover img { filter: brightness(0) sepia(1) saturate(1.8) brightness(1.2); opacity: 1; }
+    .nav-links { display: flex; align-items: center; gap: 2.25rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none;
+      color: rgba(255,255,255,0.82); white-space: nowrap; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { margin-left: 1.25rem; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1rem;
+      text-decoration: none; padding: 0.75rem 1.75rem;
+      border-radius: var(--radius); cursor: pointer; border: 2px solid transparent;
+      transition: background 0.2s, color 0.2s, border-color 0.2s; white-space: nowrap;
+    }
+    .btn--ghost-white { background: transparent; color: #fff; border-color: rgba(255,255,255,0.45); }
+    .btn--ghost-white:hover { background: var(--gold); border-color: var(--gold); }
+    .btn--sm { padding: 0.45rem 1.1rem; font-size: 0.875rem; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; flex-direction: column; gap: 5px; }
+    .nav-toggle span { display: block; width: 24px; height: 1.5px; background: rgba(255,255,255,0.85); }
+    @media (max-width: 840px) { .nav-links, .nav-cta { display: none; } .nav-toggle { display: flex; } }
+
+    /* MAIN */
+    .page-main {
+      padding-top: calc(var(--nav-h) + 4rem);
+      padding-bottom: 6rem;
+      min-height: 70vh;
+    }
+    .page-content { max-width: 720px; }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      color: var(--navy-mid); margin-bottom: 2.5rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--gold); }
+    .back-link::before { content: '←'; font-size: 1rem; }
+    .page-meta { font-size: 0.85rem; color: var(--ink-muted); margin-bottom: 2rem; }
+    .page-content p { color: var(--ink-soft); margin-bottom: 1.15rem; }
+    .page-content address { color: var(--ink-soft); font-style: normal; margin-bottom: 1.25rem; line-height: 1.9; }
+    .page-content address a { color: var(--navy); text-decoration: underline; }
+    .page-content a { color: var(--navy); }
+    hr { border: none; border-top: 1px solid var(--line); margin: 2.5rem 0; }
+
+    /* FOOTER */
+    .footer { background: var(--navy); padding: clamp(2.5rem, 6vw, 4.5rem) 0 0; }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem; padding-bottom: clamp(2rem, 5vw, 3.5rem);
+    }
+    @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr; gap: 2rem; } }
+    .footer-logo img { height: 40px; filter: brightness(0) invert(1); opacity: 0.95; margin-bottom: 0.75rem; }
+    .footer-tagline { font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.85); margin-bottom: 1.25rem; max-width: 32ch; }
+    .footer-logos { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .footer-logos img { height: 54px; filter: brightness(0) invert(1); opacity: 0.9; }
+    .footer-col h4 {
+      font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.55); margin-bottom: 1.1rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.55rem; }
+    .footer-col a { color: #fff; text-decoration: underline; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-bottom {
+      padding: 1.5rem 0;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 0.75rem;
+      font-size: 0.8rem; color: rgba(255,255,255,0.45);
+    }
+    .footer-bottom a { color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+    .footer-bottom a:hover { color: var(--gold); }
+    .footer-heart { color: #e05555; }
+  </style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Hauptnavigation">
+  <div class="nav-inner">
+    <a href="mockup.html" class="nav-logo" aria-label="Gerlinde Pramer – Startseite">
+      <img src="img/unterschrift-alpha.png" alt="Gerlinde Pramer" height="40">
+    </a>
+    <ul class="nav-links">
+      <li><a href="mockup.html#ueber">Über mich</a></li>
+      <li><a href="mockup.html#angebote">Angebote</a></li>
+      <li><a href="/termine/">Termine</a></li>
+      <li><a href="/kontakt/">Kontakt</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="/kontakt/" class="btn btn--ghost-white btn--sm">Erstgespräch</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menü öffnen"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main class="page-main">
+  <div class="container">
+    <div class="page-content">
+      <a href="mockup.html" class="back-link">Zurück zur Startseite</a>
+
+      <h1>Impressum</h1>
+
+      <address>
+        <strong>Mag. Gerlinde Pramer, MBA</strong><br>
+        Obermüllnerweg 12<br>
+        4040 Linz<br><br>
+        Telefon: <a href="tel:+436641139600">+43 (0) 664 / 11 39 600</a><br>
+        E-Mail: <a href="mailto:office@pramer.com">office@pramer.com</a>
+      </address>
+
+      <p>Gewerbeschein für Business-Coaching und Unternehmensberatung / IT</p>
+
+      <hr>
+
+      <h2>Haftungsausschluss</h2>
+      <p>Die Inhalte dieser Webseite sind urheberrechtlich geschützt. Die Informationen sind nur für die persönliche Verwendung bestimmt. Jede weitergehende Nutzung, insbesondere die Speicherung in Datenbanken, Vervielfältigung und jede Form von gewerblicher Nutzung sowie die Weitergabe an Dritte – auch in Teilen oder in überarbeiteter Form – ohne Zustimmung ist untersagt.</p>
+      <p>Im Hinblick auf die technischen Eigenschaften des Internets kann keine Gewähr für die Authentizität, Richtigkeit und Vollständigkeit der im Internet zur Verfügung gestellten Informationen übernommen werden. Es wird auch keine Gewähr für die Verfügbarkeit oder den Betrieb der gegenständlichen Webseite und ihrer Inhalte übernommen. Jede Haftung für unmittelbare, mittelbare oder sonstige Schäden, unabhängig von deren Ursachen, die aus der Benutzung oder Nichtverfügbarkeit der Daten und Informationen dieser Webseite erwachsen, wird, soweit rechtlich zulässig, ausgeschlossen.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" aria-label="Seitenfuß">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-logo">
+          <img src="img/unterschrift-alpha.png" alt="Gerlinde Pramer" height="40">
+        </div>
+        <p class="footer-tagline">Bewusstseinsarbeit für Führungskräfte und Unternehmer:innen, die bereit sind, die Tiefe zu erkunden – und von dort zu führen.</p>
+        <div class="footer-logos">
+          <img src="img/gpm-logo.png" alt="GPM – Gerlinde Pramer Management" height="54">
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="/ueber-mich/">Über mich</a></li>
+          <li><a href="/angebote/">Angebote</a></li>
+          <li><a href="/termine/">Termine</a></li>
+          <li><a href="/kontakt/">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Angebote</h4>
+        <ul>
+          <li><a href="/online-sessions/">Online Sessions</a></li>
+          <li><a href="https://abc.pramer.com">Business Circle</a></li>
+          <li><a href="/coaching/">Retreat &amp; Coaching</a></li>
+          <li><a href="/keynote/">Keynote</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Gerlinde Pramer Management</span>
+      <span>
+        <a href="impressum.html">Impressum</a> &nbsp;·&nbsp;
+        <a href="datenschutz.html">Datenschutz</a>
+      </span>
+      <span>Made with <span class="footer-heart">♥</span> by <a href="https://www.nfbrands.xyz/" target="_blank" rel="noopener">NFBrands.X</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
