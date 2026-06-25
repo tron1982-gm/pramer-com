@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Retreat & Intensiv-Coaching – Mag. Gerlinde Pramer</title>
+  <title>Retreat & Intensiv-Coaching in Lovran – Mag. Gerlinde Pramer</title>
+  <meta name="description" content="Exklusive Einzelcoachings und mehrtägige Retreats im Anahata Space Lovran, Kroatien. Tiefe Bewusstseinsarbeit für Unternehmer und Führungskräfte – mit Gerlinde Pramer.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -45,9 +46,9 @@
       color: var(--navy);
       letter-spacing: -0.015em;
     }
-    h1 { font-size: clamp(2.6rem, 5.5vw, 4.8rem); letter-spacing: -0.02em; }
-    h2 { font-size: clamp(1.9rem, 4vw, 2.9rem); }
-    h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 500; }
+    h1 { font-size: clamp(2.4rem, 5vw, 4.2rem); letter-spacing: -0.02em; }
+    h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); }
+    h3 { font-size: clamp(1.1rem, 2.2vw, 1.35rem); font-weight: 500; }
     .eyebrow {
       font-family: 'Inter', sans-serif;
       font-size: 0.72rem;
@@ -58,50 +59,41 @@
       display: block;
     }
     .eyebrow--gold  { color: var(--gold); }
-    .eyebrow--white { color: rgba(255,255,255,0.7); }
+    .eyebrow--white { color: rgba(255,255,255,0.65); }
     .container { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
 
-    /* BUTTONS */
+    /* ── BUTTONS ── */
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.45rem;
-      font-family: 'Outfit', sans-serif;
-      font-weight: 500;
-      font-size: 1rem;
-      text-decoration: none;
-      padding: 0.75rem 1.75rem;
-      border-radius: var(--radius);
-      cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
+      font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1rem;
+      text-decoration: none; padding: 0.75rem 1.75rem;
+      border-radius: var(--radius); cursor: pointer;
       border: 2px solid transparent;
       transition: background 0.2s, color 0.2s, border-color 0.2s;
       white-space: nowrap;
     }
-    .btn--primary { background: var(--navy); color: #fff; border-color: var(--navy); }
-    .btn--primary:hover { background: var(--navy-mid); border-color: var(--navy-mid); }
-    .btn--ghost   { background: transparent; color: var(--ink); border-color: var(--ink); }
+    .btn--primary     { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .btn--primary:hover { background: var(--gold); border-color: var(--gold); }
+    .btn--ghost       { background: transparent; color: var(--ink); border-color: var(--ink); }
     .btn--ghost:hover { background: var(--navy); border-color: var(--navy); color: #fff; }
     .btn--ghost-white { background: transparent; color: #fff; border-color: rgba(255,255,255,0.45); }
     .btn--ghost-white:hover { background: var(--gold); border-color: var(--gold); }
-    .btn--gold    { background: var(--gold); color: #fff; border-color: var(--gold); }
-    .btn--gold:hover { background: var(--navy-mid); border-color: var(--navy-mid); }
+    .btn--gold        { background: var(--gold); color: #fff; border-color: var(--gold); }
+    .btn--gold:hover  { background: var(--navy-mid); border-color: var(--navy-mid); }
     .btn--sm { padding: 0.45rem 1.1rem; font-size: 0.875rem; }
 
-    /* REVEAL */
-    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.72s ease, transform 0.72s ease; }
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.72s ease, transform 0.72s ease; }
     .reveal.in { opacity: 1; transform: none; }
-    .d1 { transition-delay: 0.1s; }
+    .d1 { transition-delay: 0.10s; }
     .d2 { transition-delay: 0.22s; }
     .d3 { transition-delay: 0.34s; }
 
     /* ── NAVIGATION ── */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      height: var(--nav-h);
-      display: flex; align-items: center;
-      background: transparent;
-      border-bottom: 1px solid transparent;
+      height: var(--nav-h); display: flex; align-items: center;
+      background: transparent; border-bottom: 1px solid transparent;
       transition: background 0.35s, border-color 0.35s, box-shadow 0.35s;
     }
     .nav.scrolled {
@@ -122,233 +114,234 @@
       color: rgba(255,255,255,0.82); white-space: nowrap; transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--gold); }
+    .nav-links a[aria-current="page"] { color: var(--gold); text-shadow: 1px 1px 0 rgba(10,20,60,0.85); }
     .nav-cta { margin-left: 1.25rem; }
     .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; flex-direction: column; gap: 5px; }
     .nav-toggle span { display: block; width: 24px; height: 1.5px; background: rgba(255,255,255,0.85); }
     @media (max-width: 840px) { .nav-links, .nav-cta { display: none; } .nav-toggle { display: flex; } }
 
     /* ── HERO ── */
-    .hero { position: relative; min-height: 100vh; display: flex; align-items: flex-end; overflow: hidden; }
-    .hero-slides { position: absolute; inset: 0; }
-    .hero-slide {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center 20%;
-      opacity: 0; transition: opacity 1.2s ease;
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
     }
-    .hero-slide.active { opacity: 1; }
-    .hero-slide:nth-child(1) { background-image: url('img/hero-lounge.jpg'); }
-    .hero-slide:nth-child(2) { background-image: url('img/gerlinde-beratung.png'); background-position: center center; }
-    .hero-slide:nth-child(3) { background-image: url('img/gerlinde-werkshalle-blazer.png'); background-position: center center; }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('../img/gerlinde-lovran-blazer.png');
+      background-size: cover;
+      background-position: center center;
+    }
     .hero-overlay {
       position: absolute; inset: 0;
       background:
-        linear-gradient(to bottom, rgba(0,0,0,0.32) 0%, transparent 22%),
-        linear-gradient(to top, rgba(15,25,50,0.80) 0%, rgba(15,25,50,0.40) 45%, rgba(15,25,50,0.05) 100%);
+        linear-gradient(to bottom, rgba(15,25,50,0.25) 0%, transparent 30%),
+        linear-gradient(to top, rgba(15,25,50,0.80) 0%, rgba(15,25,50,0.45) 48%, transparent 100%);
     }
-    .hero-content { position: relative; z-index: 2; width: 100%; padding-bottom: clamp(4rem, 9vh, 6.5rem); }
-    .hero-text { max-width: 820px; }
+    .hero-content {
+      position: relative; z-index: 2;
+      width: 100%;
+      padding-top: var(--nav-h);
+      padding-bottom: clamp(4rem, 10vh, 7rem);
+    }
+    .hero-text {
+      max-width: 560px;
+      margin-left: auto;
+      text-align: right;
+    }
     .hero-eyebrow {
       font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;
       letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold);
       margin-bottom: 1.25rem;
-      opacity: 0; transform: translateY(18px); animation: fadeUp 0.7s 0.4s forwards ease-out;
+      opacity: 0; transform: translateY(16px); animation: fadeUp 0.7s 0.3s forwards ease-out;
     }
     .hero h1 {
-      color: #fff; margin-bottom: 1.5rem;
-      opacity: 0; transform: translateY(24px); animation: fadeUp 0.85s 0.65s forwards ease-out;
+      color: #fff; margin-bottom: 1.4rem;
+      opacity: 0; transform: translateY(22px); animation: fadeUp 0.85s 0.55s forwards ease-out;
     }
     .hero-sub {
-      font-size: clamp(1.05rem, 2vw, 1.2rem); font-weight: 400;
-      color: rgba(255,255,255,0.85); max-width: 52ch; margin-bottom: 2.5rem; line-height: 1.8;
-      opacity: 0; transform: translateY(18px); animation: fadeUp 0.7s 0.9s forwards ease-out;
+      font-size: clamp(1rem, 2vw, 1.15rem); font-weight: 400;
+      color: rgba(255,255,255,0.82); max-width: 48ch; margin-bottom: 2.25rem; line-height: 1.82;
+      opacity: 0; transform: translateY(16px); animation: fadeUp 0.7s 0.8s forwards ease-out;
     }
     .hero-cta {
-      display: flex; gap: 1rem; flex-wrap: wrap;
-      opacity: 0; transform: translateY(14px); animation: fadeUp 0.7s 1.1s forwards ease-out;
+      opacity: 0; transform: translateY(12px); animation: fadeUp 0.7s 1s forwards ease-out;
     }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { to { opacity: 1; } }
 
-    /* Hero progress indicators */
-    .hero-progress {
-      position: absolute; bottom: 2.25rem; left: var(--pad); z-index: 3;
-      display: flex; gap: 10px; align-items: center;
-      opacity: 0; animation: fadeIn 0.5s 1.6s forwards;
-    }
-    .hero-pip {
-      width: 52px; height: 2px;
-      background: rgba(255,255,255,0.28);
-      border-radius: 2px; overflow: hidden; cursor: pointer;
-    }
-    .hero-pip-fill {
-      height: 100%; width: 0; background: #fff;
-      border-radius: 2px; transition: width linear;
-    }
-    .hero-pip.active .hero-pip-fill { width: 100%; }
-
-    /* Scroll indicator */
+    /* Scroll indicator (desktop only) */
     .hero-scroll {
       position: absolute; right: var(--pad); bottom: 2.75rem; z-index: 3;
       display: flex; flex-direction: column; align-items: center; gap: 0.55rem;
-      opacity: 0; animation: fadeIn 0.5s 1.8s forwards;
+      opacity: 0; animation: fadeIn 0.5s 1.5s forwards;
     }
     .hero-scroll span {
       font-family: 'Inter', sans-serif; font-size: 0.6rem; font-weight: 700;
-      letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.55);
+      letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.5);
       writing-mode: vertical-rl;
     }
     .scroll-bar {
-      width: 1px; height: 46px; background: rgba(255,255,255,0.22);
+      width: 1px; height: 46px; background: rgba(255,255,255,0.2);
       position: relative; overflow: hidden; border-radius: 1px;
     }
     .scroll-bar::after {
       content: ''; position: absolute; left: 0; top: -60%;
-      width: 100%; height: 60%; background: rgba(255,255,255,0.75);
-      animation: scrollPulse 2s 2.2s infinite ease-in-out;
+      width: 100%; height: 60%; background: rgba(255,255,255,0.65);
+      animation: scrollPulse 2s 2s infinite ease-in-out;
     }
+    @keyframes scrollPulse { 0% { top: -60%; } 100% { top: 110%; } }
     @media (max-width: 840px) { .hero-scroll { display: none; } }
 
-    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeIn { to { opacity: 1; } }
-    @keyframes scrollPulse { 0% { top: -60%; } 100% { top: 110%; } }
+    @media (max-width: 768px) {
+      .hero { align-items: flex-end; }
+      .hero-content { padding-top: var(--nav-h); padding-bottom: clamp(3rem, 8vh, 5rem); }
+      .hero-text { margin-left: 0; max-width: 100%; text-align: left; }
+      .hero-overlay {
+        background:
+          linear-gradient(to bottom, rgba(15,25,50,0.18) 0%, transparent 28%),
+          linear-gradient(to top, rgba(15,25,50,0.80) 0%, rgba(15,25,50,0.40) 50%, transparent 100%);
+      }
+    }
 
-    /* ── STATEMENT (wie "Wofür ich stehe") ── */
+    /* ── STATEMENT / PHILOSOPHY ── */
     .statement { background: var(--surface); padding: clamp(4rem, 9vw, 7rem) 0; }
     .statement-inner { max-width: 820px; margin: 0 auto; text-align: center; }
     .statement-inner .eyebrow { margin-bottom: 1.25rem; }
     .statement-quote {
-      font-family: 'Outfit', sans-serif; font-weight: 400;
-      font-size: clamp(1.4rem, 2.8vw, 2.15rem); color: var(--navy);
-      line-height: 1.45; letter-spacing: -0.01em; margin-bottom: 0;
+      font-family: 'Outfit', sans-serif; font-weight: 400; font-style: normal;
+      font-size: clamp(1.35rem, 2.8vw, 2.1rem); color: var(--navy);
+      line-height: 1.48; letter-spacing: -0.01em;
     }
-    .statement-quote strong { color: var(--navy-mid); font-weight: 400; }
-    .gold-rule { width: 52px; height: 2px; background: var(--gold); margin: 2.25rem auto; }
-    .statement-sub { font-size: 1.05rem; color: var(--ink-muted); max-width: 58ch; margin: 0 auto; line-height: 1.82; }
+    .gold-rule { width: 52px; height: 2px; background: var(--gold); margin: 2.25rem auto 0; }
 
-    /* ── ANGEBOTE ── */
-    .angebote { background: var(--cream-deep); padding: clamp(4rem, 9vw, 7rem) 0; }
-    .angebote-header { text-align: center; margin-bottom: 3.5rem; }
-    .angebote-header .eyebrow { margin-bottom: 0.75rem; }
-    .angebote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    @media (max-width: 860px) { .angebote-grid { grid-template-columns: 1fr; } }
+    /* ── SPLIT SECTIONS ── */
+    .split-section         { background: var(--cream-deep); padding: clamp(4rem, 9vw, 7rem) 0; }
+    .split-section--light  { background: var(--surface); padding: clamp(4rem, 9vw, 7rem) 0; }
 
-    .angebot-card {
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2.5rem, 6vw, 4.5rem);
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .split-grid { grid-template-columns: 1fr; }
+      .split-grid--flip .split-img { order: -1; }
+    }
+
+    .split-text { display: flex; flex-direction: column; gap: 0; }
+    .split-text .eyebrow { margin-bottom: 1rem; }
+    .split-text h2 { margin-bottom: 1.4rem; }
+    .split-text p {
+      color: var(--ink-muted); font-size: 1.05rem; line-height: 1.82; margin-bottom: 0;
+    }
+
+    .split-img { overflow: hidden; border-radius: var(--radius-lg); }
+    .split-img img {
+      width: 100%; aspect-ratio: 4/3;
+      object-fit: cover; display: block;
+      transition: transform 0.55s ease;
+    }
+    .split-img:hover img { transform: scale(1.04); }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: var(--navy);
+      padding: clamp(4rem, 9vw, 7rem) 0;
+      text-align: center;
+    }
+    .cta-inner { max-width: 680px; margin: 0 auto; }
+    .cta-inner .eyebrow--gold { margin-bottom: 1.25rem; }
+    .cta-inner h2 { color: #fff; margin-bottom: 1.25rem; }
+    .cta-inner p {
+      color: rgba(255,255,255,0.72); font-size: 1.05rem; line-height: 1.82;
+      margin-bottom: 2.5rem; max-width: 56ch; margin-left: auto; margin-right: auto;
+    }
+
+    /* ── ANFRAGE FORM ── */
+    .anfrage-section { background: var(--cream-deep); padding: clamp(4rem, 9vw, 7rem) 0; }
+    .anfrage-inner { max-width: 720px; margin: 0 auto; }
+    .anfrage-inner .eyebrow { margin-bottom: 1rem; }
+    .anfrage-inner h2 { margin-bottom: 1rem; }
+    .anfrage-inner > p {
+      color: var(--ink-muted); font-size: 1.05rem; margin-bottom: 2.5rem; line-height: 1.82;
+    }
+
+    .form-card {
       background: var(--surface);
       border-radius: var(--radius-lg);
-      overflow: hidden;
-      display: flex; flex-direction: column;
-      transition: background 0.28s ease, box-shadow 0.28s ease;
-      cursor: pointer;
+      padding: clamp(1.75rem, 4vw, 2.75rem);
+      box-shadow: 0 4px 32px rgba(26,58,107,0.08);
     }
-    .angebot-card:hover { background: var(--gold); box-shadow: 0 16px 48px rgba(26,58,107,0.15); }
-    .angebot-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; transition: filter 0.28s; }
-    .angebot-body { padding: 1.75rem; flex: 1; display: flex; flex-direction: column; }
-    .angebot-tag {
-      font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy-mid);
-      margin-bottom: 0.75rem;
-      transition: color 0.28s;
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
     }
-    .angebot-card h3 { margin-bottom: 0.75rem; flex-shrink: 0; min-height: 3.6em; transition: color 0.28s; }
-    .angebot-card p {
-      color: var(--ink-muted); font-size: 1rem; line-height: 1.78;
-      padding-bottom: 1.5rem;
-      transition: color 0.28s;
+    @media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .form-group:last-of-type { margin-bottom: 0; }
+    .form-group label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--ink-muted);
     }
-    .angebot-btn { margin-top: auto; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      font-family: 'Inter', inherit; font-size: 1rem; color: var(--ink);
+      padding: 0.7rem 0.9rem;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: var(--cream);
+      transition: border-color 0.15s, background 0.15s;
+      width: 100%;
+    }
+    .form-group input:hover,
+    .form-group select:hover,
+    .form-group textarea:hover { border-color: var(--navy-mid); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { outline: none; border-color: var(--navy); background: #fff; }
+    .form-group textarea { resize: vertical; min-height: 130px; line-height: 1.65; }
+    .form-note {
+      font-size: 0.78rem; color: var(--ink-muted); margin-top: 1.1rem;
+      line-height: 1.6; text-align: center;
+    }
+    .form-note a { color: var(--navy-mid); }
+    .form-submit-wrap { margin-top: 1.5rem; }
+    .form-submit-wrap .btn { width: 100%; justify-content: center; font-size: 1.05rem; padding: 0.9rem 2rem; }
+    #form-status {
+      margin-top: 1rem; padding: 0.85rem 1rem;
+      border-radius: var(--radius); font-size: 0.95rem; line-height: 1.55;
+      display: none;
+    }
+    #form-status.ok  { background: #edf7f3; border: 1px solid #6bbf99; color: #1a5c3a; }
+    #form-status.err { background: #fdf0ee; border: 1px solid #e0877a; color: #8b2a1e; }
 
-    .angebot-card:hover .angebot-tag { color: rgba(255,255,255,0.8); }
-    .angebot-card:hover h3 { color: #fff; }
-    .angebot-card:hover p { color: rgba(255,255,255,0.85); }
-    .angebot-card:hover .btn--gold {
-      background: transparent;
-      border-color: #fff;
-      color: #fff;
+    /* ── SEA VIEW ── */
+    .sea-view-section {
+      min-height: 75vh;
+      background-image: url('../img/blick-aufs-meer-lovran.jpeg');
+      background-size: cover;
+      background-position: center center;
     }
 
-    /* ── ÜBER MICH (in container, top-aligned) ── */
-    .ueber { background: var(--surface); padding: clamp(4rem, 9vw, 7rem) 0; }
-    .ueber-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(2rem, 5vw, 3.5rem); align-items: start;
+    /* ── SPLIT ALIGN TOP ── */
+    .split-grid--align-start { align-items: start; }
+    .split-img--natural img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: unset;
+      object-fit: initial;
     }
-    @media (max-width: 768px) { .ueber-grid { grid-template-columns: 1fr; } }
-    .ueber-img-col a { display: block; overflow: hidden; border-radius: var(--radius-lg); }
-    .ueber-img-col img {
-      width: 100%; aspect-ratio: 3/4;
-      object-fit: cover; object-position: 35% top;
-      display: block; transition: transform 0.55s ease;
-    }
-    .ueber-img-col a:hover img { transform: scale(1.05); }
-    .ueber-text-col { display: flex; flex-direction: column; }
-    .ueber-text-col .eyebrow { margin-bottom: 1rem; }
-    .ueber-text-col h2 { margin-bottom: 1.5rem; }
-    .ueber-text-col p { color: var(--ink-muted); font-size: 1.05rem; margin-bottom: 1.2rem; }
-    .ueber-text-col .btn { align-self: flex-start; }
-    .ueber-text-col .btn--primary:hover { background: var(--gold); border-color: var(--gold); }
 
-    /* ── ARBEITSWEISE (in container, kein Abschneiden) ── */
-    .arbeitsweise { background: var(--cream-deep); padding: clamp(4rem, 9vw, 7rem) 0; }
-    .arbeit-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(2rem, 5vw, 3.5rem); align-items: start;
-    }
-    @media (max-width: 768px) { .arbeit-grid { grid-template-columns: 1fr; } }
-    .arbeit-text-col { display: flex; flex-direction: column; }
-    .arbeit-text-col .eyebrow { margin-bottom: 1rem; }
-    .arbeit-text-col h2 { margin-bottom: 1.5rem; }
-    .arbeit-text-col p { color: var(--ink-muted); font-size: 1.05rem; margin-bottom: 1.2rem; }
-    .arbeit-img-col a { display: block; overflow: hidden; border-radius: var(--radius-lg); }
-    .arbeit-img-col img {
-      width: 100%; aspect-ratio: 4/3;
-      object-fit: cover; object-position: right center;
-      display: block; transition: transform 0.55s ease;
-    }
-    .arbeit-img-col a:hover img { transform: scale(1.05); }
-    .arbeit-text-col .btn--primary:hover { background: var(--gold); border-color: var(--gold); }
-
-    /* ── NEWSLETTER (vollflächiges Bild + schwebende Karte rechts) ── */
-    .newsletter-section { position: relative; overflow: hidden; min-height: 680px; }
-    .nl-bg { position: absolute; inset: 0; }
-    .nl-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 22% center; display: block; }
-    .nl-bg::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to right, rgba(0,0,0,0) 25%, rgba(0,0,0,0.18) 55%, rgba(0,0,0,0.38) 100%);
-    }
-    .nl-inner {
-      position: relative; z-index: 1;
-      display: flex; justify-content: flex-end; align-items: center;
-      padding-top: clamp(3.5rem, 8vw, 5.5rem);
-      padding-bottom: clamp(3.5rem, 8vw, 5.5rem);
-      min-height: 680px;
-    }
-    .nl-card {
-      background: #fff;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.22);
-      border-radius: var(--radius-lg);
-      padding: clamp(1.75rem, 3vw, 2.25rem);
-      width: 380px; max-width: 46%;
-    }
-    .nl-card .eyebrow { margin-bottom: 0.6rem; }
-    .nl-title { color: var(--navy); font-size: clamp(1.3rem, 2vw, 1.65rem); margin-bottom: 1.25rem; }
-    .nl-field { margin-bottom: 0.8rem; }
-    .nl-field label { display: block; font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: var(--ink); margin-bottom: 0.3rem; }
-    .nl-field input {
-      width: 100%; font: inherit; font-size: 0.95rem; color: var(--ink);
-      padding: 0.65rem 0.85rem; border: 1px solid var(--line);
-      border-radius: var(--radius); background: var(--cream);
-      transition: border-color 0.15s;
-    }
-    .nl-field input:hover { border-color: var(--navy-mid); }
-    .nl-field input:focus { outline: none; border-color: var(--navy); background: #fff; }
-    .nl-card .btn--primary:hover { background: var(--gold); border-color: var(--gold); }
-    .nl-note { font-size: 0.72rem; color: var(--ink-muted); margin-top: 0.75rem; text-align: center; line-height: 1.55; }
-    @media (max-width: 700px) { .nl-inner { justify-content: center; } .nl-card { max-width: 100%; width: 100%; } }
-
-    /* ── CTA (hell statt navy) ── */
-    .cta-section { background: var(--cream-deep); padding: clamp(4rem, 9vw, 7rem) 0; text-align: center; }
-    .cta-section .eyebrow--gold { margin-bottom: 1rem; }
-    .cta-section h2 { color: var(--navy); margin-bottom: 1rem; }
-    .cta-section p { color: var(--ink-muted); max-width: 52ch; margin: 0 auto 2.5rem; font-size: 1.05rem; }
-    .cta-section .btn--primary:hover { background: var(--gold); border-color: var(--gold); }
+    /* ── ANFRAGE FORM SPACING ── */
+    .anfrage-inner .form-card { margin-top: 2.5rem; }
 
     /* ── FOOTER ── */
     .footer { background: var(--navy); padding: clamp(2.5rem, 6vw, 4.5rem) 0 0; }
@@ -383,7 +376,7 @@
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ══ NAVIGATION ══ -->
 <nav class="nav" id="nav" aria-label="Hauptnavigation">
   <div class="nav-inner">
     <a href="../index.html" class="nav-logo" aria-label="Gerlinde Pramer – Startseite">
@@ -402,24 +395,169 @@
   </div>
 </nav>
 
+<!-- ══ HERO ══ -->
+<section class="hero" aria-label="Anahata Space Lovran">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
 
-<!-- PLACEHOLDER ONLY -->
-<section class="placeholder" style="min-height: calc(100vh - var(--nav-h)); display: flex; align-items: center; background: linear-gradient(to bottom, rgba(0,0,0,0.32) 0%, transparent 22%), var(--cream); position: relative;">
-  <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.32) 0%, transparent 22%); pointer-events: none;" aria-hidden="true"></div>
-  <div class="container" style="width: 100%; position: relative; z-index: 1;">
-    <div style="text-align: center; padding: 4rem 2rem;">
-      <h1 style="color: var(--navy); margin-bottom: 1.5rem; font-size: clamp(2rem, 5vw, 3.5rem);">Retreat & Intensiv-Coaching</h1>
-      <p style="color: var(--ink-soft); font-size: 1.125rem; line-height: 1.75; max-width: 65ch; margin: 0 auto; margin-bottom: 2.5rem;">
-        Details zu meinen Einzelcoachings und mehrtägigen Retreat-Angeboten folgen in Kürze. 
-        Ich begleite dich in meinem persönlichen Retreat in Lovran, Kroatien, auf deinem Weg 
-        zu mehr Klarheit und Handlungsfähigkeit.
+  <div class="hero-content">
+    <div class="container">
+      <div class="hero-text">
+        <h2 class="hero-eyebrow">Anahata Space Lovran</h2>
+        <h1>Ein Raum für Klarheit. Ein Ort für Führung aus dem Herzen.</h1>
+        <p class="hero-sub">Exklusive Auszeiten und tiefe Bewusstseinsarbeit für Unternehmer und Führungskräfte an der Opatija-Riviera.</p>
+        <div class="hero-cta">
+          <a href="#anfrage" class="btn btn--gold">Persönliche Anfrage senden</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <span>Scrollen</span>
+    <div class="scroll-bar"></div>
+  </div>
+</section>
+
+<!-- ══ PHILOSOPHIE ══ -->
+<section class="statement" aria-label="Warum Lovran">
+  <div class="container">
+    <div class="statement-inner reveal">
+      <span class="eyebrow eyebrow--gold">Warum Lovran</span>
+      <p class="statement-quote">
+        Wer ein Unternehmen führt, bewegt sich meist im Raum der Zahlen, Daten und Analysen. Doch die wirklich weitsichtigen Entscheidungen entstehen dort, wo der Verstand zur Ruhe kommt und die innere Stimme übernimmt. In Lovran öffnen wir genau diesen Raum.
       </p>
-      <a href="../kontakt/" class="btn btn--primary">Kontakt aufnehmen</a>
+      <div class="gold-rule"></div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ══ CONTENT BLOCK 1 – DER ORT ══ -->
+<section class="split-section" aria-label="Der Ort">
+  <div class="container">
+    <div class="split-grid">
+
+      <div class="split-text reveal">
+        <span class="eyebrow eyebrow--gold">Orte &amp; Atmosphäre</span>
+        <h2>Abstand vom System, um das System neu zu ordnen.</h2>
+        <p>Im Herzen von Kroatien, direkt an der geschichtsträchtigen Opatija-Riviera, liegt der Anahata Space Lovran. Dieser Kraftort wurde bewusst als Rückzugszentrum geschaffen, um den permanenten Druck des Unternehmeralltags hinter sich zu lassen. Fernab von klassischen Seminarräumen bietet dieser Ort die perfekte Kulisse, um tief durchzuatmen, die eigene Schwingung neu auszurichten und die Verbindung zu sich selbst wiederzufinden.</p>
+      </div>
+
+      <div class="split-img reveal d1">
+        <img src="../img/haus-lovran-mit-auto.jpeg" alt="Anahata Space Lovran – Außenansicht des Retreat-Hauses" loading="lazy">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ MEERBLICK ══ -->
+<section class="sea-view-section" aria-label="Blick auf das Adriatische Meer"></section>
+
+<!-- ══ CONTENT BLOCK 2 – TRANSFORMATION ══ -->
+<section class="split-section--light" aria-label="Transformation">
+  <div class="container">
+    <div class="split-grid split-grid--flip split-grid--align-start">
+
+      <div class="split-img split-img--natural reveal">
+        <img src="../img/gerlinde-lovran-raum.png" alt="Gerlinde Pramer im Coaching-Raum des Anahata Space Lovran" loading="lazy">
+      </div>
+
+      <div class="split-text reveal d1">
+        <span class="eyebrow eyebrow--gold">Transformation</span>
+        <h2>Raus aus dem Kopf – rein ins klare Handeln.</h2>
+        <p>Gute Führung erfordert Mut. Doch echter Mut entspringt nicht dem rationalen Verstand, sondern der Intuition. Bei unseren intensiven Einzelsitzungen und exklusiven Kleingruppen-Retreats vor Ort nutzen wir die ungestörte Atmosphäre für tiefe Bewusstseinsarbeit und Mentaltraining. Sie lernen, das Ego und die Alltagsängste vom wesentlichen Kern zu trennen. Das Ergebnis ist eine tief verankerte Klarheit, mit der Sie nicht mehr nur im Unternehmen funktionieren, sondern Ihr Business wieder mit echter Vision und Leichtigkeit von innen heraus verändern.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA & LOOKAHEAD ══ -->
+<section class="cta-section" aria-label="Ihr Weg nach Lovran">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <span class="eyebrow eyebrow--gold">Exklusive Termine</span>
+      <h2>Ihr Weg nach Lovran</h2>
+      <p>Gerlinde Pramer arbeitet derzeit an den exklusiven Terminen und Seminarformaten für die kommende Saison. Wenn Sie Interesse an einer maßgeschneiderten Einzel-Auszeit oder einem exklusiven Führungskräfte-Retreat im Anahata Space Lovran haben, können Sie sich bereits jetzt unverbindlich vormerken lassen.</p>
+      <a href="#anfrage" class="btn btn--ghost-white">Jetzt unverbindlich Interesse bekunden</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PERSÖNLICHE ANFRAGE ══ -->
+<section class="anfrage-section" id="anfrage" aria-label="Persönliche Anfrage">
+  <div class="container">
+    <div class="anfrage-inner">
+      <div class="reveal">
+        <span class="eyebrow eyebrow--gold">Persönliche Anfrage</span>
+        <h2>Schreiben Sie mir – ich melde mich persönlich.</h2>
+        <p>Schildern Sie mir kurz, was Sie bewegt und was Sie sich von einer Auszeit in Lovran erhoffen. Ich melde mich innerhalb von 48 Stunden bei Ihnen.</p>
+      </div>
+
+      <div class="form-card reveal d1">
+        <form id="anfrage-form" novalidate>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="af-vorname">Vorname *</label>
+              <input id="af-vorname" name="firstName" type="text" placeholder="Maria" required autocomplete="given-name">
+            </div>
+            <div class="form-group">
+              <label for="af-nachname">Nachname *</label>
+              <input id="af-nachname" name="lastName" type="text" placeholder="Musterfrau" required autocomplete="family-name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="af-email">E-Mail-Adresse *</label>
+            <input id="af-email" name="email" type="email" placeholder="maria@unternehmen.at" required autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label for="af-telefon">Telefonnummer <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+            <input id="af-telefon" name="phone" type="tel" placeholder="+43 …" autocomplete="tel">
+          </div>
+
+          <div class="form-group">
+            <label for="af-interesse">Worum geht es Ihnen? *</label>
+            <select id="af-interesse" name="interest" required>
+              <option value="">Bitte wählen …</option>
+              <option value="einzelsitzung">Intensive Einzelsitzung in Lovran</option>
+              <option value="retreat-gruppe">Exklusives Kleingruppen-Retreat</option>
+              <option value="einzel-auszeit">Maßgeschneiderte Einzel-Auszeit</option>
+              <option value="info">Allgemeine Information zu den Formaten</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="af-nachricht">Ihre Nachricht <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+            <textarea id="af-nachricht" name="message" placeholder="Was beschäftigt Sie gerade? Was erhoffen Sie sich von einer Auszeit in Lovran? …"></textarea>
+          </div>
+
+          <!-- honeypot -->
+          <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+            <input type="text" name="company" tabindex="-1" autocomplete="off">
+          </div>
+
+          <p class="form-note">
+            * Pflichtfeld | Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Daten gemäß unserer
+            <a href="../datenschutz.html">Datenschutzerklärung</a> zu.
+            Ihre Anfrage ist unverbindlich.
+          </p>
+
+          <div class="form-submit-wrap">
+            <button type="submit" class="btn btn--primary" id="af-submit">Anfrage senden</button>
+          </div>
+
+          <div id="form-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
 <footer class="footer" aria-label="Seitenfuß">
   <div class="container">
     <div class="footer-grid">
@@ -463,58 +601,68 @@
 </footer>
 
 <script>
-  /* NAV */
+  /* ── NAV SCROLL ── */
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 50);
   }, { passive: true });
 
-  /* HERO SLIDER */
-  const DURATION = 4000;
-  const slides = document.querySelectorAll('.hero-slide');
-  const pips   = document.querySelectorAll('.hero-pip');
-  const fills  = document.querySelectorAll('.hero-pip-fill');
-  let current = 0;
-  let timer, fillTimer;
-
-  function goTo(idx) {
-    slides[current].classList.remove('active');
-    pips[current].classList.remove('active');
-    fills[current].style.transition = 'none';
-    fills[current].style.width = '0%';
-
-    current = idx;
-    slides[current].classList.add('active');
-    fills[current].style.width = '0%'; // lock to 0 before active class so CSS rule can't jump to 100%
-    pips[current].classList.add('active');
-
-    // Force reflow then animate fill
-    void fills[current].offsetWidth;
-    fills[current].style.transition = `width ${DURATION}ms linear`;
-    fills[current].style.width = '100%';
-  }
-
-  function next() { goTo((current + 1) % slides.length); }
-
-  function startTimer() {
-    clearInterval(timer);
-    timer = setInterval(next, DURATION);
-  }
-
-  // Manual click on pip
-  pips.forEach((pip, i) => {
-    pip.addEventListener('click', () => { goTo(i); startTimer(); });
-  });
-
-  // Start
-  goTo(0);
-  startTimer();
-
-  /* REVEAL ON SCROLL */
+  /* ── REVEAL ON SCROLL ── */
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ── INQUIRY FORM ── */
+  (function () {
+    const form   = document.getElementById('anfrage-form');
+    const btn    = document.getElementById('af-submit');
+    const status = document.getElementById('form-status');
+
+    function showStatus(msg, kind) {
+      status.textContent = msg;
+      status.className   = kind;
+      status.style.display = 'block';
+    }
+
+    form.addEventListener('submit', async function (ev) {
+      ev.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      const data = Object.fromEntries(new FormData(form).entries());
+      data.formType = 'coaching-inquiry';
+
+      btn.disabled    = true;
+      const orig      = btn.textContent;
+      btn.textContent = 'Wird gesendet …';
+      status.style.display = 'none';
+
+      try {
+        const res  = await fetch('https://retreat-booking-api-preview.bunny.run/api/inquiry', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(data),
+        });
+        const body = await res.json().catch(() => ({}));
+
+        if (res.ok && body.ok) {
+          form.reset();
+          showStatus('Vielen Dank für Ihre Anfrage! Ich melde mich innerhalb von 48 Stunden persönlich bei Ihnen.', 'ok');
+          btn.textContent = 'Gesendet ✓';
+        } else if (body.error === 'validation') {
+          showStatus('Bitte überprüfen Sie das Feld „' + (body.field || '?') + '" und versuchen Sie es erneut.', 'err');
+          btn.disabled    = false;
+          btn.textContent = orig;
+        } else {
+          throw new Error(body.error || 'unknown');
+        }
+      } catch (_) {
+        showStatus('Die Anfrage konnte leider nicht übermittelt werden. Bitte schreiben Sie mir direkt an office@pramer.com – ich freue mich auf Ihre Nachricht.', 'err');
+        btn.disabled    = false;
+        btn.textContent = orig;
+      }
+    });
+  })();
 </script>
 </body>
 </html>

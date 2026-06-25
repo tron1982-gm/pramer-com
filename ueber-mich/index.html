@@ -113,8 +113,8 @@
       letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none;
       color: rgba(255,255,255,0.82); white-space: nowrap; transition: color 0.2s;
     }
-    .nav-links a:hover,
-    .nav-links a[aria-current="page"] { color: var(--gold); }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a[aria-current="page"] { color: var(--gold); text-shadow: 1px 1px 0 rgba(10,20,60,0.85); }
     .nav-cta { margin-left: 1.25rem; }
     .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; flex-direction: column; gap: 5px; }
     .nav-toggle span { display: block; width: 24px; height: 1.5px; background: rgba(255,255,255,0.85); }
@@ -186,7 +186,7 @@
     }
     .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: flex-end; }
     .hero-scroll {
-      position: absolute; left: var(--pad); bottom: 2.75rem; z-index: 3;
+      position: absolute; right: var(--pad); bottom: 2.75rem; z-index: 3;
       display: flex; flex-direction: column; align-items: center; gap: 0.55rem;
       opacity: 0; animation: fadeIn 0.5s 1.6s forwards;
     }
