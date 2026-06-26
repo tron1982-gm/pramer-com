@@ -241,6 +241,9 @@
     .split-section         { background: var(--cream-deep); padding: clamp(4rem, 9vw, 7rem) 0; }
     .split-section--light  { background: var(--surface); padding: clamp(4rem, 9vw, 7rem) 0; }
 
+    /* Scroll offset for sticky nav */
+    .scroll-target { scroll-margin-top: calc(var(--nav-h) + 1.5rem); }
+
     /* Top-aligned: image top edge flush with eyebrow text top edge */
     .split-grid {
       display: grid;
@@ -250,7 +253,7 @@
     }
     @media (max-width: 768px) {
       .split-grid { grid-template-columns: 1fr; }
-      .split-grid--flip .split-img { order: -1; }
+      .split-grid--flip .split-img-col { order: -1; }
     }
 
     .split-text { display: flex; flex-direction: column; }
@@ -259,6 +262,8 @@
     .split-text p { color: var(--ink-muted); font-size: 1.05rem; line-height: 1.82; margin-bottom: 1rem; }
     .split-text p:last-of-type { margin-bottom: 0; }
 
+    /* Image column wrapper: image + pills stacked */
+    .split-img-col { display: flex; flex-direction: column; gap: 1.25rem; }
     .split-img { overflow: hidden; border-radius: var(--radius-lg); }
     .split-img img {
       width: 100%; aspect-ratio: 4/3;
@@ -267,10 +272,10 @@
     }
     .split-img:hover img { transform: scale(1.04); }
 
-    /* ── FORMAT PILLS (Fakten-Block) ── */
+    /* ── FORMAT PILLS (Fakten-Block, unter dem Bild) ── */
     .format-pills {
       display: flex; flex-wrap: wrap; gap: 0.5rem;
-      margin-top: 1.75rem; margin-bottom: 0;
+      margin-top: 0; margin-bottom: 0;
     }
     .format-pills span {
       font-family: 'Inter', sans-serif;
@@ -371,9 +376,9 @@
       <div class="hero-text">
         <span class="hero-eyebrow">Meine Angebote</span>
         <h1>Vier Formate.<br>Eine Einladung.</h1>
-        <p class="hero-sub">Manche kommen, um mich unverbindlich kennenzulernen. Andere wissen schon, dass sie tiefer gehen möchten. Jeder Einstieg ist der richtige.</p>
+        <p class="hero-sub">Manche kommen, um mich unverbindlich kennenzulernen. Andere wissen schon, dass sie tiefer gehen möchten. Jeder Einstieg ist der richtige. Ich freue mich auf Sie.</p>
         <div class="hero-cta">
-          <a href="#online-sessions" class="btn btn--gold">Angebote entdecken</a>
+          <a href="#was-mich-antreibt" class="btn btn--gold">Angebote entdecken</a>
         </div>
       </div>
     </div>
@@ -386,7 +391,7 @@
 </section>
 
 <!-- ══ INTRO ══ -->
-<section class="statement" aria-label="Was mich antreibt">
+<section class="statement scroll-target" id="was-mich-antreibt" aria-label="Was mich antreibt">
   <div class="container">
     <div class="statement-inner reveal">
       <span class="eyebrow eyebrow--gold">Was mich antreibt</span>
@@ -412,7 +417,13 @@
         <p>Alle zwei Wochen lade ich Sie zu einer kostenlosen Live-Session ein – 30 bis 45 Minuten, bequem von überall aus, ganz ohne Voranmeldehürde.</p>
         <p>Im Mittelpunkt stehen die Fragen, die Unternehmer:innen wirklich bewegen: Wie entscheide ich aus innerer Klarheit statt aus Angst? Wie führe ich, ohne mich dabei zu verlieren? Wie komme ich raus aus dem Kopf – und rein ins echte Handeln? Sie bekommen einen direkten Einblick in meine Arbeit: konkret, spürbar, sofort umsetzbar. Kein Verkaufsgespräch, kein Skript – einfach echte Bewusstseinsarbeit, die im Alltag funktioniert.</p>
         <p>Diese Sessions sind mein herzlicher Einstieg in die gemeinsame Arbeit. Wer tiefer gehen möchte, findet im begleitenden Online-Coaching-Programm den Rahmen dafür.</p>
+        <a href="../termine/" class="btn btn--primary">Zur nächsten Session</a>
+      </div>
 
+      <div class="split-img-col reveal d1">
+        <div class="split-img">
+          <img src="../img/gerlinde-whiteboard-1.png" alt="Gerlinde Pramer am Whiteboard während einer Live Online Session" loading="lazy" style="object-position: 20% center;">
+        </div>
         <div class="format-pills">
           <span>📅 Jeden 2. und 4. Dienstag</span>
           <span>🕐 11:30 Uhr</span>
@@ -421,12 +432,6 @@
           <span>✅ Kostenlos &amp; ohne Anmeldehürde</span>
           <span>🗓 Ab Juli 2026</span>
         </div>
-
-        <a href="../online-sessions/" class="btn btn--primary">Zur nächsten Session</a>
-      </div>
-
-      <div class="split-img reveal d1">
-        <img src="../img/gerlinde-whiteboard-1.png" alt="Gerlinde Pramer am Whiteboard während einer Live Online Session" loading="lazy" style="object-position: 20% center;">
       </div>
 
     </div>
@@ -438,8 +443,16 @@
   <div class="container">
     <div class="split-grid split-grid--flip">
 
-      <div class="split-img reveal">
-        <img src="../img/anahata-business-circle-bild-2-modern.png" alt="Teilnehmer:innen des Anahata Business Circle im Gespräch an einem runden Tisch" loading="lazy">
+      <div class="split-img-col reveal">
+        <div class="split-img">
+          <img src="../img/anahata-business-circle-bild-2-modern.png" alt="Teilnehmer:innen des Anahata Business Circle im Gespräch an einem runden Tisch" loading="lazy">
+        </div>
+        <div class="format-pills">
+          <span>📍 Wien · Linz · Graz</span>
+          <span>🌙 Abendformat</span>
+          <span>👥 Kleine Teilnehmerrunde</span>
+          <span>🗓 Ab Herbst 2026</span>
+        </div>
       </div>
 
       <div class="split-text reveal d1">
@@ -448,14 +461,6 @@
         <p>Manche Erkenntnisse entstehen nicht am Schreibtisch, sondern im echten Gespräch – mit Menschen, die ähnliche Fragen tragen wie Sie. Der Anahata Business Circle bringt Sie genau dorthin.</p>
         <p>An exklusiven Abenden in Wien, Linz und Graz begegnen sich Unternehmer:innen auf Augenhöhe: kleine Runde, ehrlicher Austausch, kein Frontalvortrag. Jede Veranstaltungswelle folgt einem konkreten Monatsthema – immer getragen vom roten Faden stimmigen Unternehmertums: Führung, die aus innerer Klarheit statt aus reiner Zahlenlogik entsteht.</p>
         <p>Da alle Termine einer Welle jeweils in Wien, Linz und Graz stattfinden, wählen Sie einfach die Stadt, die für Sie am besten passt – und kommen so, wie es Ihr Alltag erlaubt.</p>
-
-        <div class="format-pills">
-          <span>📍 Wien · Linz · Graz</span>
-          <span>🌙 Abendformat</span>
-          <span>👥 Kleine Teilnehmerrunde</span>
-          <span>🗓 Ab Herbst 2026</span>
-        </div>
-
         <a href="https://abc.pramer.com" class="btn btn--primary" target="_blank" rel="noopener">Zum Anahata Business Circle</a>
       </div>
 
@@ -474,19 +479,19 @@
         <p>Manchmal braucht es mehr als einen Nachmittag, um wirklich anzukommen. In meinem Rückzugszentrum Anahata Space Lovran – direkt an der Opatija-Riviera in Kroatien – schaffen wir diesen Raum.</p>
         <p>In intensiven Einzelsitzungen oder kleinen Gruppen-Retreats arbeiten wir fernab vom Unternehmeralltag an dem, was wirklich zählt: der Verbindung zu sich selbst, zur eigenen Intuition und zur inneren Führungskraft in Ihnen. Nicht mit Theorie, sondern mit gelebter Bewusstseinsarbeit und Mentaltraining – so lange, bis echte Klarheit entsteht und Sie wissen, von wo aus Sie führen wollen.</p>
         <p>Diese Formate sind bewusst exklusiv gehalten und werden individuell auf Sie abgestimmt. Wenn Sie das Gefühl haben, dass die Zeit für diesen Schritt reif ist – ich freue mich auf Ihre Nachricht.</p>
+        <a href="../coaching/" class="btn btn--primary">Zum Retreat Lovran</a>
+      </div>
 
+      <div class="split-img-col reveal d1">
+        <div class="split-img">
+          <img src="../img/blick-aufs-meer-angebote.jpeg" alt="Blick auf die Adria vom Anahata Space Lovran an der Opatija-Riviera" loading="lazy">
+        </div>
         <div class="format-pills">
           <span>📍 Anahata Space Lovran, Kroatien</span>
           <span>🌊 Opatija-Riviera</span>
           <span>👤 Einzel-Intensiv &amp; Kleingruppenformate</span>
           <span>📩 Termine auf persönliche Anfrage</span>
         </div>
-
-        <a href="../coaching/" class="btn btn--primary">Persönliche Anfrage senden</a>
-      </div>
-
-      <div class="split-img reveal d1">
-        <img src="../img/blick-aufs-meer-angebote.jpeg" alt="Blick auf die Adria vom Anahata Space Lovran an der Opatija-Riviera" loading="lazy">
       </div>
 
     </div>
@@ -498,8 +503,16 @@
   <div class="container">
     <div class="split-grid split-grid--flip">
 
-      <div class="split-img reveal">
-        <img src="../img/gerlinde-ranger-portrait.png" alt="Mag. Gerlinde Pramer als Keynote-Speakerin – professionell und einladend" loading="lazy">
+      <div class="split-img-col reveal">
+        <div class="split-img">
+          <img src="../img/gerlinde-ranger-portrait.png" alt="Mag. Gerlinde Pramer als Keynote-Speakerin – professionell und einladend" loading="lazy">
+        </div>
+        <div class="format-pills">
+          <span>🎤 Keynotes &amp; Impulsvorträge</span>
+          <span>🏢 Unternehmensevents &amp; Kongresse</span>
+          <span>📐 Dauer &amp; Format individuell</span>
+          <span>📩 Buchungsanfrage per Kontaktformular</span>
+        </div>
       </div>
 
       <div class="split-text reveal d1">
@@ -508,15 +521,7 @@
         <p>Was wäre, wenn Ihre nächste Veranstaltung Ihren Gästen mehr mitgibt als ein gutes Gefühl – nämlich eine Erkenntnis, die wirklich etwas verändert?</p>
         <p>Ich spreche über die Themen, die im Unternehmertum oft unausgesprochen bleiben: Wie entscheide ich, wenn die Excel-Tabelle schweigt? Wie führe ich, ohne mich dabei zu verlieren? Warum spüren so viele trotz äußerem Erfolg eine innere Leere – und was steckt dahinter? Meine Vorträge verbinden unternehmerische Erfahrung mit Bewusstseinsarbeit: klar, direkt, und so, dass es nachhallt. Kein abgehobener Esoterik-Vortrag, keine hohlen Motivationsfloskeln – sondern ein Impuls, der sitzt.</p>
         <p>Wenn Ihre Veranstaltung zu meinen Werten passt und Raum für echte Tiefe lässt, freue ich mich sehr auf Ihre Anfrage.</p>
-
-        <div class="format-pills">
-          <span>🎤 Keynotes &amp; Impulsvorträge</span>
-          <span>🏢 Unternehmensevents &amp; Kongresse</span>
-          <span>📐 Dauer &amp; Format individuell</span>
-          <span>📩 Buchungsanfrage per Kontaktformular</span>
-        </div>
-
-        <a href="../kontakt/" class="btn btn--primary">Anfrage stellen</a>
+        <a href="../keynote/" class="btn btn--primary">Meine Themen entdecken</a>
       </div>
 
     </div>
