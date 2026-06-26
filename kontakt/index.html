@@ -131,7 +131,9 @@
     /* ── KONTAKT-HERO (kein Bild, schlank, zentriert, mobil-first) ── */
     .kontakt-hero {
       padding: clamp(7rem, 16vw, 9rem) 0 clamp(2.5rem, 6vw, 3rem);
-      background: var(--cream);
+      background:
+        linear-gradient(to bottom, rgba(15,25,50,0.68) 0%, transparent clamp(5rem, 11vw, 7rem)),
+        var(--cream);
       text-align: center;
     }
     .kontakt-hero-inner { max-width: 700px; margin: 0 auto; }
@@ -234,6 +236,44 @@
       .social-btn { flex: 1 1 100%; }
     }
 
+    /* ── NEWSLETTER ── */
+    .newsletter-section { position: relative; overflow: hidden; min-height: 680px; }
+    .nl-bg { position: absolute; inset: 0; }
+    .nl-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 22% center; display: block; }
+    .nl-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0) 25%, rgba(0,0,0,0.18) 55%, rgba(0,0,0,0.38) 100%);
+    }
+    .nl-inner {
+      position: relative; z-index: 1;
+      display: flex; justify-content: flex-end; align-items: center;
+      padding-top: clamp(3.5rem, 8vw, 5.5rem);
+      padding-bottom: clamp(3.5rem, 8vw, 5.5rem);
+      min-height: 680px;
+    }
+    .nl-card {
+      background: #fff;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.22);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.75rem, 3vw, 2.25rem);
+      width: 380px; max-width: 46%;
+    }
+    .nl-card .eyebrow { margin-bottom: 0.6rem; }
+    .nl-title { color: var(--navy); font-size: clamp(1.3rem, 2vw, 1.65rem); margin-bottom: 1.25rem; }
+    .nl-field { margin-bottom: 0.8rem; }
+    .nl-field label { display: block; font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; color: var(--ink); margin-bottom: 0.3rem; }
+    .nl-field input {
+      width: 100%; font: inherit; font-size: 0.95rem; color: var(--ink);
+      padding: 0.65rem 0.85rem; border: 1px solid var(--line);
+      border-radius: var(--radius); background: var(--cream);
+      transition: border-color 0.15s;
+    }
+    .nl-field input:hover { border-color: var(--navy-mid); }
+    .nl-field input:focus { outline: none; border-color: var(--navy); background: #fff; }
+    .nl-card .btn--primary:hover { background: var(--gold); border-color: var(--gold); }
+    .nl-note { font-size: 0.72rem; color: var(--ink-muted); margin-top: 0.75rem; text-align: center; line-height: 1.55; }
+    @media (max-width: 700px) { .nl-inner { justify-content: center; } .nl-card { max-width: 100%; width: 100%; } }
+
     /* ── FOOTER ── */
     .footer { background: var(--navy); padding: clamp(2.5rem, 6vw, 4.5rem) 0 0; }
     .footer-grid {
@@ -323,15 +363,15 @@
 
     <div class="social-list reveal">
       <a href="https://www.linkedin.com/in/pramermanagementberatung/" class="social-btn" target="_blank" rel="noopener">
-        <img src="https://cdn.simpleicons.org/linkedin/1A3A6B" alt="" width="20" height="20">
+        <img src="../img/icon-linkedin.svg" alt="" width="20" height="20">
         <span>LinkedIn</span>
       </a>
       <a href="https://www.instagram.com/gerlinde_pramer/" class="social-btn" target="_blank" rel="noopener">
-        <img src="https://cdn.simpleicons.org/instagram/1A3A6B" alt="" width="20" height="20">
+        <img src="../img/icon-instagram.svg" alt="" width="20" height="20">
         <span>Instagram</span>
       </a>
       <a href="https://www.facebook.com/profile.php?id=100010777603741" class="social-btn" target="_blank" rel="noopener">
-        <img src="https://cdn.simpleicons.org/facebook/1A3A6B" alt="" width="20" height="20">
+        <img src="../img/icon-facebook.svg" alt="" width="20" height="20">
         <span>Facebook</span>
       </a>
     </div>
@@ -343,7 +383,30 @@
   <div class="container">
     <div class="kontakt-intro reveal">
       <span class="eyebrow eyebrow--gold" style="margin-bottom: 1rem;">Auf ein Wort</span>
-      <p>Jede Begegnung beginnt mit einem ersten Schritt – diesem hier. Ob Sie eine Frage haben, sich für ein Coaching interessieren oder einfach in Verbindung bleiben möchten: Ich freue mich von Herzen auf Ihre Nachricht. Nehmen Sie sich die Zeit, die es braucht, und melden Sie sich auf dem Weg, der sich für Sie am stimmigsten&nbsp;anfühlt.</p>
+      <p>Jede Begegnung beginnt mit einem ersten Schritt – diesem hier. Ob Sie eine Frage haben, sich für ein Coaching interessieren oder einfach in Verbindung bleiben möchten: Ich freue mich von Herzen auf Ihre Nachricht.<br>Nehmen Sie sich die Zeit, die es braucht, und melden Sie sich auf dem Weg, der sich für Sie am stimmigsten&nbsp;anfühlt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section" id="newsletter" aria-label="Newsletter">
+  <div class="nl-bg" aria-hidden="true">
+    <img src="../img/gerlinde-sitzend.png" alt="">
+  </div>
+  <div class="container nl-inner">
+    <div class="nl-card reveal">
+      <span class="eyebrow eyebrow--gold">Newsletter</span>
+      <h2 class="nl-title">Bleiben Sie in Verbindung.</h2>
+      <div class="nl-field">
+        <label for="nl-name">Name</label>
+        <input type="text" id="nl-name" name="name" placeholder="Vorname Nachname" autocomplete="name">
+      </div>
+      <div class="nl-field">
+        <label for="nl-email">E-Mail-Adresse</label>
+        <input type="email" id="nl-email" name="email" placeholder="ihre@email.at" autocomplete="email">
+      </div>
+      <button type="submit" class="btn btn--primary" style="width:100%; margin-top:0.5rem;">Jetzt anmelden</button>
+      <p class="nl-note">Kein Spam. Abmeldung jederzeit möglich.</p>
     </div>
   </div>
 </section>
@@ -392,9 +455,8 @@
 </footer>
 
 <script>
-  /* NAV – kein Hero-Bild, daher sofort navy */
+  /* NAV */
   const nav = document.getElementById('nav');
-  nav.classList.add('scrolled');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 50);
   }, { passive: true });
