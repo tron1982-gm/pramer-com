@@ -145,27 +145,29 @@
     }
     .kontakt-intro {
       max-width: 640px; margin: 0 auto; text-align: center;
+    }
+    .kontakt-intro p {
       font-family: 'Outfit', sans-serif; font-weight: 400;
       font-size: clamp(1.15rem, 2.2vw, 1.35rem);
       line-height: 1.75; color: var(--navy);
     }
 
     /* ── KONTAKT-BUTTONS ── */
-    .kontakt-block { background: var(--surface); padding: 0 0 clamp(4rem, 9vw, 6rem); }
+    .kontakt-block { background: var(--surface); padding: clamp(4rem, 9vw, 6rem) 0; }
     .kontakt-list {
       display: flex; flex-direction: column; gap: 0.85rem;
       max-width: 480px; margin: 0 auto;
     }
     .kontakt-btn {
       display: flex; align-items: center; gap: 1rem;
-      background: var(--cream-deep);
-      border: 1px solid var(--line);
+      background: var(--navy);
+      border: 1px solid var(--navy);
       border-radius: var(--radius-lg);
       padding: 1.1rem 1.35rem;
       text-decoration: none;
       transition: background 0.25s, border-color 0.25s;
     }
-    .kontakt-btn:hover { background: var(--navy); border-color: var(--navy); }
+    .kontakt-btn:hover { background: var(--gold); border-color: var(--gold); }
     .kontakt-btn-icon {
       flex-shrink: 0; width: 44px; height: 44px;
       display: flex; align-items: center; justify-content: center;
@@ -173,18 +175,18 @@
       background: var(--surface);
       transition: background 0.25s;
     }
-    .kontakt-btn:hover .kontakt-btn-icon { background: rgba(255,255,255,0.12); }
+    .kontakt-btn:hover .kontakt-btn-icon { background: rgba(255,255,255,0.92); }
     .kontakt-btn-text { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
     .kontakt-btn-label {
-      font-family: 'Outfit', sans-serif; font-size: 1.1rem; color: var(--navy);
+      font-family: 'Outfit', sans-serif; font-size: 1.1rem; color: #fff;
       transition: color 0.25s;
     }
     .kontakt-btn-meta {
-      font-family: 'Inter', sans-serif; font-size: 0.88rem; color: var(--ink-muted);
+      font-family: 'Inter', sans-serif; font-size: 0.88rem; color: rgba(255,255,255,0.7);
       transition: color 0.25s;
     }
     .kontakt-btn:hover .kontakt-btn-label { color: #fff; }
-    .kontakt-btn:hover .kontakt-btn-meta { color: rgba(255,255,255,0.75); }
+    .kontakt-btn:hover .kontakt-btn-meta { color: rgba(255,255,255,0.85); }
 
     .kontakt-response-note {
       text-align: center; font-size: 0.95rem; color: var(--ink-muted);
@@ -293,13 +295,6 @@
   </div>
 </section>
 
-<!-- INTRO-TEXT -->
-<section class="kontakt-intro-section">
-  <div class="container">
-    <p class="kontakt-intro reveal">Jede Begegnung beginnt mit einem ersten Schritt – diesem hier. Ob Sie eine Frage haben, sich für ein Coaching interessieren oder einfach in Verbindung bleiben möchten: Ich freue mich von Herzen auf Ihre Nachricht. Nehmen Sie sich die Zeit, die es braucht, und melden Sie sich auf dem Weg, der sich für Sie am stimmigsten anfühlt.</p>
-  </div>
-</section>
-
 <!-- KONTAKT-BUTTONS -->
 <section class="kontakt-block">
   <div class="container">
@@ -339,6 +334,16 @@
         <img src="https://cdn.simpleicons.org/facebook/1A3A6B" alt="" width="20" height="20">
         <span>Facebook</span>
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABSCHLUSS-TEXT -->
+<section class="kontakt-intro-section">
+  <div class="container">
+    <div class="kontakt-intro reveal">
+      <span class="eyebrow eyebrow--gold" style="margin-bottom: 1rem;">Auf ein Wort</span>
+      <p>Jede Begegnung beginnt mit einem ersten Schritt – diesem hier. Ob Sie eine Frage haben, sich für ein Coaching interessieren oder einfach in Verbindung bleiben möchten: Ich freue mich von Herzen auf Ihre Nachricht. Nehmen Sie sich die Zeit, die es braucht, und melden Sie sich auf dem Weg, der sich für Sie am stimmigsten&nbsp;anfühlt.</p>
     </div>
   </div>
 </section>
