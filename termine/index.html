@@ -199,6 +199,7 @@
     .keynote-split-text .eyebrow { margin-bottom: 1rem; display: block; }
     .keynote-split-text h2 { margin-bottom: 1.25rem; }
     .keynote-split-text p { color: var(--ink-muted); font-size: 1.05rem; line-height: 1.82; margin-bottom: 1.5rem; }
+    .keynote-split-text p:last-of-type { margin-bottom: 1.5rem; }
     .keynote-split-text .btn--primary:hover { background: var(--gold); border-color: var(--gold); }
     .keynote-split-img { overflow: hidden; border-radius: var(--radius-lg); }
     .keynote-split-img img { width: 100%; aspect-ratio: 4/3; object-fit: cover; object-position: center 20%; display: block; }
@@ -213,7 +214,7 @@
       width: 100%;
       border-collapse: collapse;
       background: var(--surface);
-      min-width: 540px;
+      min-width: 620px;
     }
     .termine-table thead tr { background: var(--ink); }
     .termine-table th {
@@ -234,9 +235,25 @@
       color: var(--ink-soft);
       font-size: 0.97rem;
       vertical-align: middle;
+      transition: background 0.18s, color 0.18s;
     }
+    .termine-table tbody tr { cursor: pointer; }
     .termine-table tbody tr:nth-child(even) { background: var(--cream-deep); }
     .termine-table tbody tr:last-child td { border-bottom: none; }
+
+    /* ABC-Zeilen fett */
+    .tr-abc td { font-weight: 600; }
+
+    /* Hover: gold + weiße Schrift */
+    .termine-table tbody tr:hover td {
+      background: var(--gold);
+      color: #fff;
+      border-bottom-color: rgba(255,255,255,0.2);
+    }
+    .termine-table tbody tr:hover .badge {
+      background: rgba(255,255,255,0.25);
+      color: #fff;
+    }
 
     .badge {
       display: inline-block;
@@ -246,6 +263,7 @@
       padding: 2px 8px;
       white-space: nowrap;
       font-family: 'Inter', sans-serif;
+      transition: background 0.18s, color 0.18s;
     }
     .badge--abc    { background: var(--gold-soft); color: var(--ink); }
     .badge--online { background: var(--blue-bg);   color: var(--blue-deep); }
@@ -260,14 +278,11 @@
       margin-right: auto;
       line-height: 1.65;
     }
-    .termine-ctas {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 2.25rem;
+
+    @media (max-width: 767px) {
+      .col-thema,
+      .col-dauer { display: none; }
     }
-    @media (max-width: 767px) { .col-thema { display: none; } }
 
     /* ── NEWSLETTER ── */
     .newsletter-section { position: relative; overflow: hidden; min-height: 680px; }
@@ -406,155 +421,171 @@
         <thead>
           <tr>
             <th>Datum</th>
+            <th>Ort</th>
             <th>Uhrzeit</th>
             <th>Format</th>
             <th class="col-thema">Thema</th>
-            <th>Ort</th>
+            <th class="col-dauer">Dauer</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 14.7.2026</td>
+            <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
             <td class="col-thema">–</td>
-            <td>Online</td>
+            <td class="col-dauer">–</td>
           </tr>
-          <tr>
+          <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 28.7.2026</td>
+            <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
             <td class="col-thema">–</td>
-            <td>Online</td>
+            <td class="col-dauer">–</td>
           </tr>
-          <tr>
+          <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 11.8.2026</td>
+            <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
             <td class="col-thema">–</td>
-            <td>Online</td>
+            <td class="col-dauer">–</td>
           </tr>
-          <tr>
+          <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 25.8.2026</td>
+            <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
             <td class="col-thema">–</td>
-            <td>Online</td>
+            <td class="col-dauer">–</td>
           </tr>
-          <tr>
+          <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 8.9.2026</td>
+            <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
             <td class="col-thema"><span title="Klarheit im Sturm: Wie du die Stimme der Intuition von der Angst trennst.">Klarheit im Sturm</span></td>
-            <td>Online</td>
+            <td class="col-dauer">–</td>
           </tr>
-          <tr>
+          <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Mo, 21.9.2026</td>
+            <td>Linz</td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
             <td class="col-thema"><span title="Klarheit im Sturm: Wie du die Stimme der Intuition von der Angst trennst.">Klarheit im Sturm</span></td>
-            <td>Linz</td>
+            <td class="col-dauer">–</td>
           </tr>
-          <tr>
+          <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 22.9.2026</td>
+            <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
             <td class="col-thema"><span title="Klarheit im Sturm: Wie du die Stimme der Intuition von der Angst trennst.">Klarheit im Sturm</span></td>
-            <td>Online</td>
+            <td class="col-dauer">–</td>
           </tr>
-          <tr>
+          <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Di, 22.9.2026</td>
+            <td>Wien</td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
             <td class="col-thema"><span title="Klarheit im Sturm: Wie du die Stimme der Intuition von der Angst trennst.">Klarheit im Sturm</span></td>
-            <td>Wien</td>
+            <td class="col-dauer">–</td>
           </tr>
-          <tr>
+          <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Mi, 23.9.2026</td>
+            <td>Graz</td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
             <td class="col-thema"><span title="Klarheit im Sturm: Wie du die Stimme der Intuition von der Angst trennst.">Klarheit im Sturm</span></td>
-            <td>Graz</td>
+            <td class="col-dauer">–</td>
           </tr>
-          <tr>
+          <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 13.10.2026</td>
+            <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
             <td class="col-thema"><span title="Die Frequenz der Führung: Warum deine besten Mitarbeiter wirklich bleiben.">Frequenz der Führung</span></td>
-            <td>Online</td>
+            <td class="col-dauer">–</td>
           </tr>
-          <tr>
+          <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Mo, 19.10.2026</td>
+            <td>Linz</td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
             <td class="col-thema"><span title="Die Frequenz der Führung: Warum deine besten Mitarbeiter wirklich bleiben.">Frequenz der Führung</span></td>
-            <td>Linz</td>
+            <td class="col-dauer">–</td>
           </tr>
-          <tr>
+          <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Di, 20.10.2026</td>
+            <td>Wien</td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
             <td class="col-thema"><span title="Die Frequenz der Führung: Warum deine besten Mitarbeiter wirklich bleiben.">Frequenz der Führung</span></td>
-            <td>Wien</td>
+            <td class="col-dauer">–</td>
           </tr>
-          <tr>
+          <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Mi, 21.10.2026</td>
+            <td>Graz</td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
             <td class="col-thema"><span title="Die Frequenz der Führung: Warum deine besten Mitarbeiter wirklich bleiben.">Frequenz der Führung</span></td>
-            <td>Graz</td>
+            <td class="col-dauer">–</td>
           </tr>
-          <tr>
+          <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 27.10.2026</td>
+            <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
             <td class="col-thema"><span title="Die Frequenz der Führung: Warum deine besten Mitarbeiter wirklich bleiben.">Frequenz der Führung</span></td>
-            <td>Online</td>
+            <td class="col-dauer">–</td>
           </tr>
-          <tr>
+          <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 10.11.2026</td>
+            <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
             <td class="col-thema"><span title="Raus aus dem Hustle, rein in den Fluss: Erfolg, der dem Herzen folgt.">Raus aus dem Hustle</span></td>
-            <td>Online</td>
+            <td class="col-dauer">–</td>
           </tr>
-          <tr>
+          <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Mo, 16.11.2026</td>
-            <td>18:30</td>
-            <td><span class="badge badge--abc">Anahata Business Circle</span></td>
-            <td class="col-thema"><span title="Raus aus dem Hustle, rein in den Fluss: Erfolg, der dem Herzen folgt.">Raus aus dem Hustle</span></td>
             <td>Linz</td>
+            <td>18:30</td>
+            <td><span class="badge badge--abc">Anahata Business Circle</span></td>
+            <td class="col-thema"><span title="Raus aus dem Hustle, rein in den Fluss: Erfolg, der dem Herzen folgt.">Raus aus dem Hustle</span></td>
+            <td class="col-dauer">–</td>
           </tr>
-          <tr>
+          <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Di, 17.11.2026</td>
-            <td>18:30</td>
-            <td><span class="badge badge--abc">Anahata Business Circle</span></td>
-            <td class="col-thema"><span title="Raus aus dem Hustle, rein in den Fluss: Erfolg, der dem Herzen folgt.">Raus aus dem Hustle</span></td>
             <td>Wien</td>
-          </tr>
-          <tr>
-            <td>Mi, 18.11.2026</td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
             <td class="col-thema"><span title="Raus aus dem Hustle, rein in den Fluss: Erfolg, der dem Herzen folgt.">Raus aus dem Hustle</span></td>
-            <td>Graz</td>
+            <td class="col-dauer">–</td>
           </tr>
-          <tr>
+          <tr class="tr-abc" data-href="https://abc.pramer.com">
+            <td>Mi, 18.11.2026</td>
+            <td>Graz</td>
+            <td>18:30</td>
+            <td><span class="badge badge--abc">Anahata Business Circle</span></td>
+            <td class="col-thema"><span title="Raus aus dem Hustle, rein in den Fluss: Erfolg, der dem Herzen folgt.">Raus aus dem Hustle</span></td>
+            <td class="col-dauer">–</td>
+          </tr>
+          <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 24.11.2026</td>
+            <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
             <td class="col-thema"><span title="Raus aus dem Hustle, rein in den Fluss: Erfolg, der dem Herzen folgt.">Raus aus dem Hustle</span></td>
-            <td>Online</td>
+            <td class="col-dauer">–</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <p class="termine-fussnote reveal d2">Alle Termine ohne Gewähr. Anahata Business Circle-Abende finden ab mindestens 10 Teilnehmer:innen statt. Live Online Sessions sind kostenlos und ohne Voranmeldung zugänglich.</p>
-    <div class="termine-ctas reveal d3">
-      <a href="https://abc.pramer.com" class="btn btn--primary">Platz im Business Circle sichern</a>
-      <a href="../online-sessions/" class="btn btn--ghost">Zur nächsten Online Session</a>
-    </div>
+    <p class="termine-fussnote reveal d2">Alle Termine ohne Gewähr. Anahata Business Circle-Abende finden ab mindestens 5 Teilnehmer:innen statt.</p>
 
   </div>
 </section>
@@ -566,8 +597,9 @@
       <div class="keynote-split-text">
         <span class="eyebrow eyebrow--gold">Keynotes &amp; Impulsvorträge</span>
         <h2>Gerlinde Pramer auf der Bühne erleben</h2>
-        <p>Aktuell stehen keine öffentlich zugänglichen Keynote-Termine fest. Neue Termine werden hier so bald wie möglich ergänzt – bei Interesse an einem individuellen Vortrag für Ihr Unternehmen oder Ihre Veranstaltung freuen wir uns über Ihre Anfrage.</p>
-        <a href="../keynote/#buchungsanfrage" class="btn btn--primary">Buchungsanfrage senden</a>
+        <p>Aktuell stehen keine öffentlich zugänglichen Keynote-Termine fest. Neue Termine werden hier so bald wie möglich ergänzt.</p>
+        <p>Sollten Sie Interesse an einem individuellen Vortrag für Ihr Unternehmen oder Ihre Veranstaltung haben, so freue ich mich über Ihre Anfrage.</p>
+        <a href="../keynote/" class="btn btn--primary">Meine Themen entdecken</a>
       </div>
       <div class="keynote-split-img">
         <img src="../img/gerlinde-buehne.png" alt="Mag. Gerlinde Pramer – Keynote" loading="lazy">
@@ -652,6 +684,10 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  document.querySelectorAll('.termine-table tbody tr[data-href]').forEach(tr => {
+    tr.addEventListener('click', () => { window.location.href = tr.dataset.href; });
+  });
 </script>
 </body>
 </html>
