@@ -105,8 +105,9 @@
       display: flex; align-items: center; justify-content: space-between;
       width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--pad);
     }
-    .nav-logo img { height: 40px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; transition: filter 0.2s, opacity 0.2s; }
-    .nav-logo:hover img { filter: brightness(0) invert(1) brightness(0.55) sepia(1) saturate(2) brightness(0.92); opacity: 1; }
+    .nav-logo img { height: 58px; width: auto; filter: brightness(0) invert(1) brightness(1.08); opacity: 0.9; transition: filter 0.2s, opacity 0.2s, height 0.3s; transform: translateY(6px); }
+    .nav.scrolled .nav-logo img { height: 44px; transform: translateY(4px); }
+    .nav-logo:hover img { filter: brightness(0) invert(1) sepia(0.6) hue-rotate(40deg) saturate(1.2) brightness(1.05); opacity: 1; }
     .nav-links { display: flex; align-items: center; gap: 2.25rem; list-style: none; }
     .nav-links a {
       font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600;
@@ -394,7 +395,7 @@
       gap: 3rem; padding-bottom: clamp(2rem, 5vw, 3.5rem);
     }
     @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr; gap: 2rem; } }
-    .footer-logo img { height: 40px; filter: brightness(0) invert(1); opacity: 0.95; margin-bottom: 0.75rem; }
+    .footer-logo img { height: 58px; filter: brightness(0) invert(1); opacity: 0.95; margin-bottom: 0.75rem; }
     .footer-tagline { font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.85); margin-bottom: 1.25rem; max-width: 32ch; }
     .footer-logos { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; margin-top: 0.5rem; }
     .footer-logos img { height: 54px; filter: brightness(0) invert(1); opacity: 0.9; }
@@ -425,7 +426,7 @@
 <nav class="nav" id="nav" aria-label="Hauptnavigation">
   <div class="nav-inner">
     <a href="../index.html" class="nav-logo" aria-label="Gerlinde Pramer – Startseite">
-      <img src="../img/unterschrift-alpha.png" alt="Gerlinde Pramer" height="40">
+      <img src="../img/signatur-3.svg" alt="Gerlinde Pramer" height="40">
     </a>
     <ul class="nav-links">
       <li><a href="./" aria-current="page">Über mich</a></li>
@@ -738,7 +739,7 @@
     <div class="footer-grid">
       <div class="footer-col">
         <div class="footer-logo">
-          <img src="../img/unterschrift-alpha.png" alt="Gerlinde Pramer" height="40">
+          <img src="../img/signatur-3.svg" alt="Gerlinde Pramer" height="40">
         </div>
         <p class="footer-tagline">Bewusstseinsarbeit für Führungskräfte und Unternehmer:innen, die bereit sind, die Tiefe zu erkunden – und von dort zu führen.</p>
         <div class="footer-logos">
