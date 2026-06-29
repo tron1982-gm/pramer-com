@@ -113,7 +113,10 @@
       display: flex; align-items: center; justify-content: space-between;
       width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--pad);
     }
-    .nav-logo img { height: 58px; width: auto; filter: brightness(0) invert(1) sepia(1) hue-rotate(35deg) saturate(1.8) brightness(0.9); opacity: 0.9; transition: filter 0.2s, opacity 0.2s, height 0.3s; transform: translateY(6px); }
+    .nav-logo img { height: 58px; width: auto; opacity: 0.9; transition: opacity 0.2s, height 0.3s; transform: translateY(6px); }
+    .nav-logo .logo-white { display: none; }
+    .nav.scrolled .nav-logo .logo-gold { display: none; }
+    .nav.scrolled .nav-logo .logo-white { display: block; }
     .nav.scrolled .nav-logo img { height: 44px; transform: translateY(4px); }
     .nav-logo:hover img { filter: brightness(0) invert(1) sepia(0.6) hue-rotate(40deg) saturate(1.2) brightness(1.05); opacity: 1; }
     .nav-links { display: flex; align-items: center; gap: 2.25rem; list-style: none; }
@@ -392,7 +395,8 @@
 <nav class="nav" id="nav" aria-label="Hauptnavigation">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo" aria-label="Gerlinde Pramer – Startseite">
-      <img src="img/signatur-3.svg" alt="Gerlinde Pramer" height="40">
+      <img class="logo-gold" src="img/signatur-3-gold.svg" alt="Gerlinde Pramer" height="40">
+      <img class="logo-white" src="img/signatur-3-white.svg" alt="Gerlinde Pramer" height="40">
     </a>
     <ul class="nav-links">
       <li><a href="ueber-mich/">Über mich</a></li>
