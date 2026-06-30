@@ -4,3 +4,10 @@
 _sigtmp.png
 mockup.html
 *.bak
+
+# Claude-interne Dateien
+.claude/
+
+# Backup-Kopien (z.B. "termine index Kopie.html")
+*Kopie*.html
+* Kopie*.html
