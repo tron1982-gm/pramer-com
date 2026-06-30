@@ -464,6 +464,9 @@
     .footer-col li { margin-bottom: 0.55rem; }
     .footer-col a { color: #fff; text-decoration: underline; font-size: 0.9rem; transition: color 0.2s; }
     .footer-col a:hover { color: var(--gold); }
+    .footer-col a[aria-current="page"] { color: var(--gold); text-shadow: 1px 1px 0 rgba(10,20,60,0.85); }
+    .footer-logo a { display: inline-block; }
+    .footer-logo a:hover img { filter: brightness(0) invert(1) sepia(0.6) hue-rotate(40deg) saturate(1.2) brightness(1.05); opacity: 1; }
     .footer-bottom {
       padding: 1.5rem 0;
       display: flex; justify-content: space-between; align-items: center;
@@ -773,7 +776,9 @@
     <div class="footer-grid">
       <div class="footer-col">
         <div class="footer-logo">
-          <img src="../img/signatur-3.svg" alt="Gerlinde Pramer" height="40">
+          <a href="../index.html" aria-label="Gerlinde Pramer – Startseite">
+            <img src="../img/signatur-3.svg" alt="Gerlinde Pramer" height="40">
+          </a>
         </div>
         <p class="footer-tagline">Bewusstseinsarbeit für Unternehmerinnen und Führungskräfte, die bereit sind, die Tiefe zu erkunden – und von dort zu führen.</p>
         <div class="footer-logos">
@@ -785,7 +790,7 @@
         <ul>
           <li><a href="../ueber-mich/">Über mich</a></li>
           <li><a href="../angebote/">Angebote</a></li>
-          <li><a href="../termine/">Termine</a></li>
+          <li><a href="../termine/" aria-current="page">Termine</a></li>
           <li><a href="../kontakt/">Kontakt</a></li>
         </ul>
       </div>
@@ -794,6 +799,7 @@
         <ul>
           <li><a href="../online-sessions/">Online Sessions</a></li>
           <li><a href="https://abc.pramer.com">Business Circle</a></li>
+          <li><a href="../1-1-begleitung/">1:1 Begleitung</a></li>
           <li><a href="../coaching/">Retreat &amp; Coaching</a></li>
           <li><a href="../keynote/">Keynote</a></li>
         </ul>

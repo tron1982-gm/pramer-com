@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Meine Angebote – Mag. Gerlinde Pramer</title>
-  <meta name="description" content="Online Sessions, Anahata Business Circle, Retreat & Intensiv-Coaching in Lovran, Keynote & Vorträge – Bewusstseinsarbeit für Führungskräfte von Mag. Gerlinde Pramer.">
+  <meta name="description" content="Online Sessions, Anahata Business Circle, 1:1 Begleitung, Retreat & Intensiv-Coaching in Lovran, Keynote & Vorträge – Bewusstseinsarbeit für Führungskräfte von Mag. Gerlinde Pramer.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -243,8 +243,8 @@
     .split-section         { background: var(--cream-deep); padding: clamp(4rem, 9vw, 7rem) 0; }
     .split-section--light  { background: var(--surface); padding: clamp(4rem, 9vw, 7rem) 0; }
 
-    /* Scroll offset for sticky nav */
-    .scroll-target { scroll-margin-top: calc(var(--nav-h) + 1.5rem); }
+    /* Scroll offset for sticky nav: bottom edge of nav flush with bottom edge of hero */
+    .scroll-target { scroll-margin-top: var(--nav-h); }
 
     /* Top-aligned: image top edge flush with eyebrow text top edge */
     .split-grid {
@@ -274,6 +274,23 @@
     }
     .split-img:hover img { transform: scale(1.04); }
 
+    /* Placeholder visual (until real photo is available) */
+    .split-img-placeholder {
+      border-radius: var(--radius-lg);
+      aspect-ratio: 4/3;
+      background: #ff00aa;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .split-img-placeholder span {
+      font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.85); text-align: center; padding: 1rem;
+    }
+
+    .split-text p a { color: var(--navy-mid); text-decoration: underline; transition: color 0.2s; }
+    .split-text p a:hover { color: var(--gold); }
+
     /* ── FORMAT PILLS (Fakten-Block, unter dem Bild) ── */
     .format-pills {
       display: flex; flex-wrap: wrap; gap: 0.5rem;
@@ -294,7 +311,7 @@
     .split-text .btn { align-self: flex-start; margin-top: 1.75rem; }
 
     /* ── CTA SECTION (Nächster Schritt) ── */
-    .cta-section { background: var(--cream-deep); padding: clamp(4rem, 9vw, 7rem) 0; text-align: center; }
+    .cta-section { background: var(--surface); padding: clamp(4rem, 9vw, 7rem) 0; text-align: center; }
     .cta-section .eyebrow--gold { margin-bottom: 1rem; }
     .cta-section h2 { color: var(--navy); margin-bottom: 1rem; }
     .cta-section p { color: var(--ink-muted); max-width: 52ch; margin: 0 auto 2.5rem; font-size: 1.05rem; }
@@ -320,6 +337,9 @@
     .footer-col li { margin-bottom: 0.55rem; }
     .footer-col a { color: #fff; text-decoration: underline; font-size: 0.9rem; transition: color 0.2s; }
     .footer-col a:hover { color: var(--gold); }
+    .footer-col a[aria-current="page"] { color: var(--gold); text-shadow: 1px 1px 0 rgba(10,20,60,0.85); }
+    .footer-logo a { display: inline-block; }
+    .footer-logo a:hover img { filter: brightness(0) invert(1) sepia(0.6) hue-rotate(40deg) saturate(1.2) brightness(1.05); opacity: 1; }
     .footer-bottom {
       padding: 1.5rem 0;
       display: flex; justify-content: space-between; align-items: center;
@@ -377,7 +397,7 @@
     <div class="container">
       <div class="hero-text">
         <span class="hero-eyebrow">Meine Angebote</span>
-        <h1>Vier Formate.<br>Eine Einladung.</h1>
+        <h1>Fünf Formate.<br>Eine Einladung.</h1>
         <p class="hero-sub">Manche kommen, um mich unverbindlich kennenzulernen. Andere wissen schon, dass sie tiefer gehen möchten. Jeder Einstieg ist der richtige. Ich freue mich auf Sie.</p>
         <div class="hero-cta">
           <a href="#was-mich-antreibt" class="btn btn--gold">Angebote entdecken</a>
@@ -470,8 +490,38 @@
   </div>
 </section>
 
-<!-- ══ SEKTION 3 – RETREAT & INTENSIV-COACHING LOVRAN (beige) ══ -->
-<section class="split-section" id="retreat-lovran" aria-label="Retreat & Intensiv-Coaching in Lovran">
+<!-- ══ SEKTION NEU – 1:1 BEGLEITUNG (beige) ══ -->
+<section class="split-section" id="1-1-begleitung" aria-label="1:1 Begleitung">
+  <div class="container">
+    <div class="split-grid">
+
+      <div class="split-text reveal">
+        <span class="eyebrow eyebrow--gold">Persönlich &amp; individuell</span>
+        <h2>1:1 Begleitung</h2>
+        <p>Eine Gesprächspartnerin auf Augenhöhe – jemand, der zuhört und zugleich mitdenkt. Der die Tiefe kennt – und die unternehmerische Praxis.</p>
+        <p>Die 1:1-Begleitung ist kein fixes Programm. Eine einzelne Session, wenn ein konkretes Thema Raum braucht. Regelmäßiges Sparring im Zwei-Wochen-Rhythmus, wenn Sie eine verlässliche Gesprächspartnerin wollen. Oder ein kurzes Telefonat, wenn gerade eine Entscheidung ansteht.</p>
+        <p>Im Mittelpunkt stehen immer beide Seiten – Sie als Person und Sie als Unternehmer:in. Aktuelle Themen, Muster, Richtungsfragen. Und die Frage, wie stimmige Entscheidungen für Sie und Ihr Unternehmen konkret aussehen und entstehen. Wer einmal tiefer gehen möchte, findet das passende Format im <a href="#retreat-lovran">Retreat &amp; Intensiv-Coaching in Lovran</a> weiter unten.</p>
+        <a href="../1-1-begleitung/" class="btn btn--primary">Gespräch anfragen</a>
+      </div>
+
+      <div class="split-img-col reveal d1">
+        <div class="split-img-placeholder">
+          <span>Foto folgt</span>
+        </div>
+        <div class="format-pills">
+          <span>📍 Online &amp; in Österreich</span>
+          <span>🔁 Einzelsession oder laufendes Sparring</span>
+          <span>🕐 Termine nach Vereinbarung</span>
+          <span>📩 Anfrage per Kontaktformular</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SEKTION 3 – RETREAT & INTENSIV-COACHING LOVRAN (weiß) ══ -->
+<section class="split-section--light" id="retreat-lovran" aria-label="Retreat & Intensiv-Coaching in Lovran">
   <div class="container">
     <div class="split-grid">
 
@@ -500,8 +550,8 @@
   </div>
 </section>
 
-<!-- ══ SEKTION 4 – KEYNOTE & VORTRÄGE (weiß) ══ -->
-<section class="split-section--light" id="keynote" aria-label="Keynote & Vorträge">
+<!-- ══ SEKTION 4 – KEYNOTE & VORTRÄGE (beige) ══ -->
+<section class="split-section" id="keynote" aria-label="Keynote & Vorträge">
   <div class="container">
     <div class="split-grid split-grid--flip">
 
@@ -548,7 +598,9 @@
     <div class="footer-grid">
       <div class="footer-col">
         <div class="footer-logo">
-          <img src="../img/signatur-3.svg" alt="Gerlinde Pramer" height="40">
+          <a href="../index.html" aria-label="Gerlinde Pramer – Startseite">
+            <img src="../img/signatur-3.svg" alt="Gerlinde Pramer" height="40">
+          </a>
         </div>
         <p class="footer-tagline">Bewusstseinsarbeit für Unternehmerinnen und Führungskräfte, die bereit sind, die Tiefe zu erkunden – und von dort zu führen.</p>
         <div class="footer-logos">
@@ -559,7 +611,7 @@
         <h4>Navigation</h4>
         <ul>
           <li><a href="../ueber-mich/">Über mich</a></li>
-          <li><a href="../angebote/">Angebote</a></li>
+          <li><a href="../angebote/" aria-current="page">Angebote</a></li>
           <li><a href="../termine/">Termine</a></li>
           <li><a href="../kontakt/">Kontakt</a></li>
         </ul>
@@ -569,6 +621,7 @@
         <ul>
           <li><a href="../online-sessions/">Online Sessions</a></li>
           <li><a href="https://abc.pramer.com">Business Circle</a></li>
+          <li><a href="../1-1-begleitung/">1:1 Begleitung</a></li>
           <li><a href="../coaching/">Retreat &amp; Coaching</a></li>
           <li><a href="../keynote/">Keynote</a></li>
         </ul>

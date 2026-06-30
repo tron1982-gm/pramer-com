@@ -369,6 +369,7 @@
     }
     @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr; gap: 2rem; } }
     .footer-logo img { height: 40px; filter: brightness(0) invert(1); opacity: 0.95; margin-bottom: 0.75rem; }
+    .footer-logo--home img { filter: none; }
     .footer-tagline { font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.85); margin-bottom: 1.25rem; max-width: 32ch; }
     .footer-logos { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; margin-top: 0.5rem; }
     .footer-logos img { height: 54px; filter: brightness(0) invert(1); opacity: 0.9; }
@@ -381,6 +382,7 @@
     .footer-col li { margin-bottom: 0.55rem; }
     .footer-col a { color: #fff; text-decoration: underline; font-size: 0.9rem; transition: color 0.2s; }
     .footer-col a:hover { color: var(--gold); }
+    .footer-col a[aria-current="page"] { color: var(--gold); text-shadow: 1px 1px 0 rgba(10,20,60,0.85); }
     .footer-bottom {
       padding: 1.5rem 0;
       display: flex; justify-content: space-between; align-items: center;
@@ -608,8 +610,8 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-col">
-        <div class="footer-logo">
-          <img src="img/signatur-3.svg" alt="Gerlinde Pramer" height="40">
+        <div class="footer-logo footer-logo--home">
+          <img src="img/signatur-3-gold.svg" alt="Gerlinde Pramer" height="40">
         </div>
         <p class="footer-tagline">Bewusstseinsarbeit für Unternehmerinnen und Führungskräfte, die bereit sind, die Tiefe zu erkunden – und von dort zu führen.</p>
         <div class="footer-logos">
@@ -630,6 +632,7 @@
         <ul>
           <li><a href="online-sessions/">Online Sessions</a></li>
           <li><a href="https://abc.pramer.com">Business Circle</a></li>
+          <li><a href="1-1-begleitung/">1:1 Begleitung</a></li>
           <li><a href="coaching/">Retreat &amp; Coaching</a></li>
           <li><a href="keynote/">Keynote</a></li>
         </ul>
