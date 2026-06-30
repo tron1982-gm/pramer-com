@@ -440,6 +440,9 @@
     .nl-card .btn--primary:hover { background: var(--gold); border-color: var(--gold); }
     .nl-note { font-size: 0.72rem; color: var(--ink-muted); margin-top: 0.75rem; text-align: center; line-height: 1.55; }
     @media (max-width: 700px) { .nl-inner { justify-content: center; } .nl-card { max-width: 100%; width: 100%; } }
+    .nl-msg { font-size: 0.88rem; margin-top: 0.75rem; padding: 0.65rem 0.85rem; border-radius: var(--radius); display: none; }
+    .nl-msg.success { display: block; background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+    .nl-msg.error   { display: block; background: #fdecea; color: #b71c1c; border: 1px solid #ef9a9a; }
 
     /* ── FOOTER ── */
     .footer { background: var(--navy); padding: clamp(2.5rem, 6vw, 4.5rem) 0 0; }
@@ -736,16 +739,30 @@
     <div class="nl-card reveal">
       <span class="eyebrow eyebrow--gold">Newsletter</span>
       <h2 class="nl-title">Bleiben Sie in Verbindung.</h2>
-      <div class="nl-field">
-        <label for="nl-name">Name</label>
-        <input type="text" id="nl-name" name="name" placeholder="Vorname Nachname" autocomplete="name">
-      </div>
-      <div class="nl-field">
-        <label for="nl-email">E-Mail-Adresse</label>
-        <input type="email" id="nl-email" name="email" placeholder="ihre@email.at" autocomplete="email">
-      </div>
-      <button type="submit" class="btn btn--primary" style="width:100%; margin-top:0.5rem;">Jetzt anmelden</button>
-      <p class="nl-note">Kein Spam. Abmeldung jederzeit möglich.</p>
+      <form id="nl-form" novalidate>
+        <!-- ActiveCampaign Form 19 – Newsletter -->
+        <input type="hidden" name="u"        value="19">
+        <input type="hidden" name="f"        value="19">
+        <input type="hidden" name="s">
+        <input type="hidden" name="c"        value="0">
+        <input type="hidden" name="m"        value="0">
+        <input type="hidden" name="act"      value="sub">
+        <input type="hidden" name="v"        value="2">
+        <input type="hidden" name="or"       value="cb8e646c-5f3b-431d-9196-e81f2ee82c23">
+        <input type="hidden" name="field[3]" value="pramer.com/termine">
+        <input type="hidden" name="field[4]" id="nl-datum" value="">
+        <div class="nl-field">
+          <label for="nl-name">Name</label>
+          <input type="text" id="nl-name" name="fullname" placeholder="Vorname Nachname" autocomplete="name">
+        </div>
+        <div class="nl-field">
+          <label for="nl-email">E-Mail-Adresse <span style="color:#c0392b">*</span></label>
+          <input type="email" id="nl-email" name="email" placeholder="ihre@email.at" autocomplete="email" required>
+        </div>
+        <button type="submit" id="nl-submit" class="btn btn--primary" style="width:100%; margin-top:0.5rem;">Jetzt anmelden</button>
+        <div class="nl-msg" id="nl-msg" role="status" aria-live="polite"></div>
+        <p class="nl-note">Kein Spam. Abmeldung jederzeit möglich.</p>
+      </form>
     </div>
   </div>
 </section>
@@ -948,6 +965,69 @@
     });
   });
 
+  /* ── Newsletter AC-Submit (JSONP, Form 19) ── */
+  (function(){
+    const nlForm   = document.getElementById('nl-form');
+    const nlMsg    = document.getElementById('nl-msg');
+    const nlSubmit = document.getElementById('nl-submit');
+    const nlEmail  = document.getElementById('nl-email');
+    if (!nlForm) return;
+
+    function nlSuccess() {
+      nlMsg.className = 'nl-msg success';
+      nlMsg.textContent = 'Danke! Sie erhalten in Kürze einen Bestätigungslink per E-Mail.';
+      nlSubmit.textContent = 'Eingetragen ✓';
+      nlSubmit.disabled = true;
+      nlEmail.disabled  = true;
+    }
+    function nlError() {
+      nlMsg.className = 'nl-msg error';
+      nlMsg.textContent = 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie an office@pramer.com.';
+      nlSubmit.disabled = false;
+      nlSubmit.textContent = 'Jetzt anmelden';
+    }
+
+    window._show_thank_you = nlSuccess;
+    window._show_error     = nlError;
+
+    nlForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      nlEmail.value = nlEmail.value.trim();
+      if (!nlEmail.value || !nlEmail.checkValidity()) {
+        nlMsg.className = 'nl-msg error';
+        nlMsg.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+        nlEmail.focus();
+        return;
+      }
+      nlMsg.className = 'nl-msg';
+      nlMsg.textContent = '';
+      nlSubmit.disabled = true;
+      nlSubmit.textContent = 'Wird eingetragen …';
+
+      const now = new Date();
+      const datum = document.getElementById('nl-datum');
+      if (datum) datum.value = now.getFullYear() + '-' +
+        String(now.getMonth() + 1).padStart(2, '0') + '-' +
+        String(now.getDate()).padStart(2, '0');
+
+      const parts = [];
+      for (const el of nlForm.elements) {
+        if (!el.name) continue;
+        const t = el.type;
+        if (t === 'submit' || t === 'button' || t === 'reset') continue;
+        if ((t === 'checkbox' || t === 'radio') && !el.checked) continue;
+        if (el.name === 'fullname' && !el.value) continue;
+        parts.push(el.name + '=' + encodeURIComponent(el.value));
+      }
+      const s = document.createElement('script');
+      s.charset = 'utf-8';
+      s.src = 'https://pramer21406.activehosted.com/proc.php?' + parts.join('&') + '&jsonp=true';
+      s.onerror = function() { nlError(); };
+      document.head.appendChild(s);
+    });
+  })();
+
+  /* ── Anmelde-Modal (Termine) ── */
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const anrede    = document.getElementById('m-anrede').value.trim();
