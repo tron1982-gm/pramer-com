@@ -284,27 +284,25 @@
 
     /* Anmelden-Button in der Tabelle */
     .btn-anmelden {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Outfit', sans-serif;
-      font-weight: 500;
-      font-size: 0.95rem;
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
       color: #fff;
       background: var(--gold);
-      border: 2px solid var(--gold);
-      border-radius: var(--radius);
-      padding: 0.65rem 1rem;
-      min-height: 42px;
+      border: none;
+      border-radius: 3px;
+      padding: 0.25rem 0.6rem;
       cursor: pointer;
       white-space: nowrap;
-      transition: background 0.2s, border-color 0.2s;
+      transition: background 0.2s;
       text-decoration: none;
     }
-    .btn-anmelden:hover { background: var(--navy-mid); border-color: var(--navy-mid); }
+    .btn-anmelden:hover { background: var(--navy-mid); }
     .termine-table tbody tr:hover .btn-anmelden {
       background: #fff;
-      border-color: #fff;
       color: var(--gold);
     }
     .col-anmelden { text-align: right; white-space: nowrap; }
@@ -706,7 +704,7 @@
       </table>
     </div>
 
-    <p class="termine-fussnote reveal d2">Alle Termine ohne Gewähr. Anahata Business Circle-Abende finden ab mindestens 5 Teilnehmer:innen statt.</p>
+    <p class="termine-fussnote reveal d2">Alle Termine ohne Gewähr. Kurzfristige Änderungen möglich. Anahata Business Circle-Abende finden ab mindestens 5 Teilnehmer:innen statt.</p>
 
   </div>
 </section>
@@ -891,11 +889,18 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  /* ── Zeilen-Klick (nur wenn NICHT auf Anmelden-Button) ── */
+  /* ── Zeilen-Klick → Modal öffnen ── */
   document.querySelectorAll('.termine-table tbody tr[data-href]').forEach(tr => {
     tr.addEventListener('click', (e) => {
       if (e.target.closest('.btn-anmelden')) return;
-      window.location.href = tr.dataset.href;
+      const btn = tr.querySelector('.btn-anmelden');
+      if (btn) openModal({
+        datum:   btn.dataset.datum,
+        ort:     btn.dataset.ort,
+        uhrzeit: btn.dataset.uhrzeit,
+        format:  btn.dataset.format,
+        dauer:   btn.dataset.dauer
+      });
     });
   });
 
