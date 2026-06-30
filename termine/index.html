@@ -279,8 +279,130 @@
     }
 
     @media (max-width: 767px) {
-      .col-thema,
       .col-dauer { display: none; }
+    }
+
+    /* Anmelden-Button in der Tabelle */
+    .btn-anmelden {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: #fff;
+      background: var(--gold);
+      border: 2px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 0.65rem 1rem;
+      min-height: 42px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s, border-color 0.2s;
+      text-decoration: none;
+    }
+    .btn-anmelden:hover { background: var(--navy-mid); border-color: var(--navy-mid); }
+    .termine-table tbody tr:hover .btn-anmelden {
+      background: #fff;
+      border-color: #fff;
+      color: var(--gold);
+    }
+    .col-anmelden { text-align: right; white-space: nowrap; }
+
+    /* ── ANMELDE-MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(10,20,50,0.55);
+      backdrop-filter: blur(3px);
+      align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 24px 80px rgba(10,20,50,0.30);
+      width: 100%; max-width: 580px;
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal-header {
+      background: var(--navy);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: 1.5rem 1.75rem;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+    }
+    .modal-header-text { flex: 1; }
+    .modal-eyebrow {
+      font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold);
+      display: block; margin-bottom: 0.4rem;
+    }
+    .modal-title {
+      font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 1.35rem;
+      color: #fff; line-height: 1.2;
+    }
+    .modal-termin-info {
+      margin-top: 0.55rem;
+      font-family: 'Inter', sans-serif; font-size: 0.88rem;
+      color: rgba(255,255,255,0.75); line-height: 1.6;
+    }
+    .modal-close {
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.55); font-size: 1.5rem; line-height: 1;
+      padding: 0.1rem 0.25rem; flex-shrink: 0;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: #fff; }
+    .modal-body { padding: 1.75rem; }
+    .modal-note {
+      background: var(--cream-deep); border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 0.75rem 1rem; margin-bottom: 1.5rem;
+      font-family: 'Inter', sans-serif; font-size: 0.85rem; color: var(--ink-soft); line-height: 1.6;
+    }
+    .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem 1rem; }
+    .modal-field { display: flex; flex-direction: column; gap: 0.3rem; }
+    .modal-field.full { grid-column: 1 / -1; }
+    .modal-field label {
+      font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 600;
+      color: var(--ink); letter-spacing: 0.01em;
+    }
+    .modal-field .opt { font-weight: 400; color: var(--ink-muted); font-size: 0.75rem; }
+    .modal-field input,
+    .modal-field select {
+      font: inherit; font-size: 0.92rem; color: var(--ink);
+      padding: 0.6rem 0.8rem; border: 1px solid var(--line);
+      border-radius: var(--radius); background: var(--cream);
+      transition: border-color 0.15s;
+    }
+    .modal-field input:hover, .modal-field select:hover { border-color: var(--navy-mid); }
+    .modal-field input:focus, .modal-field select:focus { outline: none; border-color: var(--navy); background: #fff; }
+    .modal-field input::placeholder { color: var(--ink-muted); }
+    .modal-actions {
+      margin-top: 1.25rem; display: flex; gap: 0.75rem; flex-wrap: wrap;
+    }
+    .modal-submit {
+      flex: 1; background: var(--gold); color: #fff; border: 2px solid var(--gold);
+      font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1rem;
+      padding: 0.75rem 1.5rem; border-radius: var(--radius);
+      cursor: pointer; transition: background 0.2s, border-color 0.2s;
+    }
+    .modal-submit:hover { background: var(--navy-mid); border-color: var(--navy-mid); }
+    .modal-cancel {
+      background: transparent; color: var(--ink-muted); border: 2px solid var(--line);
+      font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1rem;
+      padding: 0.75rem 1.25rem; border-radius: var(--radius);
+      cursor: pointer; transition: border-color 0.2s, color 0.2s;
+    }
+    .modal-cancel:hover { border-color: var(--navy); color: var(--ink); }
+    .modal-hint {
+      font-family: 'Inter', sans-serif; font-size: 0.78rem; color: var(--ink-muted);
+      margin-top: 0.75rem; line-height: 1.55; text-align: center;
+    }
+    @media (max-width: 540px) {
+      .modal-grid { grid-template-columns: 1fr; }
+      .modal-field.full { grid-column: 1; }
     }
 
     /* ── NEWSLETTER ── */
@@ -412,7 +534,7 @@
 
     <div class="reveal" style="text-align: center; max-width: 760px; margin: 0 auto 3rem;">
       <span class="eyebrow eyebrow--gold" style="margin-bottom: 1rem; display: block;">Aktuelle Termine</span>
-      <h2>Alle Veranstaltungen auf einen Blick</h2>
+      <h2>Alle geplanten Veranstaltungen<br>auf einen Blick</h2>
     </div>
 
     <div class="termine-table-wrap reveal d1">
@@ -423,8 +545,8 @@
             <th>Ort</th>
             <th>Uhrzeit</th>
             <th>Format</th>
-            <th class="col-thema">Thema</th>
             <th class="col-dauer">Dauer</th>
+            <th class="col-anmelden"></th>
           </tr>
         </thead>
         <tbody>
@@ -433,152 +555,152 @@
             <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
-            <td class="col-thema">–</td>
             <td class="col-dauer">30 – 45 Min.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Di, 14.7.2026" data-ort="Online" data-uhrzeit="11:30" data-format="Live Online Session" data-dauer="30 – 45 Min.">Anmelden</button></td>
           </tr>
           <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 28.7.2026</td>
             <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
-            <td class="col-thema">–</td>
             <td class="col-dauer">30 – 45 Min.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Di, 28.7.2026" data-ort="Online" data-uhrzeit="11:30" data-format="Live Online Session" data-dauer="30 – 45 Min.">Anmelden</button></td>
           </tr>
           <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 11.8.2026</td>
             <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
-            <td class="col-thema">–</td>
             <td class="col-dauer">30 – 45 Min.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Di, 11.8.2026" data-ort="Online" data-uhrzeit="11:30" data-format="Live Online Session" data-dauer="30 – 45 Min.">Anmelden</button></td>
           </tr>
           <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 25.8.2026</td>
             <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
-            <td class="col-thema">–</td>
             <td class="col-dauer">30 – 45 Min.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Di, 25.8.2026" data-ort="Online" data-uhrzeit="11:30" data-format="Live Online Session" data-dauer="30 – 45 Min.">Anmelden</button></td>
           </tr>
           <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 8.9.2026</td>
             <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
-            <td class="col-thema"><span title="Klarheit im Sturm: Wie du die Stimme der Intuition von der Angst trennst.">Klarheit im Sturm</span></td>
             <td class="col-dauer">30 – 45 Min.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Di, 8.9.2026" data-ort="Online" data-uhrzeit="11:30" data-format="Live Online Session" data-dauer="30 – 45 Min.">Anmelden</button></td>
           </tr>
           <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Mo, 21.9.2026</td>
             <td>Linz</td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
-            <td class="col-thema"><span title="Klarheit im Sturm: Wie du die Stimme der Intuition von der Angst trennst.">Klarheit im Sturm</span></td>
             <td class="col-dauer">ca. 2 Std.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Mo, 21.9.2026" data-ort="Linz" data-uhrzeit="18:30" data-format="Anahata Business Circle" data-dauer="ca. 2 Std.">Anmelden</button></td>
           </tr>
           <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 22.9.2026</td>
             <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
-            <td class="col-thema"><span title="Klarheit im Sturm: Wie du die Stimme der Intuition von der Angst trennst.">Klarheit im Sturm</span></td>
             <td class="col-dauer">30 – 45 Min.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Di, 22.9.2026" data-ort="Online" data-uhrzeit="11:30" data-format="Live Online Session" data-dauer="30 – 45 Min.">Anmelden</button></td>
           </tr>
           <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Di, 22.9.2026</td>
             <td>Wien</td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
-            <td class="col-thema"><span title="Klarheit im Sturm: Wie du die Stimme der Intuition von der Angst trennst.">Klarheit im Sturm</span></td>
             <td class="col-dauer">ca. 2 Std.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Di, 22.9.2026" data-ort="Wien" data-uhrzeit="18:30" data-format="Anahata Business Circle" data-dauer="ca. 2 Std.">Anmelden</button></td>
           </tr>
           <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Mi, 23.9.2026</td>
             <td>Graz</td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
-            <td class="col-thema"><span title="Klarheit im Sturm: Wie du die Stimme der Intuition von der Angst trennst.">Klarheit im Sturm</span></td>
             <td class="col-dauer">ca. 2 Std.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Mi, 23.9.2026" data-ort="Graz" data-uhrzeit="18:30" data-format="Anahata Business Circle" data-dauer="ca. 2 Std.">Anmelden</button></td>
           </tr>
           <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 13.10.2026</td>
             <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
-            <td class="col-thema"><span title="Die Frequenz der Führung: Warum deine besten Mitarbeiter wirklich bleiben.">Frequenz der Führung</span></td>
             <td class="col-dauer">30 – 45 Min.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Di, 13.10.2026" data-ort="Online" data-uhrzeit="11:30" data-format="Live Online Session" data-dauer="30 – 45 Min.">Anmelden</button></td>
           </tr>
           <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Mo, 19.10.2026</td>
             <td>Linz</td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
-            <td class="col-thema"><span title="Die Frequenz der Führung: Warum deine besten Mitarbeiter wirklich bleiben.">Frequenz der Führung</span></td>
             <td class="col-dauer">ca. 2 Std.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Mo, 19.10.2026" data-ort="Linz" data-uhrzeit="18:30" data-format="Anahata Business Circle" data-dauer="ca. 2 Std.">Anmelden</button></td>
           </tr>
           <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Di, 20.10.2026</td>
             <td>Wien</td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
-            <td class="col-thema"><span title="Die Frequenz der Führung: Warum deine besten Mitarbeiter wirklich bleiben.">Frequenz der Führung</span></td>
             <td class="col-dauer">ca. 2 Std.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Di, 20.10.2026" data-ort="Wien" data-uhrzeit="18:30" data-format="Anahata Business Circle" data-dauer="ca. 2 Std.">Anmelden</button></td>
           </tr>
           <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Mi, 21.10.2026</td>
             <td>Graz</td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
-            <td class="col-thema"><span title="Die Frequenz der Führung: Warum deine besten Mitarbeiter wirklich bleiben.">Frequenz der Führung</span></td>
             <td class="col-dauer">ca. 2 Std.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Mi, 21.10.2026" data-ort="Graz" data-uhrzeit="18:30" data-format="Anahata Business Circle" data-dauer="ca. 2 Std.">Anmelden</button></td>
           </tr>
           <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 27.10.2026</td>
             <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
-            <td class="col-thema"><span title="Die Frequenz der Führung: Warum deine besten Mitarbeiter wirklich bleiben.">Frequenz der Führung</span></td>
             <td class="col-dauer">30 – 45 Min.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Di, 27.10.2026" data-ort="Online" data-uhrzeit="11:30" data-format="Live Online Session" data-dauer="30 – 45 Min.">Anmelden</button></td>
           </tr>
           <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 10.11.2026</td>
             <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
-            <td class="col-thema"><span title="Raus aus dem Hustle, rein in den Fluss: Erfolg, der dem Herzen folgt.">Raus aus dem Hustle</span></td>
             <td class="col-dauer">30 – 45 Min.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Di, 10.11.2026" data-ort="Online" data-uhrzeit="11:30" data-format="Live Online Session" data-dauer="30 – 45 Min.">Anmelden</button></td>
           </tr>
           <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Mo, 16.11.2026</td>
             <td>Linz</td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
-            <td class="col-thema"><span title="Raus aus dem Hustle, rein in den Fluss: Erfolg, der dem Herzen folgt.">Raus aus dem Hustle</span></td>
             <td class="col-dauer">ca. 2 Std.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Mo, 16.11.2026" data-ort="Linz" data-uhrzeit="18:30" data-format="Anahata Business Circle" data-dauer="ca. 2 Std.">Anmelden</button></td>
           </tr>
           <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Di, 17.11.2026</td>
             <td>Wien</td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
-            <td class="col-thema"><span title="Raus aus dem Hustle, rein in den Fluss: Erfolg, der dem Herzen folgt.">Raus aus dem Hustle</span></td>
             <td class="col-dauer">ca. 2 Std.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Di, 17.11.2026" data-ort="Wien" data-uhrzeit="18:30" data-format="Anahata Business Circle" data-dauer="ca. 2 Std.">Anmelden</button></td>
           </tr>
           <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Mi, 18.11.2026</td>
             <td>Graz</td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
-            <td class="col-thema"><span title="Raus aus dem Hustle, rein in den Fluss: Erfolg, der dem Herzen folgt.">Raus aus dem Hustle</span></td>
             <td class="col-dauer">ca. 2 Std.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Mi, 18.11.2026" data-ort="Graz" data-uhrzeit="18:30" data-format="Anahata Business Circle" data-dauer="ca. 2 Std.">Anmelden</button></td>
           </tr>
           <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 24.11.2026</td>
             <td>Online</td>
             <td>11:30</td>
             <td><span class="badge badge--online">Live Online Session</span></td>
-            <td class="col-thema"><span title="Raus aus dem Hustle, rein in den Fluss: Erfolg, der dem Herzen folgt.">Raus aus dem Hustle</span></td>
             <td class="col-dauer">30 – 45 Min.</td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Di, 24.11.2026" data-ort="Online" data-uhrzeit="11:30" data-format="Live Online Session" data-dauer="30 – 45 Min.">Anmelden</button></td>
           </tr>
         </tbody>
       </table>
@@ -673,19 +795,207 @@
   </div>
 </footer>
 
+<!-- ANMELDE-MODAL -->
+<div class="modal-overlay" id="anmelde-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-card">
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <span class="modal-eyebrow">Anmeldung</span>
+        <h3 class="modal-title" id="modal-title">Termin reservieren</h3>
+        <p class="modal-termin-info" id="modal-termin-info"></p>
+      </div>
+      <button class="modal-close" id="modal-close-btn" aria-label="Schließen">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-note">
+        Füllen Sie bitte die Felder aus und klicken Sie auf <strong>„E-Mail öffnen"</strong>. Ihr E-Mail-Programm öffnet sich automatisch mit allen Angaben – bitte senden Sie die Nachricht direkt ab.
+      </div>
+      <form id="anmelde-form" novalidate>
+        <div class="modal-grid">
+
+          <div class="modal-field full">
+            <label for="m-anrede">Anrede <span style="color:#c0392b">*</span></label>
+            <select id="m-anrede" required>
+              <option value="">Bitte wählen …</option>
+              <option>Frau</option>
+              <option>Herr</option>
+              <option>Divers</option>
+              <option>Keine Angabe</option>
+            </select>
+          </div>
+
+          <div class="modal-field">
+            <label for="m-titel">Titel <span class="opt">(optional)</span></label>
+            <input type="text" id="m-titel" placeholder="z. B. Dr., Mag., Ing.">
+          </div>
+          <div class="modal-field"><!-- Platzhalter --></div>
+
+          <div class="modal-field">
+            <label for="m-vorname">Vorname <span style="color:#c0392b">*</span></label>
+            <input type="text" id="m-vorname" autocomplete="given-name" required>
+          </div>
+          <div class="modal-field">
+            <label for="m-nachname">Nachname <span style="color:#c0392b">*</span></label>
+            <input type="text" id="m-nachname" autocomplete="family-name" required>
+          </div>
+
+          <div class="modal-field">
+            <label for="m-email">E-Mail-Adresse <span style="color:#c0392b">*</span></label>
+            <input type="email" id="m-email" autocomplete="email" inputmode="email" required>
+          </div>
+          <div class="modal-field">
+            <label for="m-telefon">Telefonnummer <span style="color:#c0392b">*</span></label>
+            <input type="tel" id="m-telefon" autocomplete="tel" placeholder="+43 664 …" required>
+          </div>
+
+          <div class="modal-field">
+            <label for="m-unternehmen">Unternehmen <span class="opt">(optional)</span></label>
+            <input type="text" id="m-unternehmen" autocomplete="organization">
+          </div>
+          <div class="modal-field">
+            <label for="m-position">Position <span class="opt">(optional)</span></label>
+            <input type="text" id="m-position" placeholder="z. B. Geschäftsführerin">
+          </div>
+
+          <div class="modal-field">
+            <label for="m-uid">UID-Nummer <span class="opt">(optional)</span></label>
+            <input type="text" id="m-uid" placeholder="ATU…">
+          </div>
+          <div class="modal-field">
+            <label for="m-jahrgang">Jahrgang <span class="opt">(optional)</span></label>
+            <input type="number" id="m-jahrgang" min="1930" placeholder="z. B. 1975">
+          </div>
+
+        </div>
+
+        <div class="modal-actions">
+          <button type="submit" class="modal-submit">E-Mail öffnen →</button>
+          <button type="button" class="modal-cancel" id="modal-cancel-btn">Abbrechen</button>
+        </div>
+        <p class="modal-hint">Ihre E-Mail-App öffnet sich mit allen Angaben vorausgefüllt. Bitte prüfen und absenden.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script>
+  /* ── Navigation ── */
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 50);
   }, { passive: true });
 
+  /* ── Scroll-Reveal ── */
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+  /* ── Zeilen-Klick (nur wenn NICHT auf Anmelden-Button) ── */
   document.querySelectorAll('.termine-table tbody tr[data-href]').forEach(tr => {
-    tr.addEventListener('click', () => { window.location.href = tr.dataset.href; });
+    tr.addEventListener('click', (e) => {
+      if (e.target.closest('.btn-anmelden')) return;
+      window.location.href = tr.dataset.href;
+    });
+  });
+
+  /* ── Anmelde-Modal ── */
+  const overlay  = document.getElementById('anmelde-modal');
+  const infoEl   = document.getElementById('modal-termin-info');
+  const closeBtn = document.getElementById('modal-close-btn');
+  const cancelBtn = document.getElementById('modal-cancel-btn');
+  const form     = document.getElementById('anmelde-form');
+  let currentTermin = {};
+
+  function openModal(data) {
+    currentTermin = data;
+    infoEl.textContent = data.datum + ' · ' + data.ort + ' · ' + data.uhrzeit + ' Uhr · ' + data.format + ' (' + data.dauer + ')';
+    // Felder leeren
+    ['m-anrede','m-titel','m-vorname','m-nachname','m-email','m-telefon','m-unternehmen','m-position','m-uid','m-jahrgang'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('m-anrede').focus(), 50);
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+  cancelBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  document.querySelectorAll('.btn-anmelden').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openModal({
+        datum:   btn.dataset.datum,
+        ort:     btn.dataset.ort,
+        uhrzeit: btn.dataset.uhrzeit,
+        format:  btn.dataset.format,
+        dauer:   btn.dataset.dauer
+      });
+    });
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const anrede    = document.getElementById('m-anrede').value.trim();
+    const vorname   = document.getElementById('m-vorname').value.trim();
+    const nachname  = document.getElementById('m-nachname').value.trim();
+    const email     = document.getElementById('m-email').value.trim();
+    const telefon   = document.getElementById('m-telefon').value.trim();
+
+    if (!anrede || !vorname || !nachname || !email || !telefon) {
+      alert('Bitte füllen Sie alle Pflichtfelder aus (Anrede, Vor- und Nachname, E-Mail, Telefon).');
+      return;
+    }
+
+    const titel        = document.getElementById('m-titel').value.trim();
+    const unternehmen  = document.getElementById('m-unternehmen').value.trim();
+    const position     = document.getElementById('m-position').value.trim();
+    const uid          = document.getElementById('m-uid').value.trim();
+    const jahrgang     = document.getElementById('m-jahrgang').value.trim();
+
+    const subject = encodeURIComponent('Anmeldung: ' + currentTermin.format + ' – ' + currentTermin.datum + ' in ' + currentTermin.ort);
+
+    const body = [
+      'Guten Tag,',
+      '',
+      'hiermit melde ich mich für folgenden Termin an:',
+      '',
+      'TERMIN-DETAILS',
+      '─────────────────────────────',
+      'Format:   ' + currentTermin.format,
+      'Datum:    ' + currentTermin.datum,
+      'Ort:      ' + currentTermin.ort,
+      'Uhrzeit:  ' + currentTermin.uhrzeit + ' Uhr',
+      'Dauer:    ' + currentTermin.dauer,
+      '',
+      'MEINE ANGABEN',
+      '─────────────────────────────',
+      'Anrede:        ' + anrede,
+      'Titel:         ' + (titel || '–'),
+      'Vorname:       ' + vorname,
+      'Nachname:      ' + nachname,
+      'E-Mail:        ' + email,
+      'Telefon:       ' + telefon,
+      'Unternehmen:   ' + (unternehmen || '–'),
+      'Position:      ' + (position || '–'),
+      'UID-Nummer:    ' + (uid || '–'),
+      'Jahrgang:      ' + (jahrgang || '–'),
+      '',
+      'Mit freundlichen Grüßen',
+      vorname + ' ' + nachname
+    ].join('\n');
+
+    window.location.href = 'mailto:office@pramer.com?subject=' + subject + '&body=' + encodeURIComponent(body);
+    closeModal();
   });
 </script>
 </body>
