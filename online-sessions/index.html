@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Online Sessions – Mag. Gerlinde Pramer</title>
-  <meta name="description" content="Kostenlose Live-Impulse alle zwei Wochen – 30 bis 45 Minuten Bewusstseinsarbeit, direkt umsetzbar. Online, ohne Anmeldehürde. Mit Mag. Gerlinde Pramer.">
+  <meta name="description" content="Kostenlose Live-Impulse alle zwei Wochen – 30 bis 45 Minuten Bewusstseinsarbeit, direkt umsetzbar. Anmeldung ganz einfach per Formular. Mit Mag. Gerlinde Pramer.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -244,11 +244,12 @@
     /* ── SPLIT SECTIONS ── */
     .split-section        { background: var(--cream-deep); padding: clamp(4rem, 9vw, 7rem) 0; }
     .split-section--light { background: var(--surface); padding: clamp(4rem, 9vw, 7rem) 0; }
+    #was-sind { scroll-margin-top: var(--nav-h); }
     .split-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: clamp(2.5rem, 6vw, 4.5rem);
-      align-items: center;
+      align-items: start;
     }
     @media (max-width: 768px) { .split-grid { grid-template-columns: 1fr; } }
     .split-text { display: flex; flex-direction: column; }
@@ -264,9 +265,27 @@
     }
     .split-img:hover img { transform: scale(1.04); }
 
-    /* ── FÜR WEN (text-only, weißer Hintergrund) ── */
+    /* ── FÜR WEN (Zwei-Spalten, weißer Hintergrund) ── */
     .fuer-wen { background: var(--surface); padding: clamp(4rem, 9vw, 7rem) 0; }
-    .fuer-wen-inner { max-width: 780px; }
+    .fuer-wen-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2.5rem, 6vw, 4.5rem);
+      align-items: start;
+    }
+    @media (max-width: 768px) { .fuer-wen-grid { grid-template-columns: 1fr; } }
+    .fuer-wen-placeholder {
+      border-radius: var(--radius-lg);
+      aspect-ratio: 4/3;
+      background: #ff00aa;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .fuer-wen-placeholder span {
+      font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.85); text-align: center; padding: 1rem;
+    }
     .fuer-wen-inner .eyebrow { margin-bottom: 1.1rem; }
     .fuer-wen-inner h2 { margin-bottom: 1.5rem; max-width: 22ch; }
     .fuer-wen-inner p { color: var(--ink-muted); font-size: 1.05rem; line-height: 1.85; }
@@ -452,9 +471,9 @@
       <div class="hero-text">
         <span class="hero-eyebrow">Online Sessions</span>
         <h1>Raus aus dem Kopf.<br>In 30 Minuten.</h1>
-        <p class="hero-sub">Alle zwei Wochen ein kostenloser Live-Impuls mit Mag. Gerlinde Pramer.<br>30 bis 45 Minuten Bewusstseinsarbeit, die direkt in den Alltag passt.<br>Online – ohne Anmeldehürde. Einfach dabei sein.</p>
+        <p class="hero-sub">Alle zwei Wochen ein kostenloser Live-Impuls mit Mag. Gerlinde Pramer. 30 bis 45 Minuten Bewusstseinsarbeit, die direkt in den Alltag passt. Anmeldung ganz einfach per Formular – und du bist dabei.</p>
         <div class="hero-cta">
-          <a href="#was-sind" class="btn btn--gold">Mehr erfahren ↓</a>
+          <a href="#was-sind" class="btn btn--gold">Mehr erfahren</a>
         </div>
       </div>
     </div>
@@ -484,7 +503,7 @@
         <span class="date-callout-sep"></span>
         <span class="date-callout-date">Jeder 2. &amp; 4. Dienstag · 11:30 Uhr</span>
         <span class="date-callout-sep"></span>
-        <a href="../termine/" class="btn btn--sm btn--primary">Zum Termin &amp; Zugangslink →</a>
+        <a href="../termine/" class="btn btn--sm btn--primary">Zu den Terminen</a>
       </div>
     </div>
   </div>
@@ -503,7 +522,7 @@
       </div>
 
       <div class="split-img reveal d1">
-        <img src="../img/gerlinde-whiteboard-1.png" alt="Gerlinde Pramer – Online Session" loading="lazy">
+        <img src="../img/gerlinde-whiteboard-1.png" alt="Gerlinde Pramer – Online Session" loading="lazy" style="object-position: left center;">
       </div>
 
     </div>
@@ -513,10 +532,18 @@
 <!-- ══ FÜR WEN IST DAS? ══ -->
 <section class="fuer-wen" aria-label="Für wen ist das">
   <div class="container">
-    <div class="fuer-wen-inner reveal">
-      <span class="eyebrow eyebrow--gold">Für wen ist das?</span>
-      <h2>Für dich, wenn du gerade mitten im Tun bist – und dich fragst, ob du auch im Richtigen bist.</h2>
-      <p>Wenn du merkst, dass Zahlen und Analysen allein nicht mehr reichen. Wenn du Bewusstseinsarbeit noch nicht kennst und erst einmal schauen möchtest, was das eigentlich ist. Oder wenn du einfach 30 Minuten brauchst, um aus dem Kopf heraus und wieder bei dir anzukommen.</p>
+    <div class="fuer-wen-grid">
+
+      <div class="fuer-wen-placeholder reveal">
+        <span>Foto folgt</span>
+      </div>
+
+      <div class="fuer-wen-inner reveal d1">
+        <span class="eyebrow eyebrow--gold">Für wen ist das?</span>
+        <h2>Für dich, wenn du gerade mitten im Tun bist – und dich fragst, ob du auch im Richtigen bist.</h2>
+        <p>Wenn du merkst, dass Zahlen und Analysen allein nicht mehr reichen. Wenn du Bewusstseinsarbeit noch nicht kennst und erst einmal schauen möchtest, was das eigentlich ist. Oder wenn du einfach 30 bis 45 Minuten brauchst, um aus dem Kopf heraus und wieder bei dir anzukommen.</p>
+      </div>
+
     </div>
   </div>
 </section>
@@ -532,19 +559,19 @@
 
       <div class="step-card reveal d1">
         <div class="step-number">01</div>
-        <h3>Thema der nächsten Session checken</h3>
-        <p>Auf der Terminseite siehst du, was Mag. Gerlinde Pramer beim nächsten Mal mitbringt – und kannst entscheiden, ob dich das Thema anspricht.</p>
+        <h3>Nächsten Termin auf der Terminseite anschauen</h3>
+        <p>Auf der Terminseite findest du den nächsten Sessiontermin – und kannst dich mit einem kurzen Formular anmelden.</p>
       </div>
 
       <div class="step-card reveal d2">
         <div class="step-number">02</div>
-        <h3>Link anklicken – fertig</h3>
-        <p>Kein Konto, keine Registrierung. Kurz vor Beginn einfach auf den Zugangslink klicken und einwählen.</p>
+        <h3>Anmelden – Zugangslink erhalten</h3>
+        <p>Nach erfolgreicher Anmeldung bekommst du den Teilnahmelink per E-Mail zugesendet. Kurz vor Beginn einfach einwählen.</p>
       </div>
 
       <div class="step-card reveal d3">
         <div class="step-number">03</div>
-        <h3>30 Minuten eintauchen und mitnehmen</h3>
+        <h3>30 – 45 Min. eintauchen und mitnehmen</h3>
         <p>Ein Impuls, eine Übung, manchmal eine unbequeme Frage. Was sich löst, nimmst du mit – in deinen Tag, dein Unternehmen, dein Leben.</p>
       </div>
 
@@ -557,9 +584,7 @@
   <div class="container">
     <div class="testimonial-inner reveal">
       <span class="eyebrow eyebrow--gold">Was Teilnehmer sagen</span>
-      <blockquote class="testimonial-quote">
-        Gerlinde hat Themen angesprochen, die man nicht unmittelbar am Radar hat und deswegen auch nicht daran denkt. Diese zusätzlichen Aspekte regen zum Nachdenken an und lösen etwas aus. Ich freue mich auf ein nächstes Mal – entweder für ein Update, eine Auffrischung oder die Vertiefung in eines ihrer Themen.
-      </blockquote>
+      <blockquote class="testimonial-quote">Gerlinde hat erkenntnisreiche Themen angesprochen, die man nicht unmittelbar am Radar hat und deswegen auch nicht daran denkt. Diese zusätzlichen Aspekte regen zum Nachdenken an und lösen etwas aus. Ich freue mich auf ein nächstes Mal – entweder für ein Update, eine Auffrischung oder die Vertiefung in eines ihrer Themen.</blockquote>
       <div class="testimonial-author-row">
         <div class="testimonial-photo">
           <!-- TODO: Foto als ../img/testimonial-matthias-lechner.jpg ins img-Verzeichnis legen -->
@@ -595,8 +620,8 @@
       <span class="eyebrow eyebrow--gold">Wann &amp; wie?</span>
       <h2>Jeder 2. und 4. Dienstag im Monat</h2>
       <p class="wann-wie-tagline">11:30 Uhr – online, von überall aus.</p>
-      <p>Das aktuelle Thema und den Zugangslink zur nächsten Session findest du hier:</p>
-      <a href="../termine/" class="btn btn--primary">Zum aktuellen Termin &amp; Anmeldung →</a>
+      <p>Melde dich kurz an – und du bekommst alles, was du brauchst, direkt per E-Mail.</p>
+      <a href="../termine/" class="btn btn--primary">Termine &amp; Anmeldung</a>
     </div>
   </div>
 </section>
