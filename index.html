@@ -113,13 +113,14 @@
       display: flex; align-items: center; justify-content: space-between;
       width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--pad);
     }
-    .nav-logo img { height: 58px; width: auto; opacity: 0.9; transition: opacity 0.2s, height 0.3s; transform: translateY(6px); }
-    .nav-logo .logo-white { display: none; }
-    .nav.scrolled .nav-logo .logo-gold { display: none; }
-    .nav.scrolled .nav-logo .logo-white { display: block; }
+    .nav-logo { position: relative; }
+    .nav-logo img { height: 58px; width: auto; opacity: 1; transition: opacity 0.35s ease, height 0.3s, transform 0.3s; transform: translateY(6px); }
+    .nav-logo .logo-white { position: absolute; top: 0; left: 0; opacity: 0; }
+    .nav.scrolled .nav-logo .logo-gold { opacity: 0; }
+    .nav.scrolled .nav-logo .logo-white { opacity: 1; }
     .nav.scrolled .nav-logo img { height: 44px; transform: translateY(4px); }
-    .nav.scrolled .nav-logo:hover .logo-white { display: none; }
-    .nav.scrolled .nav-logo:hover .logo-gold { display: block; }
+    .nav.scrolled .nav-logo:hover .logo-white { opacity: 0; }
+    .nav.scrolled .nav-logo:hover .logo-gold { opacity: 1; }
     .nav-links { display: flex; align-items: center; gap: 2.25rem; list-style: none; }
     .nav-links a {
       font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600;

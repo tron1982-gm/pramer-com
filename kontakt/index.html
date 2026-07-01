@@ -322,7 +322,7 @@
 </head>
 <body>
 
-<nav class="nav" id="nav" aria-label="Hauptnavigation">
+<nav class="nav scrolled" id="nav" aria-label="Hauptnavigation">
   <div class="nav-inner">
     <a href="../index.html" class="nav-logo" aria-label="Gerlinde Pramer – Startseite">
       <img class="logo-default" src="../img/signatur-3.svg" alt="Gerlinde Pramer" height="40">
@@ -488,12 +488,6 @@
 </footer>
 
 <script>
-  /* NAV */
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 50);
-  }, { passive: true });
-
   /* REVEAL ON SCROLL */
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
