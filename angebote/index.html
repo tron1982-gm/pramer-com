@@ -106,9 +106,13 @@
       display: flex; align-items: center; justify-content: space-between;
       width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--pad);
     }
-    .nav-logo img { height: 58px; width: auto; filter: brightness(0) invert(1) brightness(1.08); opacity: 0.9; transition: filter 0.2s, opacity 0.2s, height 0.3s; transform: translateY(6px); }
+    .nav-logo { position: relative; }
+    .nav-logo img { height: 58px; width: auto; transition: opacity 0.25s ease, height 0.3s; transform: translateY(6px); }
+    .nav-logo .logo-default { filter: brightness(0) invert(1) brightness(1.08); opacity: 0.9; }
+    .nav-logo .logo-hover { position: absolute; top: 0; left: 0; opacity: 0; }
     .nav.scrolled .nav-logo img { height: 44px; transform: translateY(4px); }
-    .nav-logo:hover img { filter: brightness(0) invert(1) sepia(0.6) hue-rotate(40deg) saturate(1.2) brightness(1.05); opacity: 1; }
+    .nav-logo:hover .logo-default { opacity: 0; }
+    .nav-logo:hover .logo-hover { opacity: 1; }
     .nav-links { display: flex; align-items: center; gap: 2.25rem; list-style: none; }
     .nav-links a {
       font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600;
@@ -324,7 +328,10 @@
       gap: 3rem; padding-bottom: clamp(2rem, 5vw, 3.5rem);
     }
     @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr; gap: 2rem; } }
-    .footer-logo img { height: 58px; filter: brightness(0) invert(1); opacity: 0.95; margin-bottom: 0.75rem; }
+    .footer-logo { margin-bottom: 0.75rem; }
+    .footer-logo img { height: 58px; transition: opacity 0.25s ease; }
+    .footer-logo .logo-default { filter: brightness(0) invert(1); opacity: 0.95; }
+    .footer-logo .logo-hover { position: absolute; top: 0; left: 0; opacity: 0; }
     .footer-tagline { font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.85); margin-bottom: 1.25rem; max-width: 32ch; }
     .footer-logos { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; margin-top: 0.5rem; }
     .footer-logos img { height: 54px; filter: brightness(0) invert(1); opacity: 0.9; }
@@ -338,8 +345,9 @@
     .footer-col a { color: #fff; text-decoration: underline; font-size: 0.9rem; transition: color 0.2s; }
     .footer-col a:hover { color: var(--gold); }
     .footer-col a[aria-current="page"] { color: var(--gold); text-shadow: 1px 1px 0 rgba(10,20,60,0.85); }
-    .footer-logo a { display: inline-block; }
-    .footer-logo a:hover img { filter: brightness(0) invert(1) sepia(0.6) hue-rotate(40deg) saturate(1.2) brightness(1.05); opacity: 1; }
+    .footer-logo a { display: inline-block; position: relative; }
+    .footer-logo a:hover .logo-default { opacity: 0; }
+    .footer-logo a:hover .logo-hover { opacity: 1; }
     .footer-bottom {
       padding: 1.5rem 0;
       display: flex; justify-content: space-between; align-items: center;
@@ -357,7 +365,8 @@
 <nav class="nav" id="nav" aria-label="Hauptnavigation">
   <div class="nav-inner">
     <a href="../index.html" class="nav-logo" aria-label="Gerlinde Pramer – Startseite">
-      <img src="../img/signatur-3.svg" alt="Gerlinde Pramer" height="40">
+      <img class="logo-default" src="../img/signatur-3.svg" alt="Gerlinde Pramer" height="40">
+      <img class="logo-hover" src="../img/signatur-3-gold.svg" alt="Gerlinde Pramer" height="40" aria-hidden="true">
     </a>
     <ul class="nav-links">
       <li><a href="../ueber-mich/">Über mich</a></li>
@@ -599,7 +608,8 @@
       <div class="footer-col">
         <div class="footer-logo">
           <a href="../index.html" aria-label="Gerlinde Pramer – Startseite">
-            <img src="../img/signatur-3.svg" alt="Gerlinde Pramer" height="40">
+            <img class="logo-default" src="../img/signatur-3.svg" alt="Gerlinde Pramer" height="40">
+            <img class="logo-hover" src="../img/signatur-3-gold.svg" alt="Gerlinde Pramer" height="40" aria-hidden="true">
           </a>
         </div>
         <p class="footer-tagline">Bewusstseinsarbeit für Unternehmerinnen und Führungskräfte, die bereit sind, die Tiefe zu erkunden – und von dort zu führen.</p>

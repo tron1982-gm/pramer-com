@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>1:1 Begleitung – Mag. Gerlinde Pramer</title>
-  <meta name="description" content="Persönliche 1:1-Begleitung von Mag. Gerlinde Pramer – online, in Österreich oder im Intensiv-Retreat in Lovran. Diese Seite befindet sich gerade im Aufbau.">
+  <meta name="description" content="Persönliche 1:1-Begleitung von Mag. Gerlinde Pramer: Klarheit bei Entscheidungen, Organisationsaufstellung, der Mensch hinter der Rolle und große Weichenstellungen – online, in ganz Österreich oder im Intensiv in Lovran.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -22,6 +22,7 @@
       --ink-soft:   #3A4F6E;
       --ink-muted:  #6A7A94;
       --line:       #E5DED1;
+      --placeholder: #ff00aa;
       --radius:     4px;
       --radius-lg:  10px;
       --max:        1160px;
@@ -46,14 +47,16 @@
       color: var(--navy);
       letter-spacing: -0.015em;
     }
-    h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); letter-spacing: -0.02em; }
+    h1 { font-size: clamp(2.4rem, 5vw, 4rem); letter-spacing: -0.02em; }
     h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); }
+    h3 { font-size: clamp(1.15rem, 2.2vw, 1.4rem); font-weight: 600; }
     .eyebrow {
       font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;
       letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy-mid);
       display: block;
     }
     .eyebrow--gold  { color: var(--gold); }
+    .eyebrow--white { color: rgba(255,255,255,0.65); }
     .container { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
 
     /* ── BUTTONS ── */
@@ -66,17 +69,21 @@
       transition: background 0.2s, color 0.2s, border-color 0.2s;
       white-space: nowrap;
     }
-    .btn--primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .btn--primary     { background: var(--navy); color: #fff; border-color: var(--navy); }
     .btn--primary:hover { background: var(--gold); border-color: var(--gold); }
-    .btn--ghost   { background: transparent; color: var(--ink); border-color: var(--ink); }
+    .btn--ghost       { background: transparent; color: var(--ink); border-color: var(--ink); }
     .btn--ghost:hover { background: var(--navy); border-color: var(--navy); color: #fff; }
     .btn--ghost-white { background: transparent; color: #fff; border-color: rgba(255,255,255,0.45); }
     .btn--ghost-white:hover { background: var(--gold); border-color: var(--gold); }
+    .btn--gold        { background: var(--gold); color: #fff; border-color: var(--gold); }
+    .btn--gold:hover  { background: var(--navy-mid); border-color: var(--navy-mid); }
     .btn--sm { padding: 0.45rem 1.1rem; font-size: 0.875rem; }
 
     /* ── REVEAL ── */
     .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.72s ease, transform 0.72s ease; }
     .reveal.in { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.10s; }
+    .d2 { transition-delay: 0.22s; }
 
     /* ── NAVIGATION ── */
     .nav {
@@ -94,9 +101,13 @@
       display: flex; align-items: center; justify-content: space-between;
       width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--pad);
     }
-    .nav-logo img { height: 58px; width: auto; filter: brightness(0) invert(1) brightness(1.08); opacity: 0.9; transition: filter 0.2s, opacity 0.2s, height 0.3s; transform: translateY(6px); }
+    .nav-logo { position: relative; }
+    .nav-logo img { height: 58px; width: auto; transition: opacity 0.25s ease, height 0.3s; transform: translateY(6px); }
+    .nav-logo .logo-default { filter: brightness(0) invert(1) brightness(1.08); opacity: 0.9; }
+    .nav-logo .logo-hover { position: absolute; top: 0; left: 0; opacity: 0; }
     .nav.scrolled .nav-logo img { height: 44px; transform: translateY(4px); }
-    .nav-logo:hover img { filter: brightness(0) invert(1) sepia(0.6) hue-rotate(40deg) saturate(1.2) brightness(1.05); opacity: 1; }
+    .nav-logo:hover .logo-default { opacity: 0; }
+    .nav-logo:hover .logo-hover { opacity: 1; }
     .nav-links { display: flex; align-items: center; gap: 2.25rem; list-style: none; }
     .nav-links a {
       font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600;
@@ -104,6 +115,7 @@
       color: rgba(255,255,255,0.82); white-space: nowrap; transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--gold); }
+    .nav-links a[aria-current="page"] { color: var(--gold); text-shadow: 1px 1px 0 rgba(10,20,60,0.85); }
     .nav-cta { margin-left: 1.25rem; }
     .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; flex-direction: column; gap: 5px; }
     .nav-toggle span { display: block; width: 24px; height: 1.5px; background: rgba(255,255,255,0.85); }
@@ -139,37 +151,226 @@
     .nav-mobile-cta { margin-top: 0.5rem; }
     @media (min-width: 841px) { .nav-mobile { display: none !important; } }
 
-    /* ── HERO (kein Bild, schlank, zentriert) ── */
-    .platzhalter-hero {
-      padding: clamp(9rem, 18vw, 11rem) 0 clamp(3rem, 7vw, 4.5rem);
-      text-align: center;
+    /* ── HERO ── */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: flex-end; overflow: hidden; }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('../img/gerlinde-1-1-hero.png');
+      background-size: cover;
+      background-position: left center;
     }
-    .platzhalter-hero-inner { max-width: 700px; margin: 0 auto; }
-    .platzhalter-hero .eyebrow { margin-bottom: 1.1rem; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to left, rgba(15,25,50,0.80) 0%, rgba(15,25,50,0.55) 38%, rgba(15,25,50,0.15) 68%, transparent 100%),
+        linear-gradient(to bottom, rgba(15,25,50,0.26) 0%, transparent 30%);
+    }
+    .hero-content { position: relative; z-index: 2; width: 100%; padding-top: var(--nav-h); padding-bottom: clamp(4rem, 10vh, 7rem); }
+    .hero-text { max-width: 560px; margin-left: auto; text-align: right; }
+    .hero-eyebrow {
+      font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.25rem; display: block;
+      opacity: 0; transform: translateY(16px); animation: fadeUp 0.7s 0.3s forwards ease-out;
+    }
+    .hero h1 { color: #fff; margin-bottom: 1.4rem; opacity: 0; transform: translateY(22px); animation: fadeUp 0.85s 0.55s forwards ease-out; }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem); font-weight: 400;
+      color: rgba(255,255,255,0.85); max-width: 50ch; margin-left: auto; margin-bottom: 2.25rem; line-height: 1.82;
+      opacity: 0; transform: translateY(16px); animation: fadeUp 0.7s 0.8s forwards ease-out;
+    }
+    .hero-cta { opacity: 0; transform: translateY(12px); animation: fadeUp 0.7s 1s forwards ease-out; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn  { to { opacity: 1; } }
 
-    /* ── HINWEIS-SEKTION ── */
-    .platzhalter-section { background: var(--cream-deep); padding: clamp(3rem, 7vw, 5rem) 0 clamp(6rem, 12vw, 8rem); }
-    .platzhalter-inner { max-width: 600px; margin: 0 auto; text-align: center; }
-    .platzhalter-inner p { color: var(--ink-muted); font-size: 1.05rem; line-height: 1.82; margin-bottom: 2rem; }
-    .platzhalter-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .hero-scroll {
+      position: absolute; right: var(--pad); bottom: 2.75rem; z-index: 3;
+      display: flex; flex-direction: column; align-items: center; gap: 0.55rem;
+      opacity: 0; animation: fadeIn 0.5s 1.5s forwards;
+    }
+    .hero-scroll span {
+      font-family: 'Inter', sans-serif; font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.7);
+      writing-mode: vertical-rl;
+    }
+    .scroll-bar { width: 1px; height: 46px; background: rgba(255,255,255,0.25); position: relative; overflow: hidden; border-radius: 1px; }
+    .scroll-bar::after {
+      content: ''; position: absolute; left: 0; top: -60%;
+      width: 100%; height: 60%; background: rgba(255,255,255,0.75);
+      animation: scrollPulse 2s 2s infinite ease-in-out;
+    }
+    @keyframes scrollPulse { 0% { top: -60%; } 100% { top: 110%; } }
+    @media (max-width: 840px) { .hero-scroll { display: none; } }
+
+    @media (max-width: 768px) {
+      .hero-content { padding-top: var(--nav-h); padding-bottom: clamp(3rem, 8vh, 5rem); }
+      .hero-text { max-width: 100%; }
+      .hero-bg { background-position: 35% center; }
+      .hero-overlay {
+        background:
+          linear-gradient(to bottom, rgba(15,25,50,0.20) 0%, transparent 28%),
+          linear-gradient(to top, rgba(15,25,50,0.80) 0%, rgba(15,25,50,0.46) 52%, transparent 100%);
+      }
+    }
+
+    /* ── STATEMENT (Intro) ── */
+    .statement { background: var(--surface); padding: clamp(4rem, 9vw, 7rem) 0; scroll-margin-top: var(--nav-h); }
+    .statement-inner { max-width: 780px; margin: 0 auto; text-align: center; }
+    .statement-inner .eyebrow { margin-bottom: 1.25rem; }
+    .statement-quote {
+      font-family: 'Outfit', sans-serif; font-weight: 400; font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+      color: var(--navy); line-height: 1.5; letter-spacing: -0.01em;
+    }
+    .gold-rule { width: 52px; height: 2px; background: var(--gold); margin: 2.25rem auto 1.75rem; }
+    .statement-inner .statement-body { color: var(--ink-muted); font-size: 1.05rem; line-height: 1.82; max-width: 62ch; margin: 0 auto; }
+
+    /* ── SPLIT SECTIONS (Schwerpunkte) ── */
+    .split-section        { background: var(--cream-deep); padding: clamp(4rem, 9vw, 7rem) 0; }
+    .split-section--light { background: var(--surface);    padding: clamp(4rem, 9vw, 7rem) 0; }
+    .split-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(2.5rem, 6vw, 4.5rem); align-items: start;
+    }
+    @media (max-width: 768px) {
+      .split-grid { grid-template-columns: 1fr; }
+      .split-grid--flip .split-img { order: -1; }
+    }
+    .split-text { display: flex; flex-direction: column; }
+    .split-text .eyebrow { margin-bottom: 1rem; }
+    .split-text h2 { margin-bottom: 1.4rem; }
+    .split-text p { color: var(--ink-muted); font-size: 1.05rem; line-height: 1.82; margin-bottom: 1rem; }
+    .split-text p:last-of-type { margin-bottom: 0; }
+    .split-text a { color: var(--navy-mid); text-decoration: underline; transition: color 0.2s; }
+    .split-text a:hover { color: var(--gold); }
+
+    .img-placeholder {
+      border-radius: var(--radius-lg); aspect-ratio: 4/3;
+      background: var(--placeholder);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .img-placeholder span {
+      font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.85); text-align: center; padding: 1rem;
+    }
+
+    /* ── FORMAT PILLS ── */
+    .format-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.75rem; }
+    .format-pills span {
+      font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink-muted);
+      border: 1px solid var(--line); border-radius: 100px;
+      padding: 0.3rem 0.9rem; background: var(--surface);
+    }
+
+    /* ── RAHMEN & ORT (Navy) ── */
+    .rahmen-section { background: var(--navy); padding: clamp(4rem, 9vw, 7rem) 0; }
+    .rahmen-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+    .rahmen-inner .eyebrow { margin-bottom: 1.1rem; }
+    .rahmen-inner h2 { color: #fff; margin-bottom: 1.4rem; }
+    .rahmen-inner p { color: rgba(255,255,255,0.75); font-size: 1.05rem; line-height: 1.82; }
+    .rahmen-inner .format-pills { justify-content: center; margin-top: 2rem; }
+    .rahmen-inner .format-pills span { background: var(--surface); }
+
+    /* ── CTA SECTION (hell – grenzt an den Navy-Footer, daher bewusst kein Navy) ── */
+    .cta-section { background: var(--surface); padding: clamp(4rem, 9vw, 7rem) 0; text-align: center; }
+    .cta-inner { max-width: 640px; margin: 0 auto; }
+    .cta-inner .eyebrow--gold { margin-bottom: 1.25rem; }
+    .cta-inner h2 { margin-bottom: 1.25rem; }
+    .cta-inner p { color: var(--ink-muted); font-size: 1.05rem; line-height: 1.82; margin-bottom: 2.5rem; max-width: 56ch; margin-left: auto; margin-right: auto; }
+
+    /* ── ANFRAGE-MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(10,20,50,0.55); backdrop-filter: blur(3px);
+      align-items: center; justify-content: center; padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: #fff; border-radius: var(--radius-lg);
+      box-shadow: 0 24px 80px rgba(10,20,50,0.30);
+      width: 100%; max-width: 620px; max-height: 90vh; overflow-y: auto;
+    }
+    .modal-header {
+      background: var(--navy); border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: 1.5rem 1.75rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+    }
+    .modal-header-text { flex: 1; }
+    .modal-eyebrow {
+      font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold);
+      display: block; margin-bottom: 0.4rem;
+    }
+    .modal-title { font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 1.35rem; color: #fff; line-height: 1.2; }
+    .modal-sub { margin-top: 0.55rem; font-family: 'Inter', sans-serif; font-size: 0.88rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
+    .modal-close {
+      background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.55);
+      font-size: 1.5rem; line-height: 1; padding: 0.1rem 0.25rem; flex-shrink: 0; transition: color 0.2s;
+    }
+    .modal-close:hover { color: #fff; }
+    .modal-body { padding: 1.75rem; }
+    .modal-note {
+      background: var(--cream-deep); border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0; padding: 0.75rem 1rem; margin-bottom: 1.5rem;
+      font-family: 'Inter', sans-serif; font-size: 0.85rem; color: var(--ink-soft); line-height: 1.6;
+    }
+    .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem 1rem; }
+    .modal-field { display: flex; flex-direction: column; gap: 0.3rem; }
+    .modal-field.full { grid-column: 1 / -1; }
+    .modal-field label { font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 600; color: var(--ink); letter-spacing: 0.01em; }
+    .modal-field .opt { font-weight: 400; color: var(--ink-muted); font-size: 0.75rem; }
+    .modal-field input, .modal-field select, .modal-field textarea {
+      font: inherit; font-size: 0.92rem; color: var(--ink);
+      padding: 0.6rem 0.8rem; border: 1px solid var(--line);
+      border-radius: var(--radius); background: var(--cream);
+      transition: border-color 0.15s; width: 100%;
+    }
+    .modal-field textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+    .modal-field input:hover, .modal-field select:hover, .modal-field textarea:hover { border-color: var(--navy-mid); }
+    .modal-field input:focus, .modal-field select:focus, .modal-field textarea:focus { outline: none; border-color: var(--navy); background: #fff; }
+    .modal-field input::placeholder, .modal-field textarea::placeholder { color: var(--ink-muted); }
+    .modal-section-label {
+      grid-column: 1 / -1; margin-top: 0.5rem;
+      font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+      border-top: 1px solid var(--line); padding-top: 1rem;
+    }
+    .modal-actions { margin-top: 1.25rem; display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .modal-submit {
+      flex: 1; background: var(--gold); color: #fff; border: 2px solid var(--gold);
+      font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1rem;
+      padding: 0.75rem 1.5rem; border-radius: var(--radius); cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .modal-submit:hover { background: var(--navy-mid); border-color: var(--navy-mid); }
+    .modal-cancel {
+      background: transparent; color: var(--ink-muted); border: 2px solid var(--line);
+      font-family: 'Outfit', sans-serif; font-weight: 500; font-size: 1rem;
+      padding: 0.75rem 1.25rem; border-radius: var(--radius); cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .modal-cancel:hover { border-color: var(--navy); color: var(--ink); }
+    .modal-hint { font-family: 'Inter', sans-serif; font-size: 0.78rem; color: var(--ink-muted); margin-top: 0.75rem; line-height: 1.55; text-align: center; }
+    @media (max-width: 540px) { .modal-grid { grid-template-columns: 1fr; } .modal-field.full { grid-column: 1; } }
 
     /* ── FOOTER ── */
     .footer { background: var(--navy); padding: clamp(2.5rem, 6vw, 4.5rem) 0 0; }
-    .footer-grid {
-      display: grid; grid-template-columns: 2fr 1fr 1fr;
-      gap: 3rem; padding-bottom: clamp(2rem, 5vw, 3.5rem);
-    }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; padding-bottom: clamp(2rem, 5vw, 3.5rem); }
     @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr; gap: 2rem; } }
-    .footer-logo img { height: 58px; filter: brightness(0) invert(1); opacity: 0.95; margin-bottom: 0.75rem; }
-    .footer-logo a { display: inline-block; }
-    .footer-logo a:hover img { filter: brightness(0) invert(1) sepia(0.6) hue-rotate(40deg) saturate(1.2) brightness(1.05); opacity: 1; }
+    .footer-logo { margin-bottom: 0.75rem; }
+    .footer-logo img { height: 58px; transition: opacity 0.25s ease; }
+    .footer-logo .logo-default { filter: brightness(0) invert(1); opacity: 0.95; }
+    .footer-logo .logo-hover { position: absolute; top: 0; left: 0; opacity: 0; }
+    .footer-logo a { display: inline-block; position: relative; }
+    .footer-logo a:hover .logo-default { opacity: 0; }
+    .footer-logo a:hover .logo-hover { opacity: 1; }
     .footer-tagline { font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: rgba(255,255,255,0.85); margin-bottom: 1.25rem; max-width: 32ch; }
     .footer-logos { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; margin-top: 0.5rem; }
     .footer-logos img { height: 54px; filter: brightness(0) invert(1); opacity: 0.9; }
     .footer-col h4 {
       font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: rgba(255,255,255,0.55); margin-bottom: 1.1rem;
+      letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 1.1rem;
     }
     .footer-col ul { list-style: none; }
     .footer-col li { margin-bottom: 0.55rem; }
@@ -177,10 +378,8 @@
     .footer-col a:hover { color: var(--gold); }
     .footer-col a[aria-current="page"] { color: var(--gold); text-shadow: 1px 1px 0 rgba(10,20,60,0.85); }
     .footer-bottom {
-      padding: 1.5rem 0;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 0.75rem;
-      font-size: 0.8rem; color: rgba(255,255,255,0.45);
+      padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 0.75rem; font-size: 0.8rem; color: rgba(255,255,255,0.45);
     }
     .footer-bottom a { color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
     .footer-bottom a:hover { color: var(--gold); }
@@ -193,11 +392,12 @@
 <nav class="nav" id="nav" aria-label="Hauptnavigation">
   <div class="nav-inner">
     <a href="../index.html" class="nav-logo" aria-label="Gerlinde Pramer – Startseite">
-      <img src="../img/signatur-3.svg" alt="Gerlinde Pramer" height="40">
+      <img class="logo-default" src="../img/signatur-3.svg" alt="Gerlinde Pramer" height="40">
+      <img class="logo-hover" src="../img/signatur-3-gold.svg" alt="Gerlinde Pramer" height="40" aria-hidden="true">
     </a>
     <ul class="nav-links">
       <li><a href="../ueber-mich/">Über mich</a></li>
-      <li><a href="../angebote/">Angebote</a></li>
+      <li><a href="../angebote/" aria-current="page">Angebote</a></li>
       <li><a href="../termine/">Termine</a></li>
       <li><a href="../kontakt/">Kontakt</a></li>
     </ul>
@@ -210,9 +410,7 @@
 
 <!-- MOBILE NAV -->
 <div class="nav-mobile" id="nav-mobile" aria-label="Mobile Navigation">
-  <button class="nav-mobile-close" id="nav-mobile-close" aria-label="Menü schließen">
-    <span></span><span></span>
-  </button>
+  <button class="nav-mobile-close" id="nav-mobile-close" aria-label="Menü schließen"><span></span><span></span></button>
   <ul class="nav-mobile-links">
     <li><a href="../ueber-mich/">Über mich</a></li>
     <li><a href="../angebote/">Angebote</a></li>
@@ -224,25 +422,147 @@
   </div>
 </div>
 
-<!-- ══ HERO (ohne Bild) ══ -->
-<section class="platzhalter-hero">
+<!-- ══ HERO ══ -->
+<section class="hero" aria-label="1:1 Begleitung">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="container">
+      <div class="hero-text">
+        <span class="hero-eyebrow">1:1 Begleitung</span>
+        <h1>Eine echte<br>Gesprächspartnerin<br>auf Augenhöhe.</h1>
+        <p class="hero-sub">Sie hört zu, denkt mit – und kennt<br>die unternehmerische Realität ebenso wie<br>das Leben selbst, mit seinen Höhen und Tiefen.</p>
+        <div class="hero-cta">
+          <a href="#kein-fixes-programm" class="btn btn--ghost-white" id="hero-cta-btn">Mehr erfahren</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <span>Scrollen</span>
+    <div class="scroll-bar"></div>
+  </div>
+</section>
+
+<!-- ══ KEIN FIXES PROGRAMM ══ -->
+<section class="statement" id="kein-fixes-programm" aria-label="Kein fixes Programm">
   <div class="container">
-    <div class="platzhalter-hero-inner reveal">
-      <span class="eyebrow eyebrow--gold">1:1 Begleitung</span>
-      <h1>Eine Gesprächspartnerin auf Augenhöhe.</h1>
+    <div class="statement-inner reveal">
+      <span class="eyebrow eyebrow--gold">Kein fixes Programm</span>
+      <p class="statement-quote">Es gibt keine Vorlage dafür, was Sie gerade brauchen. Nur die Frage: Was würde jetzt wirklich weiterhelfen?</p>
+      <div class="gold-rule"></div>
+      <p class="statement-body">Manchmal ist es eine einzelne Session zu einem konkreten Thema. Manchmal ein kurzes Telefonat kurz vor einer Entscheidung. Manchmal ein verlässlicher Rhythmus über mehrere Monate. Ich richte mich nach dem, was gerade gebraucht wird – nicht nach einem Programm von der Stange. Im Mittelpunkt stehen dabei immer beide Seiten: Sie als Mensch – und Sie als Unternehmer:in.</p>
     </div>
   </div>
 </section>
 
-<!-- ══ HINWEIS ══ -->
-<section class="platzhalter-section">
+<!-- ══ SCHWERPUNKT 1 – ENTSCHEIDUNGEN ══ -->
+<section class="split-section" aria-label="Klarheit bei Entscheidungen">
   <div class="container">
-    <div class="platzhalter-inner reveal">
-      <p>Diese Seite befindet sich gerade im Aufbau. Bis sie fertig ist, erreichen Sie mich am schnellsten über ein erstes, unverbindliches Gespräch – oder lesen auf der Angebotsseite weiter, was die 1:1 Begleitung umfasst.</p>
-      <div class="platzhalter-cta">
-        <a href="../kontakt/" class="btn btn--primary">Erstgespräch anfragen</a>
-        <a href="../angebote/#1-1-begleitung" class="btn btn--ghost">Zur Angebotsübersicht</a>
+    <div class="split-grid">
+
+      <div class="split-text reveal">
+        <span class="eyebrow eyebrow--gold">Entscheidungen</span>
+        <h2>Wenn Kopf und Bauch sich widersprechen</h2>
+        <p>Manche Entscheidungen lassen sich mit einer Tabelle lösen. Die meisten nicht – da zählt jahrelange Erfahrung genauso wie ein Gefühl, das sich nicht in Zahlen fassen lässt, und der Druck des Moments.</p>
+        <p>In der 1:1-Begleitung bringe ich genau das ein: einen Blick von außen, der auf fast zwanzig Jahren eigener Geschäftsführung beruht, und die Fähigkeit, in kurzer Zeit zum eigentlichen Kern einer Sache vorzudringen. Nicht, um Ihnen eine Antwort vorzugeben – sondern damit Sie Ihre eigene, stimmige Entscheidung treffen.</p>
       </div>
+
+      <div class="img-placeholder reveal d1">
+        <span>Foto folgt</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SCHWERPUNKT 2 – ORGANISATIONSAUFSTELLUNG ══ -->
+<section class="split-section--light" aria-label="Organisationsaufstellung">
+  <div class="container">
+    <div class="split-grid split-grid--flip">
+
+      <div class="img-placeholder reveal">
+        <span>Foto folgt</span>
+      </div>
+
+      <div class="split-text reveal d1">
+        <span class="eyebrow eyebrow--gold">Organisationsaufstellung</span>
+        <h2>Das Unsichtbare sichtbar machen</h2>
+        <p>Manchmal liegt das eigentliche Problem nicht offen auf dem Tisch. Machtdynamiken, persönliche Befindlichkeiten, ein Konflikt, der nie ausgesprochen wurde – sie wirken im Hintergrund und bremsen jede Lösung, die rein auf der Sachebene gesucht wird.</p>
+        <p>Mit einer Organisationsaufstellung mache ich in ein bis zwei Stunden sichtbar, was wirklich passiert: welche Kräfte im Raum wirken, wo der eigentliche Knoten liegt – und welche Wege sich daraus öffnen. Kein Reden im Kreis, sondern ein sehr direkter Blick auf den Kern der Sache.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SCHWERPUNKT 3 – DER MENSCH DAHINTER ══ -->
+<section class="split-section" aria-label="Der Mensch hinter der Rolle">
+  <div class="container">
+    <div class="split-grid">
+
+      <div class="split-text reveal">
+        <span class="eyebrow eyebrow--gold">Der Mensch dahinter</span>
+        <h2>Was Sie antreibt, wenn niemand zusieht</h2>
+        <p>Die Unternehmerin, die Führungskraft, die alles im Griff hat – diese Rolle kostet Kraft. Und manchmal ist die eigentliche Frage in einer 1:1-Begleitung nicht „Was soll ich tun?", sondern: Aus welchem Zustand heraus handle ich gerade? Aus Angst oder aus Vertrauen. Aus Pflichtgefühl oder aus echter Überzeugung. Dieser Unterschied entscheidet mehr über Ihren Weg als jede Strategie – und genau da setze ich an.</p>
+        <p>Das hat nichts mit Esoterik zu tun. Es ist die praktischste Frage, die es gibt, wenn wir an einem Muster oder einer Erschöpfung arbeiten, die sich nicht mehr wegorganisieren lässt. Manchmal ist genau das der eigentliche Grund, warum Menschen zu mir kommen – nicht nur wegen des Unternehmens, sondern wegen sich selbst.</p>
+      </div>
+
+      <div class="img-placeholder reveal d1">
+        <span>Foto folgt</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SCHWERPUNKT 4 – WEICHENSTELLUNGEN ══ -->
+<section class="split-section--light" aria-label="Weichenstellungen und die eigene Richtung">
+  <div class="container">
+    <div class="split-grid split-grid--flip">
+
+      <div class="img-placeholder reveal">
+        <span>Foto folgt</span>
+      </div>
+
+      <div class="split-text reveal d1">
+        <span class="eyebrow eyebrow--gold">Weichenstellungen</span>
+        <h2>Wenn es um mehr geht als das nächste Quartal</h2>
+        <p>Eine Unternehmensnachfolge. Eine Umstrukturierung. Der Punkt, an dem ein Unternehmen neu gedacht werden muss. Solche Weichenstellungen brauchen mehr als eine schnelle Antwort – sie brauchen Raum, um wirklich zu klären, wohin die Reise geht.</p>
+        <p>Manchmal führt das noch weiter: zur Frage, was Sie sich selbst eigentlich wünschen, jenseits von Umsatz und Rolle. Für Entwicklungsschritte, die diesen Raum brauchen, gibt es die Möglichkeit eines zweitägigen Intensivs im Anahata Space Lovran, direkt am Meer – mit Zeit für Stille, die im laufenden Betrieb schwer zu finden ist. Mehr dazu bei <a href="../coaching/">Retreat &amp; Intensiv-Coaching in Lovran</a>.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ RAHMEN & ORT ══ -->
+<section class="rahmen-section" aria-label="Rahmen und Ort">
+  <div class="container">
+    <div class="rahmen-inner reveal">
+      <span class="eyebrow eyebrow--gold">Rahmen &amp; Ort</span>
+      <h2>So, wie es für Sie passt</h2>
+      <p>Ob eine einzelne Session, ein regelmäßiger Rhythmus oder das Intensiv in Lovran – Umfang und Dauer ergeben sich aus dem, was Sie gerade brauchen, und aus unserer gemeinsamen Vereinbarung. Persönliche Termine sind in ganz Österreich möglich – bei Ihnen, an einem Ort, der zu unserem Gespräch passt, oder in Lovran. Bei größerer Distanz oder für punktuelle Anliegen ist ein Video-Call oft die effizientere Wahl, ohne dass die Tiefe des Gesprächs darunter leidet – auch für Menschen außerhalb Österreichs.</p>
+      <div class="format-pills">
+        <span>📍 Ganz Österreich – persönlich vor Ort</span>
+        <span>💻 Video-Call – auch international</span>
+        <span>🇭🇷 Intensiv im Anahata Space Lovran</span>
+        <span>🗓 Umfang &amp; Frequenz nach Vereinbarung</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA / ANFRAGE ══ -->
+<section class="cta-section" aria-label="Ihre 1:1-Begleitung anfragen">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <span class="eyebrow eyebrow--gold">Ihr nächster Schritt</span>
+      <h2>Schreiben Sie mir, was Sie gerade bewegt.</h2>
+      <p>Erzählen Sie mir kurz, worum es geht, und was Sie sich vorstellen – ich melde mich innerhalb von 48 Stunden persönlich bei Ihnen.</p>
+      <button type="button" class="btn btn--primary" id="cta-btn">1:1 Begleitung anfragen</button>
     </div>
   </div>
 </section>
@@ -254,7 +574,8 @@
       <div class="footer-col">
         <div class="footer-logo">
           <a href="../index.html" aria-label="Gerlinde Pramer – Startseite">
-            <img src="../img/signatur-3.svg" alt="Gerlinde Pramer" height="40">
+            <img class="logo-default" src="../img/signatur-3.svg" alt="Gerlinde Pramer" height="40">
+            <img class="logo-hover" src="../img/signatur-3-gold.svg" alt="Gerlinde Pramer" height="40" aria-hidden="true">
           </a>
         </div>
         <p class="footer-tagline">Bewusstseinsarbeit für Unternehmerinnen und Führungskräfte, die bereit sind, die Tiefe zu erkunden – und von dort zu führen.</p>
@@ -293,14 +614,128 @@
   </div>
 </footer>
 
+<!-- ══ ANFRAGE-MODAL ══ -->
+<div class="modal-overlay" id="anfrage-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-card">
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <span class="modal-eyebrow">1:1 Begleitung</span>
+        <h3 class="modal-title" id="modal-title">Ihre Anfrage an Gerlinde Pramer</h3>
+        <p class="modal-sub">Ich melde mich innerhalb von 48 Stunden persönlich bei Ihnen.</p>
+      </div>
+      <button class="modal-close" id="modal-close-btn" aria-label="Schließen">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-note">
+        Füllen Sie bitte die Felder aus und klicken Sie auf <strong>„E-Mail öffnen"</strong>. Ihr E-Mail-Programm öffnet sich automatisch mit allen Angaben – bitte senden Sie die Nachricht direkt ab.
+      </div>
+      <form id="anfrage-form" novalidate>
+        <div class="modal-grid">
+
+          <div class="modal-field full">
+            <label for="m-anrede">Anrede <span style="color:#c0392b">*</span></label>
+            <select id="m-anrede" required>
+              <option value="">Bitte wählen …</option>
+              <option>Frau</option>
+              <option>Herr</option>
+              <option>Divers</option>
+              <option>Keine Angabe</option>
+            </select>
+          </div>
+
+          <div class="modal-field">
+            <label for="m-titel">Titel <span class="opt">(optional)</span></label>
+            <input type="text" id="m-titel" placeholder="z. B. Dr., Mag., Ing.">
+          </div>
+          <div class="modal-field"><!-- Platzhalter --></div>
+
+          <div class="modal-field">
+            <label for="m-vorname">Vorname <span style="color:#c0392b">*</span></label>
+            <input type="text" id="m-vorname" autocomplete="given-name" required>
+          </div>
+          <div class="modal-field">
+            <label for="m-nachname">Nachname <span style="color:#c0392b">*</span></label>
+            <input type="text" id="m-nachname" autocomplete="family-name" required>
+          </div>
+
+          <div class="modal-field">
+            <label for="m-email">E-Mail-Adresse <span style="color:#c0392b">*</span></label>
+            <input type="email" id="m-email" autocomplete="email" inputmode="email" required>
+          </div>
+          <div class="modal-field">
+            <label for="m-telefon">Telefonnummer <span style="color:#c0392b">*</span></label>
+            <input type="tel" id="m-telefon" autocomplete="tel" placeholder="+43 664 …" required>
+          </div>
+
+          <div class="modal-field">
+            <label for="m-unternehmen">Unternehmen <span class="opt">(optional)</span></label>
+            <input type="text" id="m-unternehmen" autocomplete="organization">
+          </div>
+          <div class="modal-field">
+            <label for="m-position">Position <span class="opt">(optional)</span></label>
+            <input type="text" id="m-position" placeholder="z. B. Geschäftsführerin">
+          </div>
+
+          <div class="modal-section-label">Gewünschter Rahmen</div>
+
+          <div class="modal-field">
+            <label for="m-laufzeit">Gewünschte Laufzeit <span class="opt">(optional)</span></label>
+            <select id="m-laufzeit">
+              <option value="">Noch offen</option>
+              <option>Einzelne Session</option>
+              <option>Wenige Wochen</option>
+              <option>Mehrere Monate</option>
+            </select>
+          </div>
+          <div class="modal-field">
+            <label for="m-frequenz">Gewünschte Frequenz <span class="opt">(optional)</span></label>
+            <select id="m-frequenz">
+              <option value="">Noch offen</option>
+              <option>Einmalig</option>
+              <option>Alle 2 Wochen</option>
+              <option>Monatlich</option>
+              <option>Nach Bedarf</option>
+            </select>
+          </div>
+
+          <div class="modal-field">
+            <label for="m-format">Persönlich oder Video-Call? <span class="opt">(optional)</span></label>
+            <select id="m-format">
+              <option value="">Noch offen</option>
+              <option>Persönlich vor Ort</option>
+              <option>Video-Call</option>
+              <option>Intensiv in Lovran</option>
+            </select>
+          </div>
+          <div class="modal-field">
+            <label for="m-budget">Budgetrahmen <span class="opt">(optional, freiwillig)</span></label>
+            <input type="text" id="m-budget" placeholder="z. B. bis € 2.000">
+          </div>
+
+          <div class="modal-field full">
+            <label for="m-nachricht">Was beschäftigt Sie gerade? <span class="opt">(optional)</span></label>
+            <textarea id="m-nachricht" placeholder="Kurz in eigenen Worten …"></textarea>
+          </div>
+
+        </div>
+
+        <div class="modal-actions">
+          <button type="submit" class="modal-submit">E-Mail öffnen →</button>
+          <button type="button" class="modal-cancel" id="modal-cancel-btn">Abbrechen</button>
+        </div>
+        <p class="modal-hint">Ihre E-Mail-App öffnet sich mit allen Angaben vorausgefüllt. Bitte prüfen und absenden.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script>
-  /* ── NAV SCROLL ── */
+  /* ── Navigation ── */
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 50);
   }, { passive: true });
 
-  /* ── MOBILE NAV ── */
   const toggle = document.getElementById('nav-toggle');
   const mobile = document.getElementById('nav-mobile');
   const close  = document.getElementById('nav-mobile-close');
@@ -308,11 +743,92 @@
   close.addEventListener('click',  () => document.body.classList.remove('nav-open'));
   mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => document.body.classList.remove('nav-open')));
 
-  /* ── REVEAL ON SCROLL ── */
+  /* ── Scroll-Reveal ── */
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ── Anfrage-Modal ── */
+  const overlay   = document.getElementById('anfrage-modal');
+  const closeBtn  = document.getElementById('modal-close-btn');
+  const cancelBtn = document.getElementById('modal-cancel-btn');
+  const form      = document.getElementById('anfrage-form');
+
+  function openModal() {
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('m-anrede').focus(), 50);
+  }
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('cta-btn').addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  cancelBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const anrede    = document.getElementById('m-anrede').value.trim();
+    const vorname   = document.getElementById('m-vorname').value.trim();
+    const nachname  = document.getElementById('m-nachname').value.trim();
+    const email     = document.getElementById('m-email').value.trim();
+    const telefon   = document.getElementById('m-telefon').value.trim();
+
+    if (!anrede || !vorname || !nachname || !email || !telefon) {
+      alert('Bitte füllen Sie alle Pflichtfelder aus (Anrede, Vor- und Nachname, E-Mail, Telefon).');
+      return;
+    }
+
+    const titel       = document.getElementById('m-titel').value.trim();
+    const unternehmen = document.getElementById('m-unternehmen').value.trim();
+    const position    = document.getElementById('m-position').value.trim();
+    const laufzeit     = document.getElementById('m-laufzeit').value.trim();
+    const frequenz      = document.getElementById('m-frequenz').value.trim();
+    const format      = document.getElementById('m-format').value.trim();
+    const budget      = document.getElementById('m-budget').value.trim();
+    const nachricht   = document.getElementById('m-nachricht').value.trim();
+
+    const subject = encodeURIComponent('Anfrage 1:1-Begleitung – ' + vorname + ' ' + nachname);
+
+    const body = [
+      'Guten Tag,',
+      '',
+      'ich interessiere mich für eine 1:1-Begleitung und bitte um Kontaktaufnahme.',
+      '',
+      'MEINE ANGABEN',
+      '─────────────────────────────',
+      'Anrede:        ' + anrede,
+      'Titel:         ' + (titel || '–'),
+      'Vorname:       ' + vorname,
+      'Nachname:      ' + nachname,
+      'E-Mail:        ' + email,
+      'Telefon:       ' + telefon,
+      'Unternehmen:   ' + (unternehmen || '–'),
+      'Position:      ' + (position || '–'),
+      '',
+      'GEWÜNSCHTER RAHMEN',
+      '─────────────────────────────',
+      'Laufzeit:      ' + (laufzeit || 'noch offen'),
+      'Frequenz:      ' + (frequenz || 'noch offen'),
+      'Format:        ' + (format || 'noch offen'),
+      'Budgetrahmen:  ' + (budget || '–'),
+      '',
+      'MEINE NACHRICHT',
+      '─────────────────────────────',
+      (nachricht || '–'),
+      '',
+      'Mit freundlichen Grüßen',
+      vorname + ' ' + nachname
+    ].join('\n');
+
+    window.location.href = 'mailto:office@pramer.com?subject=' + subject + '&body=' + encodeURIComponent(body);
+    closeModal();
+  });
 </script>
 </body>
 </html>
