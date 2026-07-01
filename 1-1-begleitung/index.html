@@ -254,6 +254,14 @@
       letter-spacing: 0.12em; text-transform: uppercase;
       color: rgba(255,255,255,0.85); text-align: center; padding: 1rem;
     }
+    .split-img {
+      border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/3;
+    }
+    .split-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.5s ease;
+    }
+    .split-img:hover img { transform: scale(1.04); }
 
     /* ── FORMAT PILLS ── */
     .format-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.75rem; }
@@ -470,8 +478,8 @@
         <p>In der 1:1-Begleitung bringe ich genau das ein: einen Blick von außen, der auf fast zwanzig Jahren eigener Geschäftsführung beruht, und die Fähigkeit, in kurzer Zeit zum eigentlichen Kern einer Sache vorzudringen. Nicht, um Ihnen eine Antwort vorzugeben – sondern damit Sie Ihre eigene, stimmige Entscheidung treffen.</p>
       </div>
 
-      <div class="img-placeholder reveal d1">
-        <span>Foto folgt</span>
+      <div class="split-img reveal d1">
+        <img src="../img/gerlinde-tisch-gespraech-neu.png" alt="Mag. Gerlinde Pramer im Gespräch am Tisch – 1:1 Begleitung bei Entscheidungen" loading="lazy">
       </div>
 
     </div>
@@ -510,8 +518,8 @@
         <p>Das hat nichts mit Esoterik zu tun. Es ist die praktischste Frage, die es gibt, wenn wir an einem Muster oder einer Erschöpfung arbeiten, die sich nicht mehr wegorganisieren lässt. Manchmal ist genau das der eigentliche Grund, warum Menschen zu mir kommen – nicht nur wegen des Unternehmens, sondern wegen sich selbst.</p>
       </div>
 
-      <div class="img-placeholder reveal d1">
-        <span>Foto folgt</span>
+      <div class="split-img reveal d1">
+        <img src="../img/gerlinde-werkshalle-blazer-neu.png" alt="Mag. Gerlinde Pramer in der Werkshalle – Der Mensch dahinter" loading="lazy">
       </div>
 
     </div>
@@ -523,8 +531,8 @@
   <div class="container">
     <div class="split-grid split-grid--flip">
 
-      <div class="img-placeholder reveal">
-        <span>Foto folgt</span>
+      <div class="split-img reveal">
+        <img src="../img/gerlinde-lovran-blazer-neu.png" alt="Mag. Gerlinde Pramer in Lovran – Weichenstellungen und Neuausrichtung" loading="lazy">
       </div>
 
       <div class="split-text reveal d1">
