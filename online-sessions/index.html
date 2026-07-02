@@ -166,7 +166,7 @@
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background-image: url('../img/gerlinde-whiteboard-neu.png');
+      background-image: url('../img/gerlinde-whiteboard-neu.jpg');
       background-size: cover;
       background-position: center center;
     }
@@ -279,18 +279,13 @@
       align-items: start;
     }
     @media (max-width: 768px) { .fuer-wen-grid { grid-template-columns: 1fr; } }
-    .fuer-wen-placeholder {
-      border-radius: var(--radius-lg);
-      aspect-ratio: 4/3;
-      background: #ff00aa;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
+    .fuer-wen-img { overflow: hidden; border-radius: var(--radius-lg); }
+    .fuer-wen-img img {
+      width: 100%; aspect-ratio: 4/3;
+      object-fit: cover; display: block;
+      transition: transform 0.55s ease;
     }
-    .fuer-wen-placeholder span {
-      font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(255,255,255,0.85); text-align: center; padding: 1rem;
-    }
+    .fuer-wen-img:hover img { transform: scale(1.04); }
     .fuer-wen-inner .eyebrow { margin-bottom: 1.1rem; }
     .fuer-wen-inner h2 { margin-bottom: 1.5rem; max-width: 22ch; }
     .fuer-wen-inner p { color: var(--ink-muted); font-size: 1.05rem; line-height: 1.85; }
@@ -535,7 +530,7 @@
       </div>
 
       <div class="split-img reveal d1">
-        <img src="../img/gerlinde-whiteboard-1.png" alt="Gerlinde Pramer – Online Session" loading="lazy" style="object-position: left center;">
+        <img src="../img/gerlinde-laptop-online-session.jpg" alt="Mag. Gerlinde Pramer während einer Online Session am Laptop" loading="lazy">
       </div>
 
     </div>
@@ -547,8 +542,8 @@
   <div class="container">
     <div class="fuer-wen-grid">
 
-      <div class="fuer-wen-placeholder reveal">
-        <span>Foto folgt</span>
+      <div class="fuer-wen-img reveal">
+        <img src="../img/gerlinde-online-session-fuer-wen.jpg" alt="Teilnehmerin nimmt an einer Online Session mit Mag. Gerlinde Pramer teil" loading="lazy">
       </div>
 
       <div class="fuer-wen-inner reveal d1">
