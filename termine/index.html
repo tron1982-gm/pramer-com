@@ -155,16 +155,22 @@
     .nav-mobile {
       display: none; position: fixed; inset: 0; z-index: 999;
       background: var(--navy);
-      flex-direction: column; align-items: center; justify-content: center;
-      gap: 1.4rem; padding: 2rem;
+      flex-direction: column; align-items: flex-start; justify-content: flex-start;
+      gap: 1.5rem; padding: 6.5rem 2.25rem 2.5rem;
       overflow-y: auto;
     }
     .nav-open .nav-mobile { display: flex; }
-    .nav-mobile-links { list-style: none; text-align: center; }
-    .nav-mobile-links > li { margin-bottom: 1.05rem; }
+    .nav-mobile-logo { position: absolute; top: 1.3rem; left: 1.5rem; z-index: 2; }
+    .nav-mobile-logo img { height: 34px; width: auto; transition: opacity 0.25s ease; }
+    .nav-mobile-logo .logo-default { filter: brightness(0) invert(1) brightness(1.08); opacity: 0.9; }
+    .nav-mobile-logo .logo-hover { position: absolute; top: 0; left: 0; opacity: 0; }
+    .nav-mobile-logo:hover .logo-default { opacity: 0; }
+    .nav-mobile-logo:hover .logo-hover { opacity: 1; }
+    .nav-mobile-links { list-style: none; text-align: left; width: 100%; }
+    .nav-mobile-links > li { margin-bottom: 1.3rem; }
     .nav-mobile-links > li:last-child { margin-bottom: 0; }
     .nav-mobile-links a {
-      font-family: 'Outfit', sans-serif; font-size: 1.35rem; font-weight: 300;
+      font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 300;
       color: rgba(255,255,255,0.9); text-decoration: none; letter-spacing: 0.04em;
       transition: color 0.2s;
     }
@@ -172,12 +178,14 @@
     .nav-mobile-links > li > a[aria-current="page"] { color: var(--gold); }
     .nav-mobile-sublinks {
       list-style: none;
-      display: flex; flex-direction: column; gap: 0.55rem;
-      margin: 0.65rem 0 0;
+      display: flex; flex-direction: column; gap: 0.75rem;
+      margin: 0.9rem 0 0;
+      padding-left: 1.25rem;
+      border-left: 1px solid rgba(184,153,104,0.35);
     }
     .nav-mobile-sublinks a {
-      font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 500;
-      letter-spacing: 0.03em; color: rgba(255,255,255,0.62);
+      font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 300;
+      letter-spacing: 0.04em; color: rgba(255,255,255,0.72);
     }
     .nav-mobile-sublinks a:hover,
     .nav-mobile-sublinks a[aria-current="page"] { color: var(--gold); }
@@ -572,6 +580,10 @@
 
 <!-- MOBILE NAV -->
 <div class="nav-mobile" id="nav-mobile" aria-label="Mobile Navigation">
+  <a href="../index.html" class="nav-mobile-logo" aria-label="Gerlinde Pramer – Startseite">
+    <img class="logo-default" src="../img/signatur-3.svg" alt="Gerlinde Pramer" height="34">
+    <img class="logo-hover" src="../img/signatur-3-gold.svg" alt="Gerlinde Pramer" height="34" aria-hidden="true">
+  </a>
   <button class="nav-mobile-close" id="nav-mobile-close" aria-label="Menü schließen">
     <span></span><span></span>
   </button>
