@@ -144,18 +144,31 @@
       display: none; position: fixed; inset: 0; z-index: 999;
       background: var(--navy);
       flex-direction: column; align-items: center; justify-content: center;
-      gap: 2rem; padding: 2rem;
+      gap: 1.4rem; padding: 2rem;
+      overflow-y: auto;
     }
     .nav-open .nav-mobile { display: flex; }
     .nav-mobile-links { list-style: none; text-align: center; }
-    .nav-mobile-links li { margin-bottom: 2rem; }
+    .nav-mobile-links > li { margin-bottom: 1.05rem; }
+    .nav-mobile-links > li:last-child { margin-bottom: 0; }
     .nav-mobile-links a {
-      font-family: 'Outfit', sans-serif; font-size: 1.85rem; font-weight: 300;
+      font-family: 'Outfit', sans-serif; font-size: 1.35rem; font-weight: 300;
       color: rgba(255,255,255,0.9); text-decoration: none; letter-spacing: 0.04em;
       transition: color 0.2s;
     }
-    .nav-mobile-links a:hover,
-    .nav-mobile-links a[aria-current="page"] { color: var(--gold); }
+    .nav-mobile-links > li > a:hover,
+    .nav-mobile-links > li > a[aria-current="page"] { color: var(--gold); }
+    .nav-mobile-sublinks {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 0.55rem;
+      margin: 0.65rem 0 0;
+    }
+    .nav-mobile-sublinks a {
+      font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.03em; color: rgba(255,255,255,0.62);
+    }
+    .nav-mobile-sublinks a:hover,
+    .nav-mobile-sublinks a[aria-current="page"] { color: var(--gold); }
     .nav-mobile-close {
       position: absolute; top: 1.25rem; right: 1.25rem;
       background: none; border: none; cursor: pointer; padding: 0.5rem;
@@ -495,7 +508,16 @@
     </button>
     <ul class="nav-mobile-links">
       <li><a href="./" aria-current="page">Über mich</a></li>
-      <li><a href="../angebote/">Angebote</a></li>
+      <li class="nav-mobile-item--group">
+        <a href="../angebote/">Angebote</a>
+        <ul class="nav-mobile-sublinks">
+          <li><a href="../online-sessions/">Online Sessions</a></li>
+          <li><a href="https://abc.pramer.com" target="_blank" rel="noopener">Business Circle</a></li>
+          <li><a href="../1-1-begleitung/">1:1 Begleitung</a></li>
+          <li><a href="../coaching/">Retreat &amp; Coaching</a></li>
+          <li><a href="../keynote/">Keynote</a></li>
+        </ul>
+      </li>
       <li><a href="../termine/">Termine</a></li>
       <li><a href="../kontakt/">Kontakt</a></li>
     </ul>
