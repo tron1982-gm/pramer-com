@@ -290,6 +290,9 @@
     }
     .gold-rule { width: 52px; height: 2px; background: var(--gold); margin: 2.25rem auto 0; }
 
+    /* Scroll offset for sticky nav: bottom edge of nav flush with bottom edge of hero */
+    .scroll-target { scroll-margin-top: var(--nav-h); }
+
     /* ── SPLIT SECTIONS ── */
     .split-section         { background: var(--cream-deep); padding: clamp(4rem, 9vw, 7rem) 0; }
     .split-section--light  { background: var(--surface); padding: clamp(4rem, 9vw, 7rem) 0; }
@@ -302,7 +305,8 @@
     }
     @media (max-width: 768px) {
       .split-grid { grid-template-columns: 1fr; }
-      .split-grid--flip .split-img { order: -1; }
+      .split-grid--flip .split-text { order: -1; }
+      .split-grid--img-first-mobile .split-img { order: -1; }
     }
 
     .split-text { display: flex; flex-direction: column; gap: 0; }
@@ -539,7 +543,7 @@
         <h1>Ein Raum für Klarheit. Ein Ort für Führung aus dem Herzen.</h1>
         <p class="hero-sub">Exklusive Auszeiten und tiefe Bewusstseinsarbeit für Unternehmer und Führungskräfte an der Opatija-Riviera.</p>
         <div class="hero-cta">
-          <a href="#anfrage" class="btn btn--gold">Persönliche Anfrage senden</a>
+          <a href="#warum-lovran" class="btn btn--gold">Mehr erfahren</a>
         </div>
       </div>
     </div>
@@ -552,7 +556,7 @@
 </section>
 
 <!-- ══ PHILOSOPHIE ══ -->
-<section class="statement" aria-label="Warum Lovran">
+<section class="statement scroll-target" id="warum-lovran" aria-label="Warum Lovran">
   <div class="container">
     <div class="statement-inner reveal">
       <span class="eyebrow eyebrow--gold">Warum Lovran</span>
@@ -567,10 +571,10 @@
 <!-- ══ CONTENT BLOCK 1 – DER ORT ══ -->
 <section class="split-section" aria-label="Der Ort">
   <div class="container">
-    <div class="split-grid">
+    <div class="split-grid split-grid--img-first-mobile">
 
       <div class="split-text reveal">
-        <span class="eyebrow eyebrow--gold">Orte &amp; Atmosphäre</span>
+        <span class="eyebrow eyebrow--gold">Ort &amp; Atmosphäre</span>
         <h2>Abstand vom System, um das System neu zu ordnen.</h2>
         <p>Im Herzen von Kroatien, direkt an der geschichtsträchtigen Opatija-Riviera, liegt der Anahata Space Lovran. Dieser Kraftort wurde bewusst als Rückzugszentrum geschaffen, um den permanenten Druck des Unternehmeralltags hinter sich zu lassen. Fernab von klassischen Seminarräumen bietet dieser Ort die perfekte Kulisse, um tief durchzuatmen, die eigene Schwingung neu auszurichten und die Verbindung zu sich selbst wiederzufinden.</p>
       </div>
