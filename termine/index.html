@@ -328,6 +328,16 @@
       color: #fff;
     }
 
+    /* Hinweiszeile, wenn keine kommenden Termine mehr vorhanden sind */
+    .tr-empty-state { cursor: default; }
+    .tr-empty-state:hover td { background: transparent; color: var(--ink-muted); }
+    .tr-empty-state td {
+      text-align: center;
+      font-style: italic;
+      color: var(--ink-muted);
+      padding: 1.6rem 1.1rem;
+    }
+
     .badge {
       display: inline-block;
       border-radius: 4px;
@@ -829,6 +839,9 @@
             <td class="col-dauer">30 – 45 Min.</td>
             <td class="col-anmelden"><button class="btn-anmelden" data-datum="Di, 24.11.2026" data-ort="Online" data-uhrzeit="11:30" data-format="Live Online Session" data-dauer="30 – 45 Min.">Anmelden</button></td>
           </tr>
+          <tr class="tr-empty-state" id="tr-keine-termine" style="display:none;">
+            <td colspan="6">Aktuell sind keine neuen Termine eingetragen – schau bald wieder vorbei.</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -1047,6 +1060,34 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ── Vergangene Termine ausblenden (Datum + Uhrzeit + Dauer + 1 Std. Puffer) ── */
+  (function filterVergangeneTermine() {
+    const jetzt = new Date();
+    const rows = document.querySelectorAll('.termine-table tbody tr[data-href]');
+    let sichtbarAnzahl = 0;
+    rows.forEach(tr => {
+      const btn = tr.querySelector('.btn-anmelden');
+      if (!btn) return;
+      const datumTeil = (btn.dataset.datum || '').split(',').pop().trim(); // "14.7.2026"
+      const [tag, monat, jahr] = datumTeil.split('.').map(n => parseInt(n, 10));
+      const [std, min] = (btn.dataset.uhrzeit || '0:0').split(':').map(n => parseInt(n, 10));
+      if (!tag || !monat || !jahr) { sichtbarAnzahl++; return; } // im Zweifel anzeigen
+      const start = new Date(jahr, monat - 1, tag, std || 0, min || 0);
+      const dauerText = btn.dataset.dauer || '';
+      const dauerZahlen = (dauerText.match(/\d+/g) || []).map(Number);
+      const dauerMax = dauerZahlen.length ? Math.max(...dauerZahlen) : 0;
+      const dauerMinuten = /std/i.test(dauerText) ? dauerMax * 60 : dauerMax;
+      const ende = new Date(start.getTime() + (dauerMinuten + 60) * 60000); // + 1 Std. Puffer
+      if (ende < jetzt) {
+        tr.style.display = 'none';
+      } else {
+        sichtbarAnzahl++;
+      }
+    });
+    const leerHinweis = document.getElementById('tr-keine-termine');
+    if (leerHinweis) leerHinweis.style.display = sichtbarAnzahl === 0 ? '' : 'none';
+  })();
 
   /* ── Zeilen-Klick → Modal öffnen ── */
   document.querySelectorAll('.termine-table tbody tr[data-href]').forEach(tr => {
