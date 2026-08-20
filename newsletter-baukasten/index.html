@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Newsletter-Baukasten – Mag. Gerlinde Pramer (intern)</title>
+<style>
+  :root{
+    --cream:#FAF7F2;
+    --cream-deep:#F2EDE3;
+    --surface:#FFFFFF;
+    --ink:#1A3A6B;
+    --ink-soft:#3A4F6E;
+    --ink-muted:#6A7A94;
+    --line:#E5DED1;
+    --gold:#B89968;
+    --gold-soft:#E7DCC6;
+    --blue-deep:#2B5A8C;
+    --radius:8px;
+    --radius-lg:14px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--cream-deep);font-family:'Outfit',Arial,Helvetica,sans-serif;color:var(--ink-soft);}
+  a{color:var(--blue-deep);}
+
+  .page-header{
+    background:var(--ink);
+    color:var(--cream);
+    padding:28px clamp(1.25rem,4vw,3rem);
+  }
+  .page-header h1{
+    margin:0 0 6px;
+    font-size:22px;
+    font-weight:600;
+    color:var(--surface);
+  }
+  .page-header p{
+    margin:0;
+    font-size:14px;
+    color:var(--gold-soft);
+  }
+
+  .layout{
+    display:grid;
+    grid-template-columns: minmax(340px, 460px) 1fr;
+    gap:32px;
+    padding: 28px clamp(1.25rem,4vw,3rem) 80px;
+    align-items:start;
+  }
+  @media (max-width: 980px){
+    .layout{grid-template-columns:1fr;}
+  }
+
+  .panel{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    padding:24px;
+    margin-bottom:20px;
+    box-shadow:0 1px 2px rgba(26,58,107,.05), 0 8px 20px rgba(26,58,107,.05);
+  }
+  .panel h2{
+    margin:0 0 4px;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  .panel .panel-sub{
+    margin:0 0 16px;
+    font-size:13px;
+    color:var(--ink-muted);
+  }
+
+  .field{margin-bottom:14px;}
+  .field label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink);
+    margin-bottom:5px;
+  }
+  .field .hint{
+    display:block;
+    font-size:12px;
+    color:var(--ink-muted);
+    margin-top:4px;
+  }
+  .field input[type=text],
+  .field input[type=url],
+  .field textarea,
+  .field select{
+    width:100%;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    font-family:inherit;
+    font-size:14px;
+    color:var(--ink);
+    background:var(--cream);
+  }
+  .field textarea{resize:vertical;min-height:64px;}
+  .field input:focus,.field textarea:focus,.field select:focus{
+    outline:2px solid var(--gold);
+    outline-offset:1px;
+    background:var(--surface);
+  }
+
+  .toggle-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    cursor:pointer;
+    user-select:none;
+  }
+  .toggle-row h2{margin:0;}
+  .switch{
+    position:relative;
+    width:42px;
+    height:24px;
+    background:var(--line);
+    border-radius:12px;
+    flex:0 0 auto;
+    transition:background .15s ease;
+  }
+  .switch::after{
+    content:"";
+    position:absolute;
+    top:2px;left:2px;
+    width:20px;height:20px;
+    background:var(--surface);
+    border-radius:50%;
+    transition:transform .15s ease;
+    box-shadow:0 1px 2px rgba(0,0,0,.25);
+  }
+  .switch.on{background:var(--gold);}
+  .switch.on::after{transform:translateX(18px);}
+  .module-body{margin-top:16px;}
+  .module-body.hidden{display:none;}
+
+  .radio-group{display:flex;flex-direction:column;gap:8px;}
+  .radio-option{
+    display:flex;
+    gap:8px;
+    align-items:flex-start;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    cursor:pointer;
+    background:var(--cream);
+  }
+  .radio-option.selected{border-color:var(--gold);background:var(--cream-deep);}
+  .radio-option input{margin-top:3px;}
+  .radio-option .opt-title{font-weight:600;color:var(--ink);font-size:13.5px;}
+  .radio-option .opt-desc{font-size:12.5px;color:var(--ink-muted);margin-top:2px;}
+
+  .preview-col{position:sticky; top:20px;}
+  .copy-bar{
+    background:var(--ink);
+    border-radius:var(--radius-lg);
+    padding:18px 22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:18px;
+    flex-wrap:wrap;
+  }
+  .copy-bar p{margin:0;color:var(--cream);font-size:13.5px;}
+  .copy-btn{
+    background:var(--gold);
+    color:var(--ink);
+    border:none;
+    padding:13px 26px;
+    border-radius:6px;
+    font-size:14.5px;
+    font-weight:600;
+    letter-spacing:.02em;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .copy-btn:hover{background:#c7ab7d;}
+  .copy-status{
+    font-size:13px;
+    font-weight:600;
+    margin-left:10px;
+  }
+  .copy-status.ok{color:#7fd18c;}
+  .copy-status.err{color:#e2a1a1;}
+
+  .preview-frame{
+    background:#d8d2c4;
+    border-radius:var(--radius-lg);
+    padding:22px 4px;
+    display:flex;
+    justify-content:center;
+    max-height:calc(100vh - 160px);
+    overflow-y:auto;
+  }
+
+  .howto{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    padding:22px 24px;
+    margin-top:20px;
+  }
+  .howto h2{
+    margin:0 0 12px;
+    font-size:15px;
+    color:var(--ink);
+  }
+  .howto ol{margin:0;padding-left:20px;}
+  .howto li{margin-bottom:8px;font-size:14px;line-height:1.55;}
+  .howto .note{
+    margin-top:14px;
+    padding:12px 14px;
+    background:var(--cream-deep);
+    border-left:3px solid var(--gold);
+    border-radius:4px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Newsletter-Baukasten</h1>
+  <p>Interner Bereich · Mag. Gerlinde Pramer · nicht für die Öffentlichkeit bestimmt</p>
+</div>
+
+<div class="layout">
+
+  <!-- ===================== FORM COLUMN ===================== -->
+  <div class="form-col">
+
+    <div class="panel">
+      <h2>Kategorie-Label</h2>
+      <p class="panel-sub">Kleines Wort über der Überschrift, z. B. NEWSLETTER, EINLADUNG oder TERMIN-UPDATE.</p>
+      <div class="field">
+        <input type="text" id="f-kicker" value="EINLADUNG" maxlength="40" />
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Überschrift &amp; Einleitung</h2>
+      <p class="panel-sub">Der wichtigste Teil – kurz und einladend.</p>
+      <div class="field">
+        <label for="f-headline">Überschrift</label>
+        <input type="text" id="f-headline" value="Sie sind herzlich eingeladen" maxlength="80" />
+      </div>
+      <div class="field">
+        <label for="f-intro">Einleitungstext</label>
+        <textarea id="f-intro" rows="4">Ich freue mich, Sie zu unserem nächsten Abend einzuladen. Es erwartet Sie ein Raum für echte Gespräche, neue Impulse und wertvolle Begegnungen.</textarea>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-termin">
+      <div class="toggle-row" data-toggle="termin">
+        <h2>Termin-Box</h2>
+        <div class="switch on" id="switch-termin"></div>
+      </div>
+      <p class="panel-sub">Ort, Datum und Zeiten hervorgehoben darstellen.</p>
+      <div class="module-body" id="body-termin">
+        <div class="field">
+          <label for="f-termin-titel">Ort &amp; Datum</label>
+          <input type="text" id="f-termin-titel" value="Wien · Mittwoch, 14. Oktober 2026" />
+        </div>
+        <div class="field">
+          <label for="f-termin-zeiten">Zeiten (eine pro Zeile)</label>
+          <textarea id="f-termin-zeiten" rows="3">Ankommen ab 18:15 Uhr
+Beginn 18:30 Uhr
+Ende ca. 20:30 Uhr</textarea>
+        </div>
+        <div class="field">
+          <label for="f-termin-hinweis">Zusatzhinweis (optional)</label>
+          <input type="text" id="f-termin-hinweis" value="Die genaue Location erhalten Sie ca. eine Woche vorher per E-Mail." />
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-zusatztext">
+      <div class="toggle-row" data-toggle="zusatztext">
+        <h2>Zusätzlicher Absatz</h2>
+        <div class="switch" id="switch-zusatztext"></div>
+      </div>
+      <p class="panel-sub">Ein zweiter Textblock, z. B. „Was Sie erwartet".</p>
+      <div class="module-body hidden" id="body-zusatztext">
+        <div class="field">
+          <label for="f-zusatz-titel">Zwischenüberschrift (optional)</label>
+          <input type="text" id="f-zusatz-titel" value="Was Sie erwartet" />
+        </div>
+        <div class="field">
+          <label for="f-zusatz-text">Text</label>
+          <textarea id="f-zusatz-text" rows="4">Ein Abend in kleiner Runde – Raum für echte Gespräche, Impulse und stille Reflexion.</textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-bild">
+      <div class="toggle-row" data-toggle="bild">
+        <h2>Bild</h2>
+        <div class="switch" id="switch-bild"></div>
+      </div>
+      <p class="panel-sub">Bild muss bereits online sein (z. B. schon auf pramer.com verwendet). Kein Upload hier möglich.</p>
+      <div class="module-body hidden" id="body-bild">
+        <div class="field">
+          <label for="f-bild-url">Bild-URL</label>
+          <input type="url" id="f-bild-url" placeholder="https://www.pramer.com/img/…" />
+          <span class="hint">Tipp: Rechtsklick auf ein Bild auf pramer.com → „Bildadresse kopieren". Oder Matthias fragen, ein neues Bild hochzuladen.</span>
+        </div>
+        <div class="field">
+          <label for="f-bild-alt">Alt-Text (Bildbeschreibung)</label>
+          <input type="text" id="f-bild-alt" placeholder="z. B. Mag. Gerlinde Pramer beim Anahata Business Circle" />
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-button">
+      <div class="toggle-row" data-toggle="button">
+        <h2>Button (Call-to-Action)</h2>
+        <div class="switch on" id="switch-button"></div>
+      </div>
+      <p class="panel-sub">Der Klick-Button, z. B. zur Anmeldung.</p>
+      <div class="module-body" id="body-button">
+        <div class="field">
+          <label for="f-btn-text">Button-Text</label>
+          <input type="text" id="f-btn-text" value="Jetzt anmelden" />
+        </div>
+        <div class="field">
+          <label for="f-btn-link">Ziel-Link</label>
+          <input type="url" id="f-btn-link" value="https://abc.pramer.com" />
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Abschlusstext</h2>
+      <p class="panel-sub">Letzter Satz vor dem Footer, z. B. Kontakthinweis.</p>
+      <div class="field">
+        <textarea id="f-closing" rows="3">Bei Fragen schreiben Sie mir jederzeit: office@pramer.com</textarea>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Footer</h2>
+      <p class="panel-sub">Wählen Sie je nach Empfängerkreis.</p>
+      <div class="radio-group" id="footer-radio">
+        <label class="radio-option selected" data-value="kurz">
+          <input type="radio" name="footer" value="kurz" checked />
+          <span>
+            <span class="opt-title">Kurzer Footer</span>
+            <span class="opt-desc">Für kleine, bereits bekannte Kontaktgruppen. Name, Website, Telefon.</span>
+          </span>
+        </label>
+        <label class="radio-option" data-value="lang">
+          <input type="radio" name="footer" value="lang" />
+          <span>
+            <span class="opt-title">Footer mit Abmeldehinweis</span>
+            <span class="opt-desc">Zusätzlich ein Hinweis zum Abmelden per Antwort-Mail und ein Link zum Impressum. Empfohlen bei größeren Verteilern.</span>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <div class="howto">
+      <h2>So geht's</h2>
+      <ol>
+        <li>Felder links ausfüllen – die Vorschau rechts aktualisiert sich sofort.</li>
+        <li>Rechts auf <strong>„Ganze E-Mail kopieren"</strong> klicken.</li>
+        <li>In Outlook eine neue Nachricht öffnen, in das Textfeld klicken.</li>
+        <li>Mit <strong>Cmd + V</strong> (Mac) bzw. <strong>Strg + V</strong> (Windows) einfügen.</li>
+        <li>Betreff, Empfänger prüfen, ggf. Text noch direkt in Outlook feinjustieren, dann senden.</li>
+      </ol>
+      <div class="note">
+        Hinweis: Web-Schriften und feine mobile Anpassungen werden beim Einfügen in Outlook nicht immer übernommen – das Layout bleibt aber stabil und markenkonform (Navy/Gold, Tabellen-Aufbau). Vor größeren Aussendungen: kurz eine Test-Mail an dich selbst schicken und auf Handy und Desktop prüfen.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===================== PREVIEW COLUMN ===================== -->
+  <div class="preview-col">
+    <div class="copy-bar">
+      <p>Vorschau entspricht 1:1 dem, was kopiert wird.</p>
+      <div style="display:flex;align-items:center;">
+        <button class="copy-btn" id="copy-btn">Ganze E-Mail kopieren</button>
+        <span class="copy-status" id="copy-status"></span>
+      </div>
+    </div>
+    <div class="preview-frame">
+      <div id="email-copy-target"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+
+  var COLORS = {
+    ink: '#1A3A6B',
+    inkSoft: '#3A4F6E',
+    inkMuted: '#6A7A94',
+    cream: '#FAF7F2',
+    creamDeep: '#F2EDE3',
+    surface: '#FFFFFF',
+    gold: '#B89968',
+    goldSoft: '#E7DCC6',
+    line: '#E5DED1',
+    blueDeep: '#2B5A8C'
+  };
+
+  var LOGO_WHITE_URL = 'https://www.pramer.com/img/newsletter/logo-signatur-3-white.png';
+  var FONT = "'Outfit',Arial,Helvetica,sans-serif";
+
+  function esc(str){
+    var div = document.createElement('div');
+    div.innerText = str == null ? '' : str;
+    return div.innerHTML;
+  }
+  function escAttr(str){
+    return esc(str).replace(/"/g,'&quot;');
+  }
+  function nl2br(str){
+    return esc(str).split('\n').map(function(s){return s;}).join('<br>');
+  }
+
+  function getToggle(name){
+    return document.getElementById('switch-' + name).classList.contains('on');
+  }
+
+  function val(id){
+    var el = document.getElementById(id);
+    return el ? el.value : '';
+  }
+
+  // ---------- Module renderers (fully inline-styled, Outlook-safe) ----------
+
+  function renderHeader(){
+    return ''
+    + '<tr>'
+    + '<td align="center" bgcolor="' + COLORS.ink + '" style="padding:40px 40px 34px;border-radius:10px 10px 0 0;text-align:center;background-color:' + COLORS.ink + ';">'
+    + '<img src="' + LOGO_WHITE_URL + '" width="200" height="59" alt="Gerlinde Pramer" style="display:block;margin:0 auto;width:200px;height:59px;border:0;outline:none;text-decoration:none;" />'
+    + '</td>'
+    + '</tr>'
+    + '<tr><td bgcolor="' + COLORS.gold + '" height="3" style="height:3px;line-height:3px;font-size:3px;background-color:' + COLORS.gold + ';">&nbsp;</td></tr>';
+  }
+
+  function renderHeadline(headline){
+    return '<h1 style="margin:0 0 24px;font-family:' + FONT + ';font-size:28px;font-weight:600;line-height:1.28;color:' + COLORS.ink + ';">' + nl2br(headline) + '</h1>';
+  }
+
+  function renderIntro(intro){
+    if (!intro || !intro.trim()) return '';
+    return '<p style="margin:0 0 32px;font-family:' + FONT + ';font-size:16px;line-height:1.7;color:' + COLORS.inkSoft + ';">' + nl2br(intro) + '</p>';
+  }
+
+  function renderTerminBox(titel, zeiten, hinweis){
+    var zeitenHtml = zeiten && zeiten.trim()
+      ? '<p style="margin:0 0 14px;font-family:' + FONT + ';font-size:15px;color:' + COLORS.inkSoft + ';line-height:1.8;">' + nl2br(zeiten) + '</p>'
+      : '';
+    var hinweisHtml = hinweis && hinweis.trim()
+      ? '<p style="margin:0;font-family:' + FONT + ';font-size:14px;font-weight:500;color:' + COLORS.gold + ';line-height:1.5;">' + esc(hinweis) + '</p>'
+      : '';
+    return ''
+    + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 32px;">'
+    + '<tr><td bgcolor="' + COLORS.cream + '" style="padding:22px 26px;border-radius:8px;border-left:4px solid ' + COLORS.gold + ';background-color:' + COLORS.cream + ';">'
+    + '<p style="margin:0 0 10px;font-family:' + FONT + ';font-size:10px;font-weight:600;letter-spacing:0.18em;color:' + COLORS.gold + ';text-transform:uppercase;">IHR TERMIN</p>'
+    + '<p style="margin:0 0 14px;font-family:' + FONT + ';font-size:19px;font-weight:600;color:' + COLORS.ink + ';line-height:1.3;">' + esc(titel) + '</p>'
+    + zeitenHtml
+    + hinweisHtml
+    + '</td></tr></table>';
+  }
+
+  function renderDivider(){
+    return '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 28px;"><tr><td height="1" style="height:1px;background-color:' + COLORS.goldSoft + ';line-height:1px;font-size:1px;">&nbsp;</td></tr></table>';
+  }
+
+  function renderZusatztext(titel, text){
+    if (!text || !text.trim()) return '';
+    var titelHtml = titel && titel.trim()
+      ? '<p style="margin:0 0 12px;font-family:' + FONT + ';font-size:13px;font-weight:600;letter-spacing:0.1em;color:' + COLORS.ink + ';text-transform:uppercase;line-height:1;">' + esc(titel) + '</p>'
+      : '';
+    return '<div style="margin:0 0 28px;">' + titelHtml + '<p style="margin:0;font-family:' + FONT + ';font-size:15px;line-height:1.7;color:' + COLORS.inkSoft + ';">' + nl2br(text) + '</p></div>';
+  }
+
+  function renderBild(url, alt){
+    if (!url || !url.trim()) return '';
+    return ''
+    + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 28px;">'
+    + '<tr><td>'
+    + '<img src="' + escAttr(url) + '" alt="' + escAttr(alt || '') + '" width="504" style="display:block;width:100%;max-width:504px;height:auto;border-radius:8px;border:0;outline:none;text-decoration:none;" />'
+    + '</td></tr></table>';
+  }
+
+  function renderButton(text, link){
+    if (!text || !text.trim() || !link || !link.trim()) return '';
+    var safeLink = escAttr(link);
+    var safeText = esc(text);
+    return ''
+    + '<!--[if mso]>'
+    + '<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="' + safeLink + '" style="height:50px;v-text-anchor:middle;width:240px;" arcsize="12%" stroke="f" fillcolor="' + COLORS.ink + '">'
+    + '<w:anchorlock/><center style="color:' + COLORS.cream + ';font-family:Arial,sans-serif;font-size:15px;font-weight:600;">' + safeText + '</center>'
+    + '</v:roundrect>'
+    + '<![endif]-->'
+    + '<!--[if !mso]><!-->'
+    + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 32px;">'
+    + '<tr><td bgcolor="' + COLORS.ink + '" style="border-radius:6px;background-color:' + COLORS.ink + ';">'
+    + '<a href="' + safeLink + '" target="_blank" style="display:inline-block;padding:15px 38px;font-family:' + FONT + ';font-size:15px;font-weight:500;letter-spacing:0.03em;color:' + COLORS.cream + ';text-decoration:none;border-radius:6px;mso-padding-alt:15px 38px;">' + safeText + '</a>'
+    + '</td></tr></table>'
+    + '<!--<![endif]-->';
+  }
+
+  function renderClosing(text){
+    if (!text || !text.trim()) return '';
+    return '<p style="margin:0;font-family:' + FONT + ';font-size:15px;line-height:1.7;color:' + COLORS.inkSoft + ';">' + nl2br(text) + '</p>';
+  }
+
+  function renderFooter(variant){
+    var base = ''
+    + '<p style="margin:0 0 6px;font-family:' + FONT + ';font-size:12px;line-height:1.6;color:' + COLORS.inkMuted + ';">MAG. GERLINDE PRAMER</p>'
+    + '<p style="margin:0;font-family:' + FONT + ';font-size:12px;line-height:1.6;">'
+    + '<a href="https://www.pramer.com" style="color:' + COLORS.blueDeep + ';text-decoration:none;">www.pramer.com</a>'
+    + '&nbsp;&middot;&nbsp;'
+    + '<a href="tel:+436641139600" style="color:' + COLORS.blueDeep + ';text-decoration:none;">+43 (0) 664 / 11 39 600</a>'
+    + '</p>';
+
+    if (variant === 'lang'){
+      base += ''
+      + '<p style="margin:14px 0 0;font-family:' + FONT + ';font-size:11.5px;line-height:1.6;color:' + COLORS.inkMuted + ';">'
+      + 'Sie erhalten diese Nachricht, weil Sie mit Mag. Gerlinde Pramer in Kontakt stehen. Kein Interesse mehr? Einfach mit „Abmelden" antworten.'
+      + '&nbsp;&middot;&nbsp;'
+      + '<a href="https://www.pramer.com/impressum.html" style="color:' + COLORS.blueDeep + ';text-decoration:underline;">Impressum</a>'
+      + '</p>';
+    }
+
+    return ''
+    + '<tr><td style="padding:26px 0 6px;text-align:center;">' + base + '</td></tr>';
+  }
+
+  // ---------- Assemble full email ----------
+
+  function assembleEmail(state){
+    var bodyParts = [];
+    bodyParts.push('<p style="margin:0 0 18px;font-family:' + FONT + ';font-size:10px;font-weight:600;letter-spacing:0.2em;color:' + COLORS.gold + ';text-transform:uppercase;line-height:1;">' + esc(state.kicker) + '</p>');
+    bodyParts.push(renderHeadline(state.headline));
+    bodyParts.push(renderIntro(state.intro));
+    if (state.terminOn) bodyParts.push(renderTerminBox(state.terminTitel, state.terminZeiten, state.terminHinweis));
+    if (state.zusatzOn) bodyParts.push(renderZusatztext(state.zusatzTitel, state.zusatzText));
+    if (state.bildOn) bodyParts.push(renderBild(state.bildUrl, state.bildAlt));
+    if (state.buttonOn) bodyParts.push(renderButton(state.btnText, state.btnLink));
+    if (state.closing && state.closing.trim()){
+      bodyParts.push(renderDivider());
+      bodyParts.push(renderClosing(state.closing));
+    }
+
+    var html = ''
+    + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:' + COLORS.creamDeep + ';">'
+    + '<tr><td align="center" style="padding:36px 16px 44px;">'
+    + '<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">'
+    + renderHeader()
+    + '<tr><td bgcolor="' + COLORS.surface + '" style="padding:46px 44px 40px;background-color:' + COLORS.surface + ';border-radius:0 0 10px 10px;">'
+    + bodyParts.join('')
+    + '</td></tr>'
+    + renderFooter(state.footerVariant)
+    + '</table>'
+    + '</td></tr>'
+    + '</table>';
+
+    return html;
+  }
+
+  // ---------- State + render ----------
+
+  function collectState(){
+    return {
+      kicker: val('f-kicker'),
+      headline: val('f-headline'),
+      intro: val('f-intro'),
+      terminOn: getToggle('termin'),
+      terminTitel: val('f-termin-titel'),
+      terminZeiten: val('f-termin-zeiten'),
+      terminHinweis: val('f-termin-hinweis'),
+      zusatzOn: getToggle('zusatztext'),
+      zusatzTitel: val('f-zusatz-titel'),
+      zusatzText: val('f-zusatz-text'),
+      bildOn: getToggle('bild'),
+      bildUrl: val('f-bild-url'),
+      bildAlt: val('f-bild-alt'),
+      buttonOn: getToggle('button'),
+      btnText: val('f-btn-text'),
+      btnLink: val('f-btn-link'),
+      closing: val('f-closing'),
+      footerVariant: document.querySelector('input[name=footer]:checked').value
+    };
+  }
+
+  function render(){
+    var state = collectState();
+    var html = assembleEmail(state);
+    document.getElementById('email-copy-target').innerHTML = html;
+  }
+
+  // ---------- Toggle wiring ----------
+
+  document.querySelectorAll('[data-toggle]').forEach(function(row){
+    row.addEventListener('click', function(){
+      var name = row.getAttribute('data-toggle');
+      var sw = document.getElementById('switch-' + name);
+      var body = document.getElementById('body-' + name);
+      sw.classList.toggle('on');
+      if (body) body.classList.toggle('hidden', !sw.classList.contains('on'));
+      render();
+    });
+  });
+
+  document.querySelectorAll('#footer-radio .radio-option').forEach(function(opt){
+    opt.addEventListener('click', function(){
+      document.querySelectorAll('#footer-radio .radio-option').forEach(function(o){ o.classList.remove('selected'); });
+      opt.classList.add('selected');
+      opt.querySelector('input').checked = true;
+      render();
+    });
+  });
+
+  document.querySelectorAll('input[type=text], input[type=url], textarea').forEach(function(el){
+    el.addEventListener('input', render);
+  });
+
+  // ---------- Copy to clipboard ----------
+
+  function flashStatus(msg, ok){
+    var el = document.getElementById('copy-status');
+    el.textContent = msg;
+    el.className = 'copy-status ' + (ok ? 'ok' : 'err');
+    setTimeout(function(){ el.textContent=''; el.className='copy-status'; }, 4000);
+  }
+
+  function copyEmail(){
+    var target = document.getElementById('email-copy-target');
+    var html = target.innerHTML;
+    var plain = target.innerText;
+
+    if (navigator.clipboard && window.ClipboardItem){
+      try {
+        var item = new ClipboardItem({
+          'text/html': new Blob([html], {type:'text/html'}),
+          'text/plain': new Blob([plain], {type:'text/plain'})
+        });
+        navigator.clipboard.write([item]).then(function(){
+          flashStatus('In die Zwischenablage kopiert ✓', true);
+        }).catch(function(){
+          fallbackCopy(target);
+        });
+        return;
+      } catch(e){
+        fallbackCopy(target);
+        return;
+      }
+    }
+    fallbackCopy(target);
+  }
+
+  function fallbackCopy(target){
+    try {
+      var range = document.createRange();
+      range.selectNodeContents(target);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      var ok = document.execCommand('copy');
+      sel.removeAllRanges();
+      flashStatus(ok ? 'In die Zwischenablage kopiert ✓' : 'Kopieren fehlgeschlagen – bitte Vorschau manuell markieren und kopieren.', ok);
+    } catch(e){
+      flashStatus('Kopieren fehlgeschlagen – bitte Vorschau manuell markieren und kopieren.', false);
+    }
+  }
+
+  document.getElementById('copy-btn').addEventListener('click', copyEmail);
+
+  render();
+})();
+</script>
+
+</body>
+</html>

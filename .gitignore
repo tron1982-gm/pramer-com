@@ -11,3 +11,9 @@ mockup.html
 # Backup-Kopien (z.B. "termine index Kopie.html")
 *Kopie*.html
 * Kopie*.html
+
+# Zugangsschutz Newsletter-Baukasten – NIE ins oeffentliche Repo
+newsletter-baukasten/.htaccess
+newsletter-baukasten/.htpasswd
+newsletter-baukasten/htaccess-newsletter-baukasten.txt
+newsletter-baukasten/htpasswd-newsletter-baukasten.txt
