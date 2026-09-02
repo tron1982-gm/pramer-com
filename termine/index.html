@@ -390,6 +390,8 @@
       color: var(--gold);
     }
     .col-anmelden { text-align: right; white-space: nowrap; }
+    .ort-sub { display: block; font-size: 0.78rem; font-weight: 400; color: var(--ink-muted); margin-top: 2px; }
+    .termine-table tbody tr:hover .ort-sub { color: rgba(255,255,255,0.85); }
 
     /* ── ANMELDE-MODAL ── */
     .modal-overlay {
@@ -729,11 +731,11 @@
           </tr>
           <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Mo, 21.9.2026</td>
-            <td>Linz</td>
+            <td>Linz<span class="ort-sub">Apotheke am Berg</span></td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
             <td class="col-dauer">ca. 2 Std.</td>
-            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Mo, 21.9.2026" data-ort="Linz" data-uhrzeit="18:30" data-format="Anahata Business Circle" data-dauer="ca. 2 Std.">Anmelden</button></td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Mo, 21.9.2026" data-ort="Linz" data-uhrzeit="18:30" data-format="Anahata Business Circle" data-dauer="ca. 2 Std." data-adresse="Apotheke am Berg, Hohe Straße 199, 4040 Gramastetten">Anmelden</button></td>
           </tr>
           <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 22.9.2026</td>
@@ -753,11 +755,11 @@
           </tr>
           <tr class="tr-abc" data-href="https://abc.pramer.com">
             <td>Mi, 23.9.2026</td>
-            <td>Graz</td>
+            <td>Graz<span class="ort-sub">Das Eggenberg</span></td>
             <td>18:30</td>
             <td><span class="badge badge--abc">Anahata Business Circle</span></td>
             <td class="col-dauer">ca. 2 Std.</td>
-            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Mi, 23.9.2026" data-ort="Graz" data-uhrzeit="18:30" data-format="Anahata Business Circle" data-dauer="ca. 2 Std.">Anmelden</button></td>
+            <td class="col-anmelden"><button class="btn-anmelden" data-datum="Mi, 23.9.2026" data-ort="Graz" data-uhrzeit="18:30" data-format="Anahata Business Circle" data-dauer="ca. 2 Std." data-adresse="Das Eggenberg, Eggenberger Allee 49, 8020 Graz">Anmelden</button></td>
           </tr>
           <tr class="tr-online" data-href="../online-sessions/">
             <td>Di, 13.10.2026</td>
@@ -1099,7 +1101,8 @@
         ort:     btn.dataset.ort,
         uhrzeit: btn.dataset.uhrzeit,
         format:  btn.dataset.format,
-        dauer:   btn.dataset.dauer
+        dauer:   btn.dataset.dauer,
+        adresse: btn.dataset.adresse
       });
     });
   });
@@ -1114,7 +1117,12 @@
 
   function openModal(data) {
     currentTermin = data;
-    infoEl.textContent = data.datum + ' · ' + data.ort + ' · ' + data.uhrzeit + ' Uhr · ' + data.format + ' (' + data.dauer + ')';
+    var infoText = data.datum + ' · ' + data.ort + ' · ' + data.uhrzeit + ' Uhr · ' + data.format + ' (' + data.dauer + ')';
+    if (data.adresse) {
+      infoEl.innerHTML = infoText + '<br><span style="color:var(--gold)">' + data.adresse + '</span>';
+    } else {
+      infoEl.textContent = infoText;
+    }
     // Felder leeren
     ['m-anrede','m-titel','m-vorname','m-nachname','m-email','m-telefon','m-unternehmen','m-position','m-uid','m-jahrgang'].forEach(id => {
       const el = document.getElementById(id);
@@ -1143,7 +1151,8 @@
         ort:     btn.dataset.ort,
         uhrzeit: btn.dataset.uhrzeit,
         format:  btn.dataset.format,
-        dauer:   btn.dataset.dauer
+        dauer:   btn.dataset.dauer,
+        adresse: btn.dataset.adresse
       });
     });
   });
@@ -1241,7 +1250,7 @@
       '─────────────────────────────',
       'Format:   ' + currentTermin.format,
       'Datum:    ' + currentTermin.datum,
-      'Ort:      ' + currentTermin.ort,
+      'Ort:      ' + currentTermin.ort + (currentTermin.adresse ? ' – ' + currentTermin.adresse : ''),
       'Uhrzeit:  ' + currentTermin.uhrzeit + ' Uhr',
       'Dauer:    ' + currentTermin.dauer,
       '',
