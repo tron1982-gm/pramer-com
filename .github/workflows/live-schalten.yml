@@ -43,7 +43,8 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
+          protocol: ftps
+          security: loose
           local-dir: ./_live/
           server-dir: /pramercom/
           state-name: .ftp-deploy-sync-state.json
