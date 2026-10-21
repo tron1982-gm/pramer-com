@@ -1,0 +1,55 @@
+# Website live schalten – pramer.com
+# Startet NUR per Knopfdruck: GitHub → Actions → „Website live schalten" → „Run workflow".
+# Lädt den aktuellen Stand von main per FTP auf den easyname-Server (/pramercom).
+# Zugangsdaten liegen als Repository-Secrets: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD.
+
+name: Website live schalten
+
+on:
+  workflow_dispatch:
+    inputs:
+      testlauf:
+        description: "Nur Testlauf (zeigt an, was hochgeladen würde – lädt nichts hoch)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: live-schalten
+  cancel-in-progress: false
+
+jobs:
+  live:
+    name: pramer.com live schalten
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Aktuellen Stand holen
+        uses: actions/checkout@v4
+
+      - name: Dateien für den Live-Server zusammenstellen
+        run: |
+          # Gleiche Auswahl wie bisher im Skript deploy-pramer-com.py
+          DATEIEN="index.html datenschutz.html impressum.html robots.txt sitemap.xml llms.txt"
+          ORDNER="img ueber-mich angebote online-sessions termine kontakt coaching keynote 1-1-begleitung anahata-business-circle newsletter-baukasten newsletter-baukasten-vorschau"
+          mkdir -p _live
+          for f in $DATEIEN; do [ -f "$f" ] && cp "$f" _live/; done
+          for d in $ORDNER; do [ -d "$d" ] && cp -R "$d" _live/; done
+          find _live \( -name '.DS_Store' -o -name '*.bak' -o -name '*.md' -o -name '*.py' -o -name '*.sh' \) -delete
+          echo "Dateien für den Upload:"; find _live -type f | wc -l
+
+      - name: Per FTP hochladen
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          local-dir: ./_live/
+          server-dir: /pramercom/
+          state-name: .ftp-deploy-sync-state.json
+          dry-run: ${{ inputs.testlauf }}
+          log-level: standard
+
+      - name: Fertig
+        if: ${{ !inputs.testlauf }}
+        run: echo "✅ pramer.com ist aktualisiert – bitte https://pramer.com kurz ansehen (ggf. Seite neu laden)."
