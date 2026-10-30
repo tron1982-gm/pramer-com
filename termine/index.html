@@ -992,7 +992,7 @@
       <button class="modal-close" id="modal-close-btn" aria-label="Schließen">×</button>
     </div>
     <div class="modal-body">
-      <div class="modal-note">
+      <div class="modal-note" id="modal-note">
         Füllen Sie bitte die Felder aus und klicken Sie auf <strong>„E-Mail öffnen"</strong>. Ihr E-Mail-Programm öffnet sich automatisch mit allen Angaben – bitte senden Sie die Nachricht direkt ab.
       </div>
       <form id="anmelde-form" novalidate>
@@ -1054,10 +1054,11 @@
         </div>
 
         <div class="modal-actions">
-          <button type="submit" class="modal-submit">E-Mail öffnen →</button>
+          <button type="submit" class="modal-submit" id="modal-submit-btn">E-Mail öffnen →</button>
           <button type="button" class="modal-cancel" id="modal-cancel-btn">Abbrechen</button>
         </div>
-        <p class="modal-hint">Ihre E-Mail-App öffnet sich mit allen Angaben vorausgefüllt. Bitte prüfen und absenden.</p>
+        <p class="modal-hint" id="modal-msg" style="display:none;"></p>
+        <p class="modal-hint" id="modal-hint">Ihre E-Mail-App öffnet sich mit allen Angaben vorausgefüllt. Bitte prüfen und absenden.</p>
       </form>
     </div>
   </div>
@@ -1149,9 +1150,97 @@
       const el = document.getElementById(id);
       if (el) el.value = '';
     });
+    document.getElementById('modal-cancel-btn').textContent = 'Abbrechen';
+    setModalMode(isOnlineSession(data));
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
     setTimeout(() => document.getElementById('m-anrede').focus(), 50);
+  }
+
+  /* ── Online Sessions: Anmeldung direkt an ActiveCampaign (Form 21) ── */
+  const MAIL_NOTE  = document.getElementById('modal-note').innerHTML;
+  const MAIL_HINT  = document.getElementById('modal-hint').textContent;
+  const submitBtn  = document.getElementById('modal-submit-btn');
+  const modalMsg   = document.getElementById('modal-msg');
+  const modalHint  = document.getElementById('modal-hint');
+
+  function isOnlineSession(data) {
+    return !!data && /online session/i.test(data.format || '');
+  }
+
+  function setModalMode(online) {
+    form.querySelectorAll('input, select, button').forEach(el => el.disabled = false);
+    modalMsg.style.display = 'none';
+    modalMsg.textContent = '';
+    modalMsg.style.color = '';
+    if (online) {
+      document.getElementById('modal-note').innerHTML = 'Füllen Sie bitte die Felder aus und klicken Sie auf <strong>„Verbindlich anmelden"</strong>. Sie erhalten in wenigen Minuten eine Bestätigung per E-Mail. Den Teilnahmelink senden wir Ihnen kurz vor der Session.';
+      submitBtn.textContent = 'Verbindlich anmelden';
+      modalHint.textContent = 'Kostenlos. Ihre Angaben werden nur zur Organisation der Session verwendet.';
+    } else {
+      document.getElementById('modal-note').innerHTML = MAIL_NOTE;
+      submitBtn.textContent = 'E-Mail öffnen →';
+      modalHint.textContent = MAIL_HINT;
+    }
+  }
+
+  function terminLang(datum) {
+    const tage = { 'Mo':'Montag','Di':'Dienstag','Mi':'Mittwoch','Do':'Donnerstag','Fr':'Freitag','Sa':'Samstag','So':'Sonntag' };
+    const m = String(datum || '').match(/^(\w{2}),\s*(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+    if (!m) return String(datum || '');
+    return (tage[m[1]] || m[1]) + ', ' + m[2].padStart(2, '0') + '.' + m[3].padStart(2, '0') + '.' + m[4];
+  }
+
+  function submitOnlineSession(v) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Wird übermittelt …';
+
+    const fields = {
+      'u': '21', 'f': '21', 's': '', 'c': '0', 'm': '0', 'act': 'sub', 'v': '2',
+      'or': 'cc04b7f3-c859-4432-a8b3-6a0e8cf7c9e7',
+      'field[19]': terminLang(currentTermin.datum),
+      'field[6]': v.anrede,
+      'field[13]': v.titel,
+      'firstname': v.vorname,
+      'lastname': v.nachname,
+      'email': v.email,
+      'phone': v.telefon,
+      'field[14]': v.unternehmen,
+      'field[15]': v.position,
+      'field[16]': v.uid,
+      'field[17]': v.jahrgang
+    };
+    const parts = Object.keys(fields).map(k => k + '=' + encodeURIComponent(fields[k]));
+
+    // AC antwortet per JSONP über globale Callbacks – Newsletter-Callbacks kurz zwischenspeichern
+    const origOk  = window._show_thank_you;
+    const origErr = window._show_error;
+    function restore() { window._show_thank_you = origOk; window._show_error = origErr; }
+
+    window._show_thank_you = function() {
+      restore();
+      form.querySelectorAll('input, select, button').forEach(el => el.disabled = true);
+      document.getElementById('modal-cancel-btn').disabled = false;
+      document.getElementById('modal-cancel-btn').textContent = 'Schließen';
+      submitBtn.textContent = 'Anmeldung übermittelt ✓';
+      modalMsg.style.display = '';
+      modalMsg.style.color = '';
+      modalMsg.textContent = 'Vielen Dank! Ihre Anmeldung ist eingegangen. Sie erhalten in wenigen Minuten eine Bestätigung per E-Mail.';
+    };
+    window._show_error = function() {
+      restore();
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Verbindlich anmelden';
+      modalMsg.style.display = '';
+      modalMsg.style.color = '#c0392b';
+      modalMsg.textContent = 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie an office@pramer.com.';
+    };
+
+    const s = document.createElement('script');
+    s.charset = 'utf-8';
+    s.src = 'https://pramer21406.activehosted.com/proc.php?' + parts.join('&') + '&jsonp=true';
+    s.onerror = function() { window._show_error(); };
+    document.head.appendChild(s);
   }
 
   function closeModal() {
@@ -1259,6 +1348,11 @@
     const position     = document.getElementById('m-position').value.trim();
     const uid          = document.getElementById('m-uid').value.trim();
     const jahrgang     = document.getElementById('m-jahrgang').value.trim();
+
+    if (isOnlineSession(currentTermin)) {
+      submitOnlineSession({ anrede, titel, vorname, nachname, email, telefon, unternehmen, position, uid, jahrgang });
+      return;
+    }
 
     const subject = encodeURIComponent('Anmeldung: ' + currentTermin.format + ' – ' + currentTermin.datum + ' in ' + currentTermin.ort);
 
