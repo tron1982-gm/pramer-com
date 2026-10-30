@@ -463,6 +463,13 @@
     .modal-field input:hover, .modal-field select:hover { border-color: var(--navy-mid); }
     .modal-field input:focus, .modal-field select:focus { outline: none; border-color: var(--navy); background: #fff; }
     .modal-field input::placeholder { color: var(--ink-muted); }
+    .modal-consent { margin-top: 1rem; }
+    .modal-consent label {
+      display: flex; gap: 0.6rem; align-items: flex-start;
+      font-family: 'Inter', sans-serif; font-size: 0.8rem; line-height: 1.5; color: var(--ink);
+      cursor: pointer;
+    }
+    .modal-consent input { margin-top: 0.2rem; flex: 0 0 auto; width: 16px; height: 16px; accent-color: var(--navy); }
     .modal-actions {
       margin-top: 1.25rem; display: flex; gap: 0.75rem; flex-wrap: wrap;
     }
@@ -1053,6 +1060,13 @@
 
         </div>
 
+        <div class="modal-consent" id="modal-consent">
+          <label for="m-datenschutz">
+            <input type="checkbox" id="m-datenschutz">
+            <span>Ich habe die <a href="../datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> zur Kenntnis genommen und erkläre mich mit der Verarbeitung meiner Angaben zur Anmeldung einverstanden. <span style="color:#c0392b">*</span></span>
+          </label>
+        </div>
+
         <div class="modal-actions">
           <button type="submit" class="modal-submit" id="modal-submit-btn">E-Mail öffnen →</button>
           <button type="button" class="modal-cancel" id="modal-cancel-btn">Abbrechen</button>
@@ -1151,7 +1165,7 @@
       if (el) el.value = '';
     });
     document.getElementById('modal-cancel-btn').textContent = 'Abbrechen';
-    setModalMode(isOnlineSession(data));
+    setModalMode(isOnlineSession(data), isBusinessCircle(data));
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
     setTimeout(() => document.getElementById('m-anrede').focus(), 50);
@@ -1168,12 +1182,25 @@
     return !!data && /online session/i.test(data.format || '');
   }
 
-  function setModalMode(online) {
+  function isBusinessCircle(data) {
+    return !!data && /business circle/i.test(data.format || '');
+  }
+
+  /* AC-Formulare je Stadt (lösen die Bestätigungs-Automation aus) */
+  const ABC_CITY_FORMS = { 'Linz': '11', 'Wien': '15', 'Graz': '13' };
+
+  function setModalMode(online, abc) {
     form.querySelectorAll('input, select, button').forEach(el => el.disabled = false);
     modalMsg.style.display = 'none';
     modalMsg.textContent = '';
     modalMsg.style.color = '';
-    if (online) {
+    document.getElementById('modal-consent').style.display = (online || abc) ? '' : 'none';
+    document.getElementById('m-datenschutz').checked = false;
+    if (abc) {
+      document.getElementById('modal-note').innerHTML = 'Füllen Sie bitte die Felder aus und klicken Sie auf <strong>„Verbindlich anmelden"</strong>. Sie erhalten in wenigen Minuten eine Bestätigung per E-Mail mit allen Details zu Ihrem Abend.';
+      submitBtn.textContent = 'Verbindlich anmelden';
+      modalHint.textContent = 'Die Location wird kurzfristig bekanntgegeben und Ihnen per E-Mail mitgeteilt.';
+    } else if (online) {
       document.getElementById('modal-note').innerHTML = 'Füllen Sie bitte die Felder aus und klicken Sie auf <strong>„Verbindlich anmelden"</strong>. Sie erhalten in wenigen Minuten eine Bestätigung per E-Mail. Den Teilnahmelink senden wir Ihnen kurz vor der Session.';
       submitBtn.textContent = 'Verbindlich anmelden';
       modalHint.textContent = 'Kostenlos. Ihre Angaben werden nur zur Organisation der Session verwendet.';
@@ -1189,6 +1216,85 @@
     const m = String(datum || '').match(/^(\w{2}),\s*(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
     if (!m) return String(datum || '');
     return (tage[m[1]] || m[1]) + ', ' + m[2].padStart(2, '0') + '.' + m[3].padStart(2, '0') + '.' + m[4];
+  }
+
+  function abcTerminText(t) {
+    const tage   = { 'Mo':'Montag','Di':'Dienstag','Mi':'Mittwoch','Do':'Donnerstag','Fr':'Freitag','Sa':'Samstag','So':'Sonntag' };
+    const monate = ['Jänner','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+    const m = String(t.datum || '').match(/^(\w{2}),\s*(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+    if (!m) return t.ort + ' - ' + t.datum + ' · ' + t.uhrzeit + ' Uhr';
+    return t.ort + ' - ' + (tage[m[1]] || m[1]) + ', ' + parseInt(m[2], 10) + '. ' + monate[parseInt(m[3], 10) - 1] + ' ' + m[4] + ' · ' + t.uhrzeit + ' Uhr';
+  }
+
+  function heute() {
+    const d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+
+  function loadAC(fields) {
+    const parts = Object.keys(fields).map(k => k + '=' + encodeURIComponent(fields[k]));
+    const s = document.createElement('script');
+    s.charset = 'utf-8';
+    s.src = 'https://pramer21406.activehosted.com/proc.php?' + parts.join('&') + '&jsonp=true';
+    s.onerror = function() { if (window._show_error) window._show_error(); };
+    document.head.appendChild(s);
+  }
+
+  function showSuccess() {
+    form.querySelectorAll('input, select, button').forEach(el => el.disabled = true);
+    document.getElementById('modal-cancel-btn').disabled = false;
+    document.getElementById('modal-cancel-btn').textContent = 'Schließen';
+    submitBtn.textContent = 'Anmeldung übermittelt ✓';
+    modalMsg.style.display = '';
+    modalMsg.style.color = '';
+    modalMsg.textContent = 'Vielen Dank! Ihre Anmeldung ist eingegangen. Sie erhalten in wenigen Minuten eine Bestätigung per E-Mail.';
+  }
+
+  function showError() {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Verbindlich anmelden';
+    modalMsg.style.display = '';
+    modalMsg.style.color = '#c0392b';
+    modalMsg.textContent = 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie an office@pramer.com.';
+  }
+
+  /* Business Circle: wie auf abc.pramer.com – Formular 17 (alle Angaben), danach Stadt-Formular (Bestätigung) */
+  function submitBusinessCircle(v) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Wird übermittelt …';
+
+    const origOk  = window._show_thank_you;
+    const origErr = window._show_error;
+    function restore() { window._show_thank_you = origOk; window._show_error = origErr; }
+
+    window._show_thank_you = function() {
+      showSuccess();
+      const cityFormId = ABC_CITY_FORMS[currentTermin.ort];
+      if (!cityFormId) { restore(); return; }
+      window._show_thank_you = restore;
+      window._show_error     = restore;
+      loadAC({ 'u': cityFormId, 'f': cityFormId, 's': '', 'c': '0', 'm': '0', 'act': 'sub', 'v': '2', 'email': v.email });
+    };
+    window._show_error = function() { restore(); showError(); };
+
+    loadAC({
+      'u': '17', 'f': '17', 's': '', 'c': '0', 'm': '0', 'act': 'sub', 'v': '2',
+      'or': '69b1b057-f666-4f9b-bf72-762fa61e5658',
+      'field[3]': 'pramer.com/termine',
+      'field[4]': heute(),
+      'field[5]': abcTerminText(currentTermin),
+      'field[6]': v.anrede,
+      'field[13]': v.titel,
+      'firstname': v.vorname,
+      'lastname': v.nachname,
+      'email': v.email,
+      'phone': v.telefon,
+      'field[14]': v.unternehmen,
+      'field[15]': v.position,
+      'field[16]': v.uid,
+      'field[17]': v.jahrgang,
+      'field[18][]': 'Ich habe die Datenschutzerklärung zur Kenntnis genommen und erkläre mich mit der Verarbeitung meiner Angaben zur Anmeldung einverstanden.'
+    });
   }
 
   function submitOnlineSession(v) {
@@ -1348,6 +1454,16 @@
     const position     = document.getElementById('m-position').value.trim();
     const uid          = document.getElementById('m-uid').value.trim();
     const jahrgang     = document.getElementById('m-jahrgang').value.trim();
+
+    if ((isOnlineSession(currentTermin) || isBusinessCircle(currentTermin)) && !document.getElementById('m-datenschutz').checked) {
+      alert('Bitte bestätigen Sie die Kenntnisnahme der Datenschutzerklärung.');
+      return;
+    }
+
+    if (isBusinessCircle(currentTermin)) {
+      submitBusinessCircle({ anrede, titel, vorname, nachname, email, telefon, unternehmen, position, uid, jahrgang });
+      return;
+    }
 
     if (isOnlineSession(currentTermin)) {
       submitOnlineSession({ anrede, titel, vorname, nachname, email, telefon, unternehmen, position, uid, jahrgang });
