@@ -307,21 +307,22 @@
       <p class="panel-sub">Der wichtigste Teil – kurz und einladend.</p>
       <div class="field">
         <label for="f-headline">Überschrift</label>
-        <input type="text" id="f-headline" value="Sie sind herzlich eingeladen" maxlength="80" />
+        <input type="text" id="f-headline" value="Herzliche Einladung" maxlength="80" />
       </div>
       <div class="field">
         <label for="f-intro">Einleitungstext</label>
-        <textarea id="f-intro" rows="4">Ich freue mich, Sie zu unserem nächsten Abend einzuladen. Es erwartet Sie ein Raum für echte Gespräche, neue Impulse und wertvolle Begegnungen.</textarea>
+        <textarea id="f-intro" rows="4">Ich freue mich auf unseren nächsten gemeinsamen Abend: eine kleine Runde mit echten Gesprächen, neuen Impulsen und wertvollen Begegnungen.</textarea>
       </div>
     </div>
 
     <div class="panel" id="panel-bausteine">
       <h2>Inhaltsbausteine</h2>
-      <p class="panel-sub">Termine, Absätze, Bilder und Buttons beliebig oft hinzufügen. Mit ↑ und ↓ die Reihenfolge ändern.</p>
+      <p class="panel-sub">Thema, Termine, Absätze, Bilder und Buttons beliebig oft hinzufügen. Mit ↑ und ↓ die Reihenfolge ändern.</p>
       <div id="block-list"></div>
       <div class="add-row">
         <span class="add-label">Hinzufügen:</span>
         <button type="button" class="add-btn" data-add="termin">+ Termin</button>
+        <button type="button" class="add-btn" data-add="thema">+ Thema</button>
         <button type="button" class="add-btn" data-add="text">+ Absatz</button>
         <button type="button" class="add-btn" data-add="bild">+ Bild</button>
         <button type="button" class="add-btn" data-add="button">+ Button</button>
@@ -332,7 +333,7 @@
       <h2>Abschlusstext</h2>
       <p class="panel-sub">Letzter Satz vor dem Footer, z. B. Kontakthinweis.</p>
       <div class="field">
-        <textarea id="f-closing" rows="3">Bei Fragen schreiben Sie mir jederzeit: office@pramer.com</textarea>
+        <textarea id="f-closing" rows="3">Bei Fragen gerne jederzeit an: office@pramer.com</textarea>
       </div>
     </div>
 
@@ -457,8 +458,8 @@
     return ''
     + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 32px;">'
     + '<tr><td bgcolor="' + COLORS.cream + '" style="padding:22px 26px;border-radius:8px;border-left:4px solid ' + COLORS.gold + ';background-color:' + COLORS.cream + ';">'
-    + '<p style="margin:0 0 10px;font-family:' + FONT + ';font-size:10px;font-weight:600;letter-spacing:0.18em;color:' + COLORS.gold + ';text-transform:uppercase;">' + esc(label && label.trim() ? label : 'IHR TERMIN') + '</p>'
-    + '<p style="margin:0 0 14px;font-family:' + FONT + ';font-size:19px;font-weight:600;color:' + COLORS.ink + ';line-height:1.3;">' + esc(titel) + '</p>'
+    + '<p style="margin:0 0 10px;font-family:' + FONT + ';font-size:10px;font-weight:600;letter-spacing:0.18em;color:' + COLORS.gold + ';text-transform:uppercase;">' + esc(label && label.trim() ? label : 'TERMIN') + '</p>'
+    + '<p style="margin:0 0 14px;font-family:' + FONT + ';font-size:19px;font-weight:600;color:' + COLORS.ink + ';line-height:1.4;">' + nl2br(titel) + '</p>'
     + zeitenHtml
     + hinweisHtml
     + '</td></tr></table>';
@@ -474,6 +475,17 @@
       ? '<p style="margin:0 0 12px;font-family:' + FONT + ';font-size:13px;font-weight:600;letter-spacing:0.1em;color:' + COLORS.ink + ';text-transform:uppercase;line-height:1;">' + esc(titel) + '</p>'
       : '';
     return '<div style="margin:0 0 28px;">' + titelHtml + '<p style="margin:0;font-family:' + FONT + ';font-size:15px;line-height:1.7;color:' + COLORS.inkSoft + ';">' + nl2br(text) + '</p></div>';
+  }
+
+  function renderThema(titel, text){
+    if ((!titel || !titel.trim()) && (!text || !text.trim())) return '';
+    var titelHtml = titel && titel.trim()
+      ? '<p style="margin:0 0 12px;font-family:' + FONT + ';font-size:18px;font-weight:600;line-height:1.4;color:' + COLORS.ink + ';"><span style="color:' + COLORS.gold + ';">Thema:</span> ' + esc(titel) + '</p>'
+      : '';
+    var textHtml = text && text.trim()
+      ? '<p style="margin:0;font-family:' + FONT + ';font-size:15px;line-height:1.7;color:' + COLORS.inkSoft + ';">' + nl2br(text) + '</p>'
+      : '';
+    return '<div style="margin:0 0 32px;">' + titelHtml + textHtml + '</div>';
   }
 
   function renderBild(url, alt){
@@ -520,7 +532,7 @@
     if (variant === 'lang'){
       base += ''
       + '<p style="margin:14px 0 0;font-family:' + FONT + ';font-size:11.5px;line-height:1.6;color:' + COLORS.inkMuted + ';">'
-      + 'Sie erhalten diese Nachricht, weil Sie mit Mag. Gerlinde Pramer in Kontakt stehen. Kein Interesse mehr? Einfach mit „Abmelden" antworten.'
+      + 'Diese Nachricht geht an Kontakte von Mag. Gerlinde Pramer. Kein Interesse mehr? Einfach mit „Abmelden" antworten.'
       + '&nbsp;&middot;&nbsp;'
       + '<a href="https://www.pramer.com/impressum.html" style="color:' + COLORS.blueDeep + ';text-decoration:underline;">Impressum</a>'
       + '</p>';
@@ -539,6 +551,7 @@
     bodyParts.push(renderIntro(state.intro));
     state.blocks.forEach(function(b){
       if (b.type === 'termin') bodyParts.push(renderTerminBox(b.label, b.titel, b.zeiten, b.hinweis));
+      else if (b.type === 'thema') bodyParts.push(renderThema(b.titel, b.text));
       else if (b.type === 'text') bodyParts.push(renderZusatztext(b.titel, b.text));
       else if (b.type === 'bild') bodyParts.push(renderBild(b.url, b.alt));
       else if (b.type === 'button') bodyParts.push(renderButton(b.text, b.link));
@@ -568,10 +581,14 @@
 
   var BLOCK_TYPES = {
     termin: { title: 'Termin', fields: [
-      { key: 'label', label: 'Kleine Überschrift', type: 'text', def: 'IHR TERMIN' },
-      { key: 'titel', label: 'Ort & Datum', type: 'text', def: 'Wien · Wochentag, TT. Monat JJJJ' },
+      { key: 'label', label: 'Kleine Überschrift', type: 'text', def: 'TERMIN' },
+      { key: 'titel', label: 'Ort & Datum (mehrere Orte: je eine Zeile, z. B. mit „oder“ dazwischen)', type: 'textarea', rows: 3, def: 'Wien · Wochentag, TT. Monat JJJJ' },
       { key: 'zeiten', label: 'Zeiten (eine pro Zeile)', type: 'textarea', rows: 3, def: 'Beginn 18:30 Uhr' },
       { key: 'hinweis', label: 'Zusatzhinweis (optional)', type: 'text', def: '' }
+    ]},
+    thema: { title: 'Thema', fields: [
+      { key: 'titel', label: 'Thema', type: 'text', def: '' , placeholder: 'z. B. Intuitiv entscheiden' },
+      { key: 'text', label: 'Beschreibung (optional)', type: 'textarea', rows: 5, def: '' }
     ]},
     text: { title: 'Absatz', fields: [
       { key: 'titel', label: 'Zwischenüberschrift (optional)', type: 'text', def: '' },
@@ -759,15 +776,16 @@
 
   // ---------- Vorlagen ----------
 
-  var CLOSING_DEFAULT = 'Bei Fragen schreiben Sie mir jederzeit: office@pramer.com';
+  var CLOSING_DEFAULT = 'Bei Fragen gerne jederzeit an: office@pramer.com';
 
   var BUILTIN_TEMPLATES = [
     { name: 'Einladung Anahata Business Circle', state: {
       kicker: 'EINLADUNG',
-      headline: 'Sie sind herzlich eingeladen',
-      intro: 'Ich freue mich, Sie zu unserem nächsten Abend einzuladen. Es erwartet Sie ein Raum für echte Gespräche, neue Impulse und wertvolle Begegnungen.',
+      headline: 'Herzliche Einladung',
+      intro: 'Ich freue mich auf unseren nächsten gemeinsamen Abend: eine kleine Runde mit echten Gesprächen, neuen Impulsen und wertvollen Begegnungen.',
       blocks: [
-        { type: 'termin', label: 'IHR TERMIN', titel: 'Wien · Mittwoch, 14. Oktober 2026', zeiten: 'Ankommen ab 18:15 Uhr\nBeginn 18:30 Uhr\nEnde ca. 20:30 Uhr', hinweis: 'Die genaue Location erhalten Sie ca. eine Woche vorher per E-Mail.' },
+        { type: 'thema', titel: 'Intuitiv entscheiden. Klarheit, wenn sich nicht mehr alles prüfen lässt', text: 'Nie gab es mehr Informationen, und nie war es schwieriger, ihnen zu vertrauen. Entschieden werden muss trotzdem. Intuition ist dabei ein oft unterschätztes Werkzeug, und sie ist etwas anderes als das Bauchgefühl: ein klares, ruhiges Wissen im Moment, das sich zeigt, wenn der Kopf zur Ruhe kommt. Wie lässt sich dieser Zustand im Führungsalltag finden?' },
+        { type: 'termin', label: 'TERMIN', titel: 'Linz · Mittwoch, 25. November 2026\noder\nWien · Montag, 30. November 2026', zeiten: 'Ankommen ab 18:15 Uhr\nBeginn 18:30 Uhr\nEnde ca. 20:30 Uhr', hinweis: 'Die genaue Location folgt ca. eine Woche vorher per E-Mail.' },
         { type: 'button', text: 'Jetzt anmelden', link: 'https://abc.pramer.com' }
       ],
       closing: CLOSING_DEFAULT, footerVariant: 'kurz'
@@ -775,9 +793,9 @@
     { name: 'Einladung Online Session', state: {
       kicker: 'EINLADUNG',
       headline: 'Online Session',
-      intro: 'Ich lade Sie herzlich zu meiner nächsten Online Session ein – eine kompakte Zeit für Impulse und Austausch, bequem von Ihrem Arbeitsplatz aus.',
+      intro: 'Herzliche Einladung zur nächsten Online Session: eine kompakte Zeit für Impulse und Austausch, bequem vom eigenen Arbeitsplatz aus.',
       blocks: [
-        { type: 'termin', label: 'IHR TERMIN', titel: 'Online · Wochentag, TT. Monat JJJJ', zeiten: 'Beginn 12:00 Uhr\nDauer 30 – 45 Min.', hinweis: 'Den Zugangslink erhalten Sie nach der Anmeldung per E-Mail.' },
+        { type: 'termin', label: 'TERMIN', titel: 'Online · Wochentag, TT. Monat JJJJ', zeiten: 'Beginn 12:00 Uhr\nDauer 30 – 45 Min.', hinweis: 'Der Zugangslink folgt nach der Anmeldung per E-Mail.' },
         { type: 'button', text: 'Jetzt anmelden', link: 'https://www.pramer.com/termine/' }
       ],
       closing: CLOSING_DEFAULT, footerVariant: 'kurz'
@@ -785,7 +803,7 @@
     { name: 'Termin-Übersicht (mehrere Termine)', state: {
       kicker: 'TERMIN-UPDATE',
       headline: 'Die nächsten Termine',
-      intro: 'Gerne gebe ich Ihnen einen Überblick über die kommenden Termine. Ich freue mich, Sie wiederzusehen.',
+      intro: 'Hier ein kurzer Überblick über die kommenden Termine. Ich freue mich auf ein Wiedersehen.',
       blocks: [
         { type: 'termin', label: 'ANAHATA BUSINESS CIRCLE', titel: 'Wien · Wochentag, TT. Monat JJJJ', zeiten: 'Beginn 18:30 Uhr\nEnde ca. 20:30 Uhr', hinweis: '' },
         { type: 'termin', label: 'ONLINE SESSION', titel: 'Online · Wochentag, TT. Monat JJJJ', zeiten: 'Beginn 12:00 Uhr\nDauer 30 – 45 Min.', hinweis: '' },
@@ -796,7 +814,7 @@
     { name: 'Newsletter (mehrere Themen)', state: {
       kicker: 'NEWSLETTER',
       headline: 'Neues von Mag. Gerlinde Pramer',
-      intro: 'Schön, dass Sie dabei sind. Heute teile ich ein paar Gedanken und Neuigkeiten mit Ihnen.',
+      intro: 'Heute teile ich ein paar Gedanken und Neuigkeiten.',
       blocks: [
         { type: 'text', titel: 'Erstes Thema', text: 'Hier steht der Text zum ersten Thema.' },
         { type: 'bild', url: '', alt: '' },
