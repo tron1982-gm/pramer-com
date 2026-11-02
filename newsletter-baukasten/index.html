@@ -223,6 +223,43 @@
     font-size:13px;
     color:var(--ink-soft);
   }
+  .block-card{
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--cream);
+    padding:14px 14px 4px;
+    margin-bottom:12px;
+  }
+  .block-card .field input,
+  .block-card .field textarea{background:var(--surface);}
+  .block-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    margin-bottom:12px;
+  }
+  .block-title{font-size:13.5px;font-weight:600;color:var(--ink);}
+  .block-tools{display:flex;gap:6px;flex-wrap:wrap;}
+  .small-btn,.add-btn{
+    border:1px solid var(--gold);
+    background:var(--surface);
+    color:var(--ink);
+    border-radius:6px;
+    padding:7px 11px;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .small-btn:hover,.add-btn:hover{background:var(--cream-deep);}
+  .small-btn:disabled{opacity:.35;cursor:default;background:var(--surface);}
+  .small-btn.danger{border-color:var(--line);color:var(--ink-muted);}
+  .add-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px;}
+  .add-label{font-size:13px;font-weight:600;color:var(--ink);margin-right:2px;}
+  .empty-note{font-size:13px;color:var(--ink-muted);margin:0 0 12px;}
+  .tpl-actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+  .tpl-status{font-size:13px;font-weight:600;color:var(--blue-deep);min-height:18px;margin-top:6px;}
 </style>
 </head>
 <body>
@@ -236,6 +273,26 @@
 
   <!-- ===================== FORM COLUMN ===================== -->
   <div class="form-col">
+
+    <div class="panel" id="panel-vorlagen">
+      <h2>Vorlagen</h2>
+      <p class="panel-sub">Fertige Vorlage laden oder die aktuelle E-Mail als eigene Vorlage speichern.</p>
+      <div class="field">
+        <label for="tpl-select">Vorlage auswählen</label>
+        <select id="tpl-select"></select>
+      </div>
+      <div class="tpl-actions">
+        <button type="button" class="small-btn" id="tpl-load">Vorlage laden</button>
+        <button type="button" class="small-btn danger" id="tpl-delete">Eigene Vorlage löschen</button>
+      </div>
+      <div class="field">
+        <label for="tpl-name">Aktuelle E-Mail speichern als …</label>
+        <input type="text" id="tpl-name" placeholder="z. B. Einladung ABC Graz" maxlength="60" />
+        <span class="hint">Eigene Vorlagen werden in diesem Browser auf diesem Gerät gespeichert.</span>
+      </div>
+      <button type="button" class="small-btn" id="tpl-save">Als Vorlage speichern</button>
+      <div class="tpl-status" id="tpl-status"></div>
+    </div>
 
     <div class="panel">
       <h2>Kategorie-Label</h2>
@@ -258,82 +315,16 @@
       </div>
     </div>
 
-    <div class="panel" id="panel-termin">
-      <div class="toggle-row" data-toggle="termin">
-        <h2>Termin-Box</h2>
-        <div class="switch on" id="switch-termin"></div>
-      </div>
-      <p class="panel-sub">Ort, Datum und Zeiten hervorgehoben darstellen.</p>
-      <div class="module-body" id="body-termin">
-        <div class="field">
-          <label for="f-termin-titel">Ort &amp; Datum</label>
-          <input type="text" id="f-termin-titel" value="Wien · Mittwoch, 14. Oktober 2026" />
-        </div>
-        <div class="field">
-          <label for="f-termin-zeiten">Zeiten (eine pro Zeile)</label>
-          <textarea id="f-termin-zeiten" rows="3">Ankommen ab 18:15 Uhr
-Beginn 18:30 Uhr
-Ende ca. 20:30 Uhr</textarea>
-        </div>
-        <div class="field">
-          <label for="f-termin-hinweis">Zusatzhinweis (optional)</label>
-          <input type="text" id="f-termin-hinweis" value="Die genaue Location erhalten Sie ca. eine Woche vorher per E-Mail." />
-        </div>
-      </div>
-    </div>
-
-    <div class="panel" id="panel-zusatztext">
-      <div class="toggle-row" data-toggle="zusatztext">
-        <h2>Zusätzlicher Absatz</h2>
-        <div class="switch" id="switch-zusatztext"></div>
-      </div>
-      <p class="panel-sub">Ein zweiter Textblock, z. B. „Was Sie erwartet".</p>
-      <div class="module-body hidden" id="body-zusatztext">
-        <div class="field">
-          <label for="f-zusatz-titel">Zwischenüberschrift (optional)</label>
-          <input type="text" id="f-zusatz-titel" value="Was Sie erwartet" />
-        </div>
-        <div class="field">
-          <label for="f-zusatz-text">Text</label>
-          <textarea id="f-zusatz-text" rows="4">Ein Abend in kleiner Runde – Raum für echte Gespräche, Impulse und stille Reflexion.</textarea>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel" id="panel-bild">
-      <div class="toggle-row" data-toggle="bild">
-        <h2>Bild</h2>
-        <div class="switch" id="switch-bild"></div>
-      </div>
-      <p class="panel-sub">Bild muss bereits online sein (z. B. schon auf pramer.com verwendet). Kein Upload hier möglich.</p>
-      <div class="module-body hidden" id="body-bild">
-        <div class="field">
-          <label for="f-bild-url">Bild-URL</label>
-          <input type="url" id="f-bild-url" placeholder="https://www.pramer.com/img/…" />
-          <span class="hint">Tipp: Rechtsklick auf ein Bild auf pramer.com → „Bildadresse kopieren". Oder Matthias fragen, ein neues Bild hochzuladen.</span>
-        </div>
-        <div class="field">
-          <label for="f-bild-alt">Alt-Text (Bildbeschreibung)</label>
-          <input type="text" id="f-bild-alt" placeholder="z. B. Mag. Gerlinde Pramer beim Anahata Business Circle" />
-        </div>
-      </div>
-    </div>
-
-    <div class="panel" id="panel-button">
-      <div class="toggle-row" data-toggle="button">
-        <h2>Button (Call-to-Action)</h2>
-        <div class="switch on" id="switch-button"></div>
-      </div>
-      <p class="panel-sub">Der Klick-Button, z. B. zur Anmeldung.</p>
-      <div class="module-body" id="body-button">
-        <div class="field">
-          <label for="f-btn-text">Button-Text</label>
-          <input type="text" id="f-btn-text" value="Jetzt anmelden" />
-        </div>
-        <div class="field">
-          <label for="f-btn-link">Ziel-Link</label>
-          <input type="url" id="f-btn-link" value="https://abc.pramer.com" />
-        </div>
+    <div class="panel" id="panel-bausteine">
+      <h2>Inhaltsbausteine</h2>
+      <p class="panel-sub">Termine, Absätze, Bilder und Buttons beliebig oft hinzufügen. Mit ↑ und ↓ die Reihenfolge ändern.</p>
+      <div id="block-list"></div>
+      <div class="add-row">
+        <span class="add-label">Hinzufügen:</span>
+        <button type="button" class="add-btn" data-add="termin">+ Termin</button>
+        <button type="button" class="add-btn" data-add="text">+ Absatz</button>
+        <button type="button" class="add-btn" data-add="bild">+ Bild</button>
+        <button type="button" class="add-btn" data-add="button">+ Button</button>
       </div>
     </div>
 
@@ -369,7 +360,8 @@ Ende ca. 20:30 Uhr</textarea>
     <div class="howto">
       <h2>So geht's</h2>
       <ol>
-        <li>Felder links ausfüllen – die Vorschau rechts aktualisiert sich sofort.</li>
+        <li>Optional: oben eine Vorlage laden.</li>
+        <li>Felder links ausfüllen und Bausteine hinzufügen – die Vorschau rechts aktualisiert sich sofort.</li>
         <li>Rechts auf <strong>„Ganze E-Mail kopieren"</strong> klicken.</li>
         <li>In Outlook eine neue Nachricht öffnen, in das Textfeld klicken.</li>
         <li>Mit <strong>Cmd + V</strong> (Mac) bzw. <strong>Strg + V</strong> (Windows) einfügen.</li>
@@ -429,10 +421,6 @@ Ende ca. 20:30 Uhr</textarea>
     return esc(str).split('\n').map(function(s){return s;}).join('<br>');
   }
 
-  function getToggle(name){
-    return document.getElementById('switch-' + name).classList.contains('on');
-  }
-
   function val(id){
     var el = document.getElementById(id);
     return el ? el.value : '';
@@ -459,7 +447,7 @@ Ende ca. 20:30 Uhr</textarea>
     return '<p style="margin:0 0 32px;font-family:' + FONT + ';font-size:16px;line-height:1.7;color:' + COLORS.inkSoft + ';">' + nl2br(intro) + '</p>';
   }
 
-  function renderTerminBox(titel, zeiten, hinweis){
+  function renderTerminBox(label, titel, zeiten, hinweis){
     var zeitenHtml = zeiten && zeiten.trim()
       ? '<p style="margin:0 0 14px;font-family:' + FONT + ';font-size:15px;color:' + COLORS.inkSoft + ';line-height:1.8;">' + nl2br(zeiten) + '</p>'
       : '';
@@ -469,7 +457,7 @@ Ende ca. 20:30 Uhr</textarea>
     return ''
     + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 32px;">'
     + '<tr><td bgcolor="' + COLORS.cream + '" style="padding:22px 26px;border-radius:8px;border-left:4px solid ' + COLORS.gold + ';background-color:' + COLORS.cream + ';">'
-    + '<p style="margin:0 0 10px;font-family:' + FONT + ';font-size:10px;font-weight:600;letter-spacing:0.18em;color:' + COLORS.gold + ';text-transform:uppercase;">IHR TERMIN</p>'
+    + '<p style="margin:0 0 10px;font-family:' + FONT + ';font-size:10px;font-weight:600;letter-spacing:0.18em;color:' + COLORS.gold + ';text-transform:uppercase;">' + esc(label && label.trim() ? label : 'IHR TERMIN') + '</p>'
     + '<p style="margin:0 0 14px;font-family:' + FONT + ';font-size:19px;font-weight:600;color:' + COLORS.ink + ';line-height:1.3;">' + esc(titel) + '</p>'
     + zeitenHtml
     + hinweisHtml
@@ -549,10 +537,12 @@ Ende ca. 20:30 Uhr</textarea>
     bodyParts.push('<p style="margin:0 0 18px;font-family:' + FONT + ';font-size:10px;font-weight:600;letter-spacing:0.2em;color:' + COLORS.gold + ';text-transform:uppercase;line-height:1;">' + esc(state.kicker) + '</p>');
     bodyParts.push(renderHeadline(state.headline));
     bodyParts.push(renderIntro(state.intro));
-    if (state.terminOn) bodyParts.push(renderTerminBox(state.terminTitel, state.terminZeiten, state.terminHinweis));
-    if (state.zusatzOn) bodyParts.push(renderZusatztext(state.zusatzTitel, state.zusatzText));
-    if (state.bildOn) bodyParts.push(renderBild(state.bildUrl, state.bildAlt));
-    if (state.buttonOn) bodyParts.push(renderButton(state.btnText, state.btnLink));
+    state.blocks.forEach(function(b){
+      if (b.type === 'termin') bodyParts.push(renderTerminBox(b.label, b.titel, b.zeiten, b.hinweis));
+      else if (b.type === 'text') bodyParts.push(renderZusatztext(b.titel, b.text));
+      else if (b.type === 'bild') bodyParts.push(renderBild(b.url, b.alt));
+      else if (b.type === 'button') bodyParts.push(renderButton(b.text, b.link));
+    });
     if (state.closing && state.closing.trim()){
       bodyParts.push(renderDivider());
       bodyParts.push(renderClosing(state.closing));
@@ -574,6 +564,149 @@ Ende ca. 20:30 Uhr</textarea>
     return html;
   }
 
+  // ---------- Bausteine ----------
+
+  var BLOCK_TYPES = {
+    termin: { title: 'Termin', fields: [
+      { key: 'label', label: 'Kleine Überschrift', type: 'text', def: 'IHR TERMIN' },
+      { key: 'titel', label: 'Ort & Datum', type: 'text', def: 'Wien · Wochentag, TT. Monat JJJJ' },
+      { key: 'zeiten', label: 'Zeiten (eine pro Zeile)', type: 'textarea', rows: 3, def: 'Beginn 18:30 Uhr' },
+      { key: 'hinweis', label: 'Zusatzhinweis (optional)', type: 'text', def: '' }
+    ]},
+    text: { title: 'Absatz', fields: [
+      { key: 'titel', label: 'Zwischenüberschrift (optional)', type: 'text', def: '' },
+      { key: 'text', label: 'Text', type: 'textarea', rows: 4, def: '' }
+    ]},
+    bild: { title: 'Bild', fields: [
+      { key: 'url', label: 'Bild-URL', type: 'url', def: '', placeholder: 'https://www.pramer.com/img/…',
+        hint: 'Bild muss bereits online sein. Tipp: Rechtsklick auf ein Bild auf pramer.com → „Bildadresse kopieren".' },
+      { key: 'alt', label: 'Alt-Text (Bildbeschreibung)', type: 'text', def: '', placeholder: 'z. B. Mag. Gerlinde Pramer beim Anahata Business Circle' }
+    ]},
+    button: { title: 'Button', fields: [
+      { key: 'text', label: 'Button-Text', type: 'text', def: 'Jetzt anmelden' },
+      { key: 'link', label: 'Ziel-Link', type: 'url', def: 'https://abc.pramer.com' }
+    ]}
+  };
+
+  var blocks = [];
+
+  function newBlock(type, values){
+    var b = { type: type };
+    BLOCK_TYPES[type].fields.forEach(function(f){
+      b[f.key] = values && values[f.key] != null ? values[f.key] : f.def;
+    });
+    return b;
+  }
+
+  function makeBtn(text, cls, onClick, disabled){
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'small-btn' + (cls ? ' ' + cls : '');
+    btn.textContent = text;
+    btn.disabled = !!disabled;
+    btn.addEventListener('click', onClick);
+    return btn;
+  }
+
+  function renderBlockList(){
+    var list = document.getElementById('block-list');
+    list.innerHTML = '';
+    if (!blocks.length){
+      var empty = document.createElement('p');
+      empty.className = 'empty-note';
+      empty.textContent = 'Noch keine Bausteine – unten einen hinzufügen.';
+      list.appendChild(empty);
+      return;
+    }
+    var counter = {};
+    blocks.forEach(function(b, i){
+      var def = BLOCK_TYPES[b.type];
+      counter[b.type] = (counter[b.type] || 0) + 1;
+      var sameTypeTotal = blocks.filter(function(x){ return x.type === b.type; }).length;
+
+      var card = document.createElement('div');
+      card.className = 'block-card';
+
+      var head = document.createElement('div');
+      head.className = 'block-head';
+      var title = document.createElement('span');
+      title.className = 'block-title';
+      title.textContent = def.title + (sameTypeTotal > 1 ? ' ' + counter[b.type] : '');
+      var tools = document.createElement('div');
+      tools.className = 'block-tools';
+      tools.appendChild(makeBtn('↑', '', function(){ moveBlock(i, -1); }, i === 0));
+      tools.appendChild(makeBtn('↓', '', function(){ moveBlock(i, 1); }, i === blocks.length - 1));
+      tools.appendChild(makeBtn('Entfernen', 'danger', function(){
+        if (confirm('Diesen Baustein („' + title.textContent + '") entfernen?')){
+          blocks.splice(i, 1);
+          renderBlockList();
+          render();
+        }
+      }));
+      head.appendChild(title);
+      head.appendChild(tools);
+      card.appendChild(head);
+
+      def.fields.forEach(function(f){
+        var field = document.createElement('div');
+        field.className = 'field';
+        var id = 'b' + i + '-' + f.key;
+        var label = document.createElement('label');
+        label.htmlFor = id;
+        label.textContent = f.label;
+        var input;
+        if (f.type === 'textarea'){
+          input = document.createElement('textarea');
+          input.rows = f.rows || 3;
+        } else {
+          input = document.createElement('input');
+          input.type = f.type;
+        }
+        input.id = id;
+        input.value = b[f.key] || '';
+        if (f.placeholder) input.placeholder = f.placeholder;
+        input.addEventListener('input', function(){
+          b[f.key] = input.value;
+          render();
+        });
+        field.appendChild(label);
+        field.appendChild(input);
+        if (f.hint){
+          var hint = document.createElement('span');
+          hint.className = 'hint';
+          hint.textContent = f.hint;
+          field.appendChild(hint);
+        }
+        card.appendChild(field);
+      });
+
+      list.appendChild(card);
+    });
+  }
+
+  function moveBlock(i, dir){
+    var j = i + dir;
+    if (j < 0 || j >= blocks.length) return;
+    var tmp = blocks[i]; blocks[i] = blocks[j]; blocks[j] = tmp;
+    renderBlockList();
+    render();
+  }
+
+  document.querySelectorAll('[data-add]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      blocks.push(newBlock(btn.getAttribute('data-add')));
+      renderBlockList();
+      render();
+      var cards = document.querySelectorAll('#block-list .block-card');
+      var last = cards[cards.length - 1];
+      if (last){
+        last.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        var firstInput = last.querySelector('input, textarea');
+        if (firstInput) firstInput.focus({ preventScroll: true });
+      }
+    });
+  });
+
   // ---------- State + render ----------
 
   function collectState(){
@@ -581,22 +714,30 @@ Ende ca. 20:30 Uhr</textarea>
       kicker: val('f-kicker'),
       headline: val('f-headline'),
       intro: val('f-intro'),
-      terminOn: getToggle('termin'),
-      terminTitel: val('f-termin-titel'),
-      terminZeiten: val('f-termin-zeiten'),
-      terminHinweis: val('f-termin-hinweis'),
-      zusatzOn: getToggle('zusatztext'),
-      zusatzTitel: val('f-zusatz-titel'),
-      zusatzText: val('f-zusatz-text'),
-      bildOn: getToggle('bild'),
-      bildUrl: val('f-bild-url'),
-      bildAlt: val('f-bild-alt'),
-      buttonOn: getToggle('button'),
-      btnText: val('f-btn-text'),
-      btnLink: val('f-btn-link'),
+      blocks: blocks.map(function(b){ return Object.assign({}, b); }),
       closing: val('f-closing'),
       footerVariant: document.querySelector('input[name=footer]:checked').value
     };
+  }
+
+  function setFooter(variant){
+    document.querySelectorAll('#footer-radio .radio-option').forEach(function(o){
+      var on = o.getAttribute('data-value') === variant;
+      o.classList.toggle('selected', on);
+      o.querySelector('input').checked = on;
+    });
+  }
+
+  function applyState(st){
+    document.getElementById('f-kicker').value = st.kicker || '';
+    document.getElementById('f-headline').value = st.headline || '';
+    document.getElementById('f-intro').value = st.intro || '';
+    document.getElementById('f-closing').value = st.closing || '';
+    blocks = (st.blocks || []).filter(function(b){ return BLOCK_TYPES[b.type]; })
+      .map(function(b){ return newBlock(b.type, b); });
+    setFooter(st.footerVariant === 'lang' ? 'lang' : 'kurz');
+    renderBlockList();
+    render();
   }
 
   function render(){
@@ -605,30 +746,170 @@ Ende ca. 20:30 Uhr</textarea>
     document.getElementById('email-copy-target').innerHTML = html;
   }
 
-  // ---------- Toggle wiring ----------
-
-  document.querySelectorAll('[data-toggle]').forEach(function(row){
-    row.addEventListener('click', function(){
-      var name = row.getAttribute('data-toggle');
-      var sw = document.getElementById('switch-' + name);
-      var body = document.getElementById('body-' + name);
-      sw.classList.toggle('on');
-      if (body) body.classList.toggle('hidden', !sw.classList.contains('on'));
-      render();
-    });
-  });
-
   document.querySelectorAll('#footer-radio .radio-option').forEach(function(opt){
     opt.addEventListener('click', function(){
-      document.querySelectorAll('#footer-radio .radio-option').forEach(function(o){ o.classList.remove('selected'); });
-      opt.classList.add('selected');
-      opt.querySelector('input').checked = true;
+      setFooter(opt.getAttribute('data-value'));
       render();
     });
   });
 
-  document.querySelectorAll('input[type=text], input[type=url], textarea').forEach(function(el){
-    el.addEventListener('input', render);
+  ['f-kicker','f-headline','f-intro','f-closing'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', render);
+  });
+
+  // ---------- Vorlagen ----------
+
+  var CLOSING_DEFAULT = 'Bei Fragen schreiben Sie mir jederzeit: office@pramer.com';
+
+  var BUILTIN_TEMPLATES = [
+    { name: 'Einladung Anahata Business Circle', state: {
+      kicker: 'EINLADUNG',
+      headline: 'Sie sind herzlich eingeladen',
+      intro: 'Ich freue mich, Sie zu unserem nächsten Abend einzuladen. Es erwartet Sie ein Raum für echte Gespräche, neue Impulse und wertvolle Begegnungen.',
+      blocks: [
+        { type: 'termin', label: 'IHR TERMIN', titel: 'Wien · Mittwoch, 14. Oktober 2026', zeiten: 'Ankommen ab 18:15 Uhr\nBeginn 18:30 Uhr\nEnde ca. 20:30 Uhr', hinweis: 'Die genaue Location erhalten Sie ca. eine Woche vorher per E-Mail.' },
+        { type: 'button', text: 'Jetzt anmelden', link: 'https://abc.pramer.com' }
+      ],
+      closing: CLOSING_DEFAULT, footerVariant: 'kurz'
+    }},
+    { name: 'Einladung Online Session', state: {
+      kicker: 'EINLADUNG',
+      headline: 'Online Session',
+      intro: 'Ich lade Sie herzlich zu meiner nächsten Online Session ein – eine kompakte Zeit für Impulse und Austausch, bequem von Ihrem Arbeitsplatz aus.',
+      blocks: [
+        { type: 'termin', label: 'IHR TERMIN', titel: 'Online · Wochentag, TT. Monat JJJJ', zeiten: 'Beginn 12:00 Uhr\nDauer 30 – 45 Min.', hinweis: 'Den Zugangslink erhalten Sie nach der Anmeldung per E-Mail.' },
+        { type: 'button', text: 'Jetzt anmelden', link: 'https://www.pramer.com/termine/' }
+      ],
+      closing: CLOSING_DEFAULT, footerVariant: 'kurz'
+    }},
+    { name: 'Termin-Übersicht (mehrere Termine)', state: {
+      kicker: 'TERMIN-UPDATE',
+      headline: 'Die nächsten Termine',
+      intro: 'Gerne gebe ich Ihnen einen Überblick über die kommenden Termine. Ich freue mich, Sie wiederzusehen.',
+      blocks: [
+        { type: 'termin', label: 'ANAHATA BUSINESS CIRCLE', titel: 'Wien · Wochentag, TT. Monat JJJJ', zeiten: 'Beginn 18:30 Uhr\nEnde ca. 20:30 Uhr', hinweis: '' },
+        { type: 'termin', label: 'ONLINE SESSION', titel: 'Online · Wochentag, TT. Monat JJJJ', zeiten: 'Beginn 12:00 Uhr\nDauer 30 – 45 Min.', hinweis: '' },
+        { type: 'button', text: 'Alle Termine ansehen', link: 'https://www.pramer.com/termine/' }
+      ],
+      closing: CLOSING_DEFAULT, footerVariant: 'lang'
+    }},
+    { name: 'Newsletter (mehrere Themen)', state: {
+      kicker: 'NEWSLETTER',
+      headline: 'Neues von Mag. Gerlinde Pramer',
+      intro: 'Schön, dass Sie dabei sind. Heute teile ich ein paar Gedanken und Neuigkeiten mit Ihnen.',
+      blocks: [
+        { type: 'text', titel: 'Erstes Thema', text: 'Hier steht der Text zum ersten Thema.' },
+        { type: 'bild', url: '', alt: '' },
+        { type: 'text', titel: 'Zweites Thema', text: 'Hier steht der Text zum zweiten Thema.' },
+        { type: 'button', text: 'Mehr erfahren', link: 'https://www.pramer.com' }
+      ],
+      closing: CLOSING_DEFAULT, footerVariant: 'lang'
+    }}
+  ];
+
+  var STORAGE_KEY = 'pramerNewsletterVorlagen';
+
+  function loadUserTemplates(){
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      var obj = raw ? JSON.parse(raw) : {};
+      return obj && typeof obj === 'object' ? obj : {};
+    } catch(e){ return {}; }
+  }
+  function saveUserTemplates(obj){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(obj)); return true; }
+    catch(e){ return false; }
+  }
+
+  function tplStatus(msg){
+    var el = document.getElementById('tpl-status');
+    el.textContent = msg;
+    clearTimeout(tplStatus.t);
+    tplStatus.t = setTimeout(function(){ el.textContent = ''; }, 4000);
+  }
+
+  function fillTemplateSelect(selectValue){
+    var sel = document.getElementById('tpl-select');
+    sel.innerHTML = '';
+    var g1 = document.createElement('optgroup');
+    g1.label = 'Mitgelieferte Vorlagen';
+    BUILTIN_TEMPLATES.forEach(function(t, i){
+      var o = document.createElement('option');
+      o.value = 'builtin:' + i;
+      o.textContent = t.name;
+      g1.appendChild(o);
+    });
+    sel.appendChild(g1);
+    var user = loadUserTemplates();
+    var names = Object.keys(user).sort(function(a, b){ return a.localeCompare(b, 'de'); });
+    if (names.length){
+      var g2 = document.createElement('optgroup');
+      g2.label = 'Meine Vorlagen';
+      names.forEach(function(n){
+        var o = document.createElement('option');
+        o.value = 'user:' + n;
+        o.textContent = n;
+        g2.appendChild(o);
+      });
+      sel.appendChild(g2);
+    }
+    if (selectValue) sel.value = selectValue;
+    updateDeleteBtn();
+  }
+
+  function updateDeleteBtn(){
+    var v = document.getElementById('tpl-select').value || '';
+    document.getElementById('tpl-delete').disabled = v.indexOf('user:') !== 0;
+  }
+
+  document.getElementById('tpl-select').addEventListener('change', updateDeleteBtn);
+
+  document.getElementById('tpl-load').addEventListener('click', function(){
+    var v = document.getElementById('tpl-select').value;
+    var st = null, name = '';
+    if (v.indexOf('builtin:') === 0){
+      var t = BUILTIN_TEMPLATES[parseInt(v.slice(8), 10)];
+      if (t){ st = t.state; name = t.name; }
+    } else if (v.indexOf('user:') === 0){
+      name = v.slice(5);
+      st = loadUserTemplates()[name];
+    }
+    if (!st) return;
+    if (!confirm('Vorlage „' + name + '" laden? Ihre aktuellen Eingaben werden dabei ersetzt.')) return;
+    applyState(st);
+    tplStatus('Vorlage „' + name + '" geladen ✓');
+  });
+
+  document.getElementById('tpl-save').addEventListener('click', function(){
+    var input = document.getElementById('tpl-name');
+    var name = input.value.trim();
+    if (!name){
+      tplStatus('Bitte zuerst einen Namen für die Vorlage eingeben.');
+      input.focus();
+      return;
+    }
+    var user = loadUserTemplates();
+    if (user[name] && !confirm('Eine Vorlage „' + name + '" gibt es schon. Überschreiben?')) return;
+    user[name] = collectState();
+    if (saveUserTemplates(user)){
+      input.value = '';
+      fillTemplateSelect('user:' + name);
+      tplStatus('Vorlage „' + name + '" gespeichert ✓');
+    } else {
+      tplStatus('Speichern hat nicht geklappt – der Browser erlaubt hier kein Speichern.');
+    }
+  });
+
+  document.getElementById('tpl-delete').addEventListener('click', function(){
+    var v = document.getElementById('tpl-select').value;
+    if (v.indexOf('user:') !== 0) return;
+    var name = v.slice(5);
+    if (!confirm('Vorlage „' + name + '" endgültig löschen?')) return;
+    var user = loadUserTemplates();
+    delete user[name];
+    saveUserTemplates(user);
+    fillTemplateSelect();
+    tplStatus('Vorlage „' + name + '" gelöscht.');
   });
 
   // ---------- Copy to clipboard ----------
@@ -682,7 +963,8 @@ Ende ca. 20:30 Uhr</textarea>
 
   document.getElementById('copy-btn').addEventListener('click', copyEmail);
 
-  render();
+  fillTemplateSelect();
+  applyState(BUILTIN_TEMPLATES[0].state);
 })();
 </script>
 
